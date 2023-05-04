@@ -1,24 +1,28 @@
-import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Nav from './shared/nav';
+import Ranks from './pages/ranks';
+import Token from './pages/token';
+import Footer from './shared/footer';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Ready to start edits with coinlist app
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="container mt-5">
+                <div className="mb-3">
+                    <Nav/>
+                </div>
+                <Routes>
+                  <Route  exact path="/" 
+                          element={ <Ranks/> }
+                  />
+                  <Route  exact path="/token" 
+                          element={ <Token /> }
+                  />
+                </Routes>
+                <Footer />
+        </div>
+    </Router>
   );
 }
 
