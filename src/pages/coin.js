@@ -8,7 +8,7 @@ function Coin() {
     const {coinMap} = useSelector((state) => state.app)
     const [coin, setCoin] = useState(undefined)
     // const {name,symbol} = coin
-    useEffect( ()=> { setCoin(coinMap[address]); console.log(coinMap) }, [] )
+    useEffect( ()=> { setCoin(coinMap[address]); console.log(coinMap) }, [address,coinMap] )
 
 
     const addCoinToWallet = async () => {

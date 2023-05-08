@@ -6,7 +6,7 @@ import Token from './pages/token';
 import Footer from './shared/footer';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadCoins } from './state/app.reducers';
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import Coin from './pages/coin';
 
 const data = [
@@ -78,18 +78,22 @@ const data = [
 ]
 
 function App() {
-  const dispatch = useDispatch()
   const {coinMap,coins} = useSelector((state) => state.app)
-
-  useEffect( () => { onInit() }, [] )
-
-  const onInit = () => {
+  const dispatch = useDispatch()
+  
+  const onInit = useCallback( () => {
     let coinMap = {}
     for(let c of data){
       coinMap[c.address] = c
     }
     dispatch( loadCoins({coins:data,coinMap}) )
-  }
+  }, [dispatch])
+
+  useEffect( () => { 
+    onInit() 
+  }, [onInit] )
+
+  
 
   return (
     <>
