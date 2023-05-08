@@ -1,0 +1,8 @@
+.rank-link{
+    color: white;
+    text-decoration: none;
+}
+
+.rank-link :hover{
+    color: black;
+}

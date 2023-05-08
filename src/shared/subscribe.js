@@ -10,8 +10,8 @@ function Subscribe() {
             <p>Get the best high potential coins right into your inbox</p>
 
             <input style={styles.input} className="form-control form-control-md bg-dark shadow text-center" placeholder="Enter your email" />
-            <div class="d-grid gap-2 mt-2">
-                <button class="btn btn-light" type="button">Subscribe</button>
+            <div className="d-grid gap-2 mt-2">
+                <button className="btn btn-light" type="button">Subscribe</button>
             </div>
 
         </>

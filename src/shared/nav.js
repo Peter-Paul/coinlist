@@ -40,7 +40,7 @@ function Nav() {
                         </li>
                         <hr className="mb-4" />
                         <li data-bs-dismiss="offcanvas">
-                            <Link style={styles.link} to="/">Token</Link>
+                            <Link style={styles.link} to="/token">Token</Link>
                         </li>      
                         <hr className="mb-4" />
                         <li data-bs-dismiss="offcanvas">

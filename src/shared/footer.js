@@ -34,28 +34,28 @@ function Footer() {
 
             <div className="d-flex justify-content-evenly mb-5 row">
                 <div className="col-md-3 col-12">
-                    <h3>Coin rankings</h3>
+                    <h4>Coin rankings</h4>
                     <ul style={styles.links}>
                         <li style={styles.link}>List of Coins</li>
                         <li style={styles.link}>Add Your Coin</li>
                         <li style={styles.link}>Promote Your Project</li>
                     </ul>
 
-                    <h3>Games</h3>
+                    <h4>Games</h4>
                     <ul style={styles.links}>
                         <li style={styles.link}>Trending Games</li>
                         <li style={styles.link}>Add Your Game</li>
                     </ul>
                 </div>
                 <div className="col-md-3 col-12">
-                    <h3>CoinList Token</h3>
+                    <h4>CoinList Token</h4>
                     <ul style={styles.links}>
                         <li style={styles.link}>About</li>
                         <li style={styles.link}>Staking</li>
                     </ul>
                 </div>
                 <div className="col-md-3 col-12">
-                    <h3>Company</h3>
+                    <h4>Company</h4>
                     <ul style={styles.links}>
                         <li style={styles.link}>Partners</li>
                         <li style={styles.link}>Disclaimer</li>
