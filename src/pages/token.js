@@ -1,6 +1,10 @@
+import AboutMyToken from "../components/myToken/aboutToken";
+
 function Token() {
     return (
-        <p>CoinList Token</p>
+        <>
+            <AboutMyToken/>
+        </>
     )
 }
 
