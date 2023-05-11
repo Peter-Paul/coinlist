@@ -38,7 +38,7 @@ function Promote() {
 
     return ( 
         <>
-            <Table data={data.filter( d => d.promoted )} title={"PROMOTED"}/>
+            <Table data={data.filter( d => d.promoted )} title={"PROMOTED"} allowRoute={false}/>
 
 
             <div className="row mt-4">

@@ -25,7 +25,7 @@ function Audit({styles}) {
             </div>
 
             <div className="mt-4">
-              <Table data={data.filter( d => d.tag.includes("audited") )} title={"AUDITED COINS"}/>
+              <Table data={data.filter( d => d.tag.includes("audited") )} title={"AUDITED COINS"} allowRoute={false}/>
             </div>
         </>
      );

@@ -15,7 +15,7 @@ function Ranks() {
                 <>
                     <Search changeView={ () => { showTables(false) } } />
 
-                    <Table data={data.filter( d => d.promoted )} title={"PROMOTED"}/>
+                    <Table data={data.filter( d => d.promoted )} title={"PROMOTED"} allowRoute={true}/>
 
                     <div className="mt-5 mb-3">
                         <button className="btn btn-light me-3" onClick={ () => setTag('trending') }>Trending</button>
@@ -24,7 +24,7 @@ function Ranks() {
                         <button className="btn btn-outline-secondary me-3" onClick={ () => setTag('doxxed') }>Doxxed</button>
                     </div>
 
-                    <Table data={data.filter( d => d.tag.includes(tag) )} title={"ASSET"}/>
+                    <Table data={data.filter( d => d.tag.includes(tag) )} title={"ASSET"} allowRoute={true}/>
                 </>
         }
 
