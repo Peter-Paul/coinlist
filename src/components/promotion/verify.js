@@ -26,7 +26,7 @@ function Verify({styles}) {
             </div>
 
             <div className="mt-4">
-              <Table data={data.filter( d => d.tag.includes("doxxed") )} title={"DOXXED COINS"}/>
+              <Table data={data.filter( d => d.tag.includes("doxxed") )} title={"DOXXED COINS"} allowRoute={false}/>
             </div>
         </>
     );

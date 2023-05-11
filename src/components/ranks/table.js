@@ -2,7 +2,7 @@ import DataTable from 'react-data-table-component';
 import { Link } from 'react-router-dom';
 
 
-function Table({data,title}) {
+function Table({data,title,allowRoute}) {
 
     const styles = {
         coinName:{
@@ -32,12 +32,21 @@ function Table({data,title}) {
             cell: row => {
                 return (
                     <>
-                        <Link style={styles.coinName} to={`/${row.address}`}>
-                            <div className="d-flex flex-column">
+                        { !allowRoute &&
+                            <div className='d-flex flex-column'>
                                 <strong>{row.name}</strong>
                                 <small>{row.tag.map( t => <span key={t} className="badge text-bg-dark me-1">{t}</span> )}</small>
                             </div>
-                        </Link>
+                        }
+                        {
+                            allowRoute &&
+                            <Link style={styles.coinName} to={`/${row.address}`}>
+                                <div className="d-flex flex-column">
+                                    <strong>{row.name}</strong>
+                                    <small>{row.tag.map( t => <span key={t} className="badge text-bg-dark me-1">{t}</span> )}</small>
+                                </div>
+                            </Link>
+                        }
                     </>
                 )
             }
