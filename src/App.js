@@ -5,10 +5,11 @@ import Ranks from './pages/ranks';
 import Token from './pages/token';
 import Footer from './shared/footer';
 import { useDispatch, useSelector } from 'react-redux';
-import { loadCoins } from './state/app.reducers';
+import { connectUser, loadState, updateVotes } from './state/app.reducers';
 import { useCallback, useEffect } from 'react';
 import Coin from './pages/coin';
 import Promotion from './pages/promotion';
+import { BrowserProvider } from 'ethers';
 
 const data = [
   {
@@ -78,44 +79,107 @@ const data = [
   }
 ]
 
+const voteData = [
+  {
+    id:1,
+    address: "0xc58F0E2007B4c52597042cB212a3683AF2ABDA06",
+    coin: "0xFE60FbA03048EfFB4aCf3f0088Ec2f53d779D3BB",
+    latestTimestamp:1684127976
+  }
+]
+
+const priceDisplay = [
+  {symbol:"ETH", price:"100", percentageChange:"+0.03"},
+  {symbol:"COINLIST", price:"100", percentageChange:"-1.55"},
+  {symbol:"BTC", price:"100", percentageChange:"+2.55"},
+  {symbol:"BNB", price:"100", percentageChange:"-0.5"},
+]
+
+
+
+
+
 function App() {
-  const {coinMap,coins} = useSelector((state) => state.app)
+  const secondsPerDay =  86400
+  const {coinMap,coins,votes,voteMap,userAddress,connected} = useSelector((state) => state.app)
   const dispatch = useDispatch()
+
+  const validTimestamp = (time) =>   time < (  (new Date().getTime() / 1000) - secondsPerDay )
+
+  const styles = {
+    navigation:{
+      backgroundColor:"#282c34"
+    }
+  }
   
   const onInit = useCallback( () => {
     let coinMap = {}
+    let voteMap = {}
     for(let c of data){
       coinMap[c.address] = c
     }
-    dispatch( loadCoins({coins:data,coinMap}) )
+
+    for (let v of voteData){
+      voteMap[`${v.address}/${v.coin}`] = v.latestTimestamp
+    }
+    dispatch( loadState({coins:data,coinMap,votes:voteData,voteMap}) )
+    
+    
   }, [dispatch])
 
+  const connectWallet = () => {
+    const provider = new BrowserProvider(window.ethereum)
+    if (window.ethereum) {
+        provider.send("eth_requestAccounts", []).then(async () => {
+          const signer  = await provider.getSigner()
+          const userAddress = await signer.getAddress()
+
+          dispatch( connectUser({userAddress,connected:true}) )
+
+        })
+    } else {
+        console.log("Please Install Metamask!!!");
+    }
+  }
+
+  const disconnectWallet = () =>  dispatch( connectUser( {userAddress:undefined,connected:false} ) )
+
+  const voteCoin = address => dispatch( updateVotes({address,userAddress}) )
+  
+  
   useEffect( () => { 
     onInit() 
   }, [onInit] )
 
   
+  
+  
 
   return (
     <>
-      { (coins && coinMap) &&
+      { (coins && coinMap && votes && voteMap) &&
           <Router>
+            <div className="mb-3 sticky-top " style={styles.navigation}>
+                <div className='container my-5'>
+                  <Nav connectWallet={connectWallet} disconnectWallet={disconnectWallet} userConnection={{userAddress,connected}}/>
+                </div>
+            </div>
             <div className="container mt-5">
-                      <div className="mb-3">
-                          <Nav/>
-                      </div>
                       <Routes>
                         <Route  exact path="/" 
-                                element={ <Ranks /> }
+                                element={ <Ranks priceDisplay={priceDisplay}
+                                validTimestamp={validTimestamp} voteCoin={voteCoin}/> }
                         />
-                        <Route  exact path="/token" 
-                                element={ <Token /> }
+                        <Route  exact path="/token/*" 
+                                element={ <Token  /> }
                         />
                         <Route  exact path="/:address" 
-                                element={ <Coin /> }
+                                element={ <Coin 
+                                validTimestamp={validTimestamp} voteCoin={voteCoin} /> }
                         />
-                        <Route  exact path="/promote/*" 
-                                element={ <Promotion /> }
+                        <Route  exact path="/promote" 
+                                element={ <Promotion 
+                                validTimestamp={validTimestamp} voteCoin={voteCoin} /> }
                         />
                       </Routes>
                       <Footer />

@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
 import Media from "./media";
 import Subscribe from "./subscribe";
+import { useSelector } from "react-redux";
 
-function Nav() {
+function Nav({connectWallet,disconnectWallet}) {
+    const {userAddress,connected} = useSelector((state) => state.app)
     const styles = {
         logo:{
             fontFamily:"Righteous"
@@ -15,16 +17,44 @@ function Nav() {
             textDecoration:"none",
             fontSize:"20px",
             color:'white'
+        },
+        card:{
+            width:"140px"
+        },
+        priceDisplay:{
+            fontSize:"12px"
         }
     }
     return ( 
         <>
+      
             <div className="d-flex justify-content-between">
                 <div>
-                    <button className="btn btn-dark" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">
+                    <button className="btn btn-lg btn-dark" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">
                         <i className="fa fa-bars"></i>
                     </button>
                 </div>
+
+                <div className="d-none d-md-block">
+
+                    {
+                        connected ?
+                            <div>
+                                <button className="btn btn-outline-light" onClick={()=>disconnectWallet()}>
+                                    <span className="me-1">
+                                        {`${userAddress.substr(0,10)}...`}
+                                    </span>
+                                    Disconnect
+                                </button>
+                            </div>
+                        :
+                            <div>
+                                <button className="btn btn-outline-light" onClick={()=>connectWallet()}>Connect Wallet</button>
+                            </div>
+                    }
+                </div>
+
+                
                 <h1 className="shadow" style={styles.logo}>CoinList</h1>
             </div>
 
@@ -35,6 +65,9 @@ function Nav() {
                 </div>
                 <div className="offcanvas-body" >
                     <ul className="d-flex flex-column" style={styles.nav} >
+                        {/* <li className="mt-auto" data-bs-dismiss="offcanvas">
+
+                        </li> */}
                         <li data-bs-dismiss="offcanvas">
                             <Link style={styles.link} to="/">Rankings</Link>
                         </li>

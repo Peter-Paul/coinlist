@@ -3,7 +3,7 @@ import Promote from "../components/promotion/promote";
 import Verify from "../components/promotion/verify";
 import Audit from "../components/promotion/audit";
 
-function Promotion() {
+function Promotion({validTimestamp,voteCoin}) {
     
     const [ activeState, setActive ] = useState("promote")
  
@@ -64,15 +64,15 @@ function Promotion() {
             </div>
 
             { activeState==="promote" &&
-                <Promote/>
+                <Promote validTimestamp={validTimestamp} voteCoin={voteCoin} />
             }
 
             { activeState==="audit" &&
-                <Audit styles={styles}/>
+                <Audit styles={styles} validTimestamp={validTimestamp} voteCoin={voteCoin}/>
             }
             
             { activeState==="dox" &&
-                <Verify styles={styles}/>
+                <Verify styles={styles} validTimestamp={validTimestamp} voteCoin={voteCoin}/>
             }
          
         </>

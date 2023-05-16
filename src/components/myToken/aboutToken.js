@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function AboutMyToken() {
 
     const tokeInfo = {
@@ -54,7 +56,7 @@ function AboutMyToken() {
         <>
             <div className="d-flex justify-content-between mb-3">
                 <h1>Hey!  Great news! </h1>
-                <button className="btn btn-lg btn-outline-light">Stake</button>
+                <Link className="btn btn-lg btn-outline-light" to={"/token/stake"}>Stake</Link>
             </div>
             <h2>We are proud to announce $COINLIST </h2>
             <h2>BSC token & it's just amazing!</h2>
