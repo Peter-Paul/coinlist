@@ -3,12 +3,15 @@ import "./coin.css"
 import Media from "../shared/media";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-function Coin() {
+function Coin({validTimestamp,voteCoin}) {
     const {address} = useParams()
-    const {coinMap} = useSelector((state) => state.app)
+    const {coinMap,connected,voteMap,userAddress} = useSelector((state) => state.app)
     const [coin, setCoin] = useState(undefined)
+    const [voter, setVoter] = useState(undefined)
+    
     // const {name,symbol} = coin
-    useEffect( ()=> { setCoin(coinMap[address]); console.log(coinMap) }, [address,coinMap] )
+    useEffect( ()=> { setCoin(coinMap[address]); setVoter(voteMap[`${userAddress}/${address}`]); }, 
+        [address,coinMap,userAddress,voteMap] )
 
 
     const addCoinToWallet = async () => {
@@ -47,12 +50,10 @@ function Coin() {
     return (  
         <>
             <div className="mb-4">
-                <button className="btn btn-outline-light ms-3 rank-link"> 
+                <Link className="btn btn-outline-light ms-3" to="/"> 
                     <i className="me-2 fa fa-angle-left"></i>
-                    <Link className="rank-link" to="/">
                         Rankings 
-                    </Link>
-                </button>
+                </Link>
             </div>
             { coin &&
 
@@ -74,10 +75,26 @@ function Coin() {
                             
                             <div className="d-flex justify-content-start mb-4">
                                 <div className="d-flex flex-column me-2">
-                                    <button className='btn btn-lg btn-outline-light'>VOTE</button>
+                                    { connected && 
+                                        <>
+                                            {
+
+                                            voter===undefined || validTimestamp(voter) ?  
+                                            <button className='btn btn-lg btn-outline-light' onClick={() => voteCoin(address)}>VOTE</button>
+                                            :  
+                                            <button className='btn btn-lg btn-outline-success'> 
+                                                <i className="fa fa-check me-2"></i>
+                                                VOTED</button>
+                                            }
+                                        </>
+                                    }
+                                    { !connected &&
+                                        <button className='btn btn-lg btn-outline-light' disabled>Connect wallet to VOTE</button>
+                                    }
                                     <small>You can vote once every 24 hours</small>
                                 </div>
                                 <div>
+
                                     <h2 className="mb-4"><span className="badge text-bg-light ms-2">{coin.votes}</span></h2>
                                 </div>
                             </div>

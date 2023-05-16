@@ -1,8 +1,8 @@
 import { useSelector } from "react-redux";
 import Table from "../ranks/table";
 
-function Verify({styles}) {
-    const {coins:data} = useSelector((state) => state.app)
+function Verify({styles,validTimestamp,voteCoin}) {
+    const {coins:data,voteMap,userAddress,connected} = useSelector((state) => state.app)
     const {discount25:apply} = styles
     return (  
         <>
@@ -26,7 +26,9 @@ function Verify({styles}) {
             </div>
 
             <div className="mt-4">
-              <Table data={data.filter( d => d.tag.includes("doxxed") )} title={"DOXXED COINS"} allowRoute={false}/>
+              <Table data={data.filter( d => d.tag.includes("doxxed") )} title={"DOXXED COINS"} allowRoute={false}
+              validTimestamp={validTimestamp} userAddress={userAddress} 
+              voteMap={voteMap} connected={connected} voteCoin={voteCoin}/>
             </div>
         </>
     );

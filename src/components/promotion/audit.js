@@ -1,9 +1,9 @@
 import { useSelector } from "react-redux";
 import Table from "../ranks/table";
 
-function Audit({styles}) {
+function Audit({styles,validTimestamp,voteCoin}) {
 
-    const {coins:data} = useSelector((state) => state.app)
+    const {coins:data,voteMap,userAddress,connected} = useSelector((state) => state.app)
     const {discount25:apply} = styles
     
     return ( 
@@ -25,7 +25,9 @@ function Audit({styles}) {
             </div>
 
             <div className="mt-4">
-              <Table data={data.filter( d => d.tag.includes("audited") )} title={"AUDITED COINS"} allowRoute={false}/>
+              <Table data={data.filter( d => d.tag.includes("audited") )} title={"AUDITED COINS"} allowRoute={false}
+              validTimestamp={validTimestamp} userAddress={userAddress} 
+              voteMap={voteMap} connected={connected} voteCoin={voteCoin}/>
             </div>
         </>
      );

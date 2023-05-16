@@ -2,8 +2,8 @@ import DataTable from 'react-data-table-component';
 import { Link } from 'react-router-dom';
 
 
-function Table({data,title,allowRoute}) {
-
+function Table({data,title,allowRoute,connected,userAddress,validTimestamp,voteCoin,voteMap}) {
+    
     const styles = {
         coinName:{
             color:"white",
@@ -81,7 +81,29 @@ function Table({data,title,allowRoute}) {
         {
             name: 'VOTES',
             selector: row => row.votes,
-            cell: row => { return ( <button className='btn btn-sm btn-outline-light'>{customFigure(parseFloat(row.votes))}</button> ) },
+            cell: row => { 
+                const voter = voteMap[`${userAddress}/${row.address}`]
+                return ( 
+                        <>
+                            { connected &&
+                                <>
+                                    {
+                                        voter===undefined || validTimestamp(voter) ? 
+                                        <button className='btn btn-sm btn-outline-light' onClick={()=>voteCoin(row.address)}>{customFigure(parseFloat(row.votes))}</button>
+                                        :
+                                        <button className='btn btn-sm btn-outline-success'>{customFigure(parseFloat(row.votes))}</button>
+                                    }
+                                </>
+                            
+                                
+                            }
+
+                            { !connected &&
+                                <button className='btn btn-sm btn-outline-light' disabled>{customFigure(parseFloat(row.votes))}</button> 
+                            }
+                        </>
+                        ) 
+            },
             sortable: true,
         },
     ];
