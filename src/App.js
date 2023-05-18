@@ -96,9 +96,6 @@ const priceDisplay = [
 ]
 
 
-
-
-
 function App() {
   const secondsPerDay =  86400
   const {coinMap,coins,votes,voteMap,userAddress,connected} = useSelector((state) => state.app)
@@ -150,10 +147,6 @@ function App() {
   useEffect( () => { 
     onInit() 
   }, [onInit] )
-
-  
-  
-  
 
   return (
     <>
