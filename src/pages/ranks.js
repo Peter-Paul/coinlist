@@ -47,10 +47,10 @@ function Ranks({priceDisplay,validTimestamp,voteCoin}) {
                        voteMap={voteMap} connected={connected} voteCoin={voteCoin} />
 
                     <div className="mt-5 mb-3">
-                        <button className="btn btn-light me-3" onClick={ () => setTag('trending') }>Trending</button>
-                        <button className="btn btn-outline-secondary me-3" onClick={ () => setTag('new') }>New</button>
-                        <button className="btn btn-outline-secondary me-3" onClick={ () => setTag('audited') }>Audited</button>
-                        <button className="btn btn-outline-secondary me-3" onClick={ () => setTag('doxxed') }>Doxxed</button>
+                        <button className="btn btn-light me-3 mb-2" onClick={ () => setTag('trending') }>Trending</button>
+                        <button className="btn btn-outline-secondary me-3 mb-2" onClick={ () => setTag('new') }>New</button>
+                        <button className="btn btn-outline-secondary me-3 mb-2" onClick={ () => setTag('audited') }>Audited</button>
+                        <button className="btn btn-outline-secondary me-3 mb-2" onClick={ () => setTag('doxxed') }>Doxxed</button>
                     </div>
 
                     <Table data={data.filter( d => d.tag.includes(tag) )} title={"ASSET"}
