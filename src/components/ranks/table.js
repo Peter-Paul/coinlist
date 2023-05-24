@@ -2,7 +2,7 @@ import DataTable from 'react-data-table-component';
 import { Link } from 'react-router-dom';
 
 
-function Table({data,title,allowRoute,connected,userAddress,validTimestamp,voteCoin,voteMap}) {
+function Table({data,title,allowRoute,connected,userAddress,validTimestamp,voteCoin,voteMap,admin=false}) {
     
     const styles = {
         coinName:{
@@ -12,19 +12,46 @@ function Table({data,title,allowRoute,connected,userAddress,validTimestamp,voteC
     }
 
     const customFigure = figure => {
-        const [thousand,million,billion, trillion] = [ 10**3, 10**6, 10**9, 10**12 ]
-        if(figure<thousand){
-            return `${(figure).toFixed(2)}`
+        const [zero, minimum, thousand,million,billion, trillion] = [ 0, 0.0001, 10**3, 10**6, 10**9, 10**12 ]
+        if(figure<=zero){
+            return "-"
+        }else if(figure>zero && figure<minimum){
+            return `>${minimum}`
+        }else if(figure>=minimum && figure<thousand){
+            return `${(figure).toFixed(4)}`
         }else if(figure>=thousand && figure<million){
-            return `${(figure/thousand).toFixed(2)}K`
+            return `${(figure/thousand).toFixed(4)}K`
         }else if(figure>=million && figure<billion){
-            return `${(figure/million).toFixed(2)}M`
+            return `${(figure/million).toFixed(4)}M`
         }else if(figure>=billion && figure<trillion){
-            return `${(figure/billion).toFixed(2)}B`
+            return `${(figure/billion).toFixed(4)}B`
         }else{
-            return `${(figure/billion).toFixed(2)}T`
+            return `${(figure/billion).toFixed(4)}T`
         }
     }
+
+    const customLaunch = launch => {
+        const daySecs = 86400
+        const now = Math.floor( new Date().getTime() / 1000 )
+        const days = ((launch - now) / daySecs ).toFixed(1)
+        if(days < 0 ){
+            return `${Math.abs(days)} days ago`
+        }else{
+            return `${Math.abs(days)} days to go`
+        }
+    }
+
+    const customSymbol = symbol => {
+        switch (symbol) {
+            case "ethereum":
+                return "ETH"
+            case "binance-smart-chain":
+                return "BSC"
+            default:
+                return "CUSTOM";
+        }
+    }
+
     const columns = [
         {
             name: title,
@@ -35,7 +62,7 @@ function Table({data,title,allowRoute,connected,userAddress,validTimestamp,voteC
                         { !allowRoute &&
                             <div className='d-flex flex-column'>
                                 <strong>{row.name}</strong>
-                                <small>{row.tag.map( t => <span key={t} className="badge text-bg-dark me-1">{t}</span> )}</small>
+                                <small>{row.tags.map( t => <span key={t} className="badge text-bg-dark me-1">{t}</span> )}</small>
                             </div>
                         }
                         {
@@ -43,7 +70,7 @@ function Table({data,title,allowRoute,connected,userAddress,validTimestamp,voteC
                             <Link style={styles.coinName} to={`/${row.address}`}>
                                 <div className="d-flex flex-column">
                                     <strong>{row.name}</strong>
-                                    <small>{row.tag.map( t => <span key={t} className="badge text-bg-dark me-1">{t}</span> )}</small>
+                                    <small>{row.tags.map( t => <span key={t} className="badge text-bg-dark me-1">{t}</span> )}</small>
                                 </div>
                             </Link>
                         }
@@ -59,20 +86,34 @@ function Table({data,title,allowRoute,connected,userAddress,validTimestamp,voteC
         {
             name: 'CHAIN',
             selector: row => row.chain,
+            cell: row => {
+                return (
+                    <>
+                        {customSymbol(row.chain)}
+                    </>
+                )
+            }
         },
         {
-            name: '24H',
+            name: 'Price',
             selector: row => row.price,
             sortable: true,
+            cell: row => {
+                return (
+                    <>
+                        {customFigure(row.price)}
+                    </>
+                )
+            }
         },
         {
-            name: 'MARKET CAP',
-            selector: row => row.mrkCap,
+            name: 'LAUNCH',
+            selector: row => row.launch,
             cell: row => {
-                const {mrkCap} = row
+                const {launch} = row
                 return(
                     <>
-                        { customFigure(parseFloat(mrkCap)) }
+                        { customLaunch(parseInt(launch)) }
                     </>
                 )
             },
@@ -106,6 +147,109 @@ function Table({data,title,allowRoute,connected,userAddress,validTimestamp,voteC
             },
             sortable: true,
         },
+        {
+            name: 'PROMOTE',
+            selector: row => row.promoted,
+            sortable: true,
+            omit: !admin,
+            cell: row => { 
+                const {address,promoted} = row
+                return (
+                    <>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" role="switch" id={address} checked={promoted} />
+                            <label class="form-check-label" for={address}>
+                                {/* Checked switch checkbox input */}
+                            </label>
+                        </div>
+                    
+                    </>
+                )
+            }
+        },
+        {
+            name: 'DISPLAY',
+            selector: row => row.show,
+            sortable: true,
+            omit: !admin,
+            cell: row => { 
+                const {address,show} = row
+                return (
+                    <>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" role="switch" id={address} checked={show} />
+                            <label class="form-check-label" for={address}>
+                                {/* Checked switch checkbox input */}
+                            </label>
+                        </div>
+                    
+                    </>
+                )
+            }
+        },
+        {
+            name: 'DOXXED',
+            selector: row => row.show,
+            sortable: true,
+            omit: !admin,
+            cell: row => { 
+                const {address,tags} = row
+                const tag = "doxxed"
+                return (
+                    <>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" role="switch" id={address} checked={tags.includes(tag)} />
+                            <label class="form-check-label" for={address}>
+                                {/* Checked switch checkbox input */}
+                            </label>
+                        </div>
+                    
+                    </>
+                )
+            }
+        },
+        {
+            name: 'AUDITED',
+            selector: row => row.show,
+            sortable: true,
+            omit: !admin,
+            cell: row => { 
+                const {address,tags} = row
+                const tag = "audited"
+                return (
+                    <>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" role="switch" id={address} checked={tags.includes(tag)} />
+                            <label class="form-check-label" for={address}>
+                                {/* Checked switch checkbox input */}
+                            </label>
+                        </div>
+                    
+                    </>
+                )
+            }
+        },
+        {
+            name: 'NEW',
+            selector: row => row.show,
+            sortable: true,
+            omit: !admin,
+            cell: row => { 
+                const {address,tags} = row
+                const tag = "new"
+                return (
+                    <>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" role="switch" id={address} checked={tags.includes(tag)} />
+                            <label class="form-check-label" for={address}>
+                                {/* Checked switch checkbox input */}
+                            </label>
+                        </div>
+                    
+                    </>
+                )
+            }
+        },
     ];
     
     const customStyles = {
@@ -118,13 +262,15 @@ function Table({data,title,allowRoute,connected,userAddress,validTimestamp,voteC
     }
  
     return (
-        <DataTable
-            columns={columns}
-            data={data}
-            customStyles={customStyles}
-            theme="dark"
-            pagination
-        />
+        <>
+                <DataTable
+                    columns={columns}
+                    data={data}
+                    customStyles={customStyles}
+                    theme="dark"
+                    pagination
+                />
+        </>
     );
 };
 

@@ -65,9 +65,7 @@ function Nav({connectWallet,disconnectWallet}) {
                 </div>
                 <div className="offcanvas-body" >
                     <ul className="d-flex flex-column" style={styles.nav} >
-                        {/* <li className="mt-auto" data-bs-dismiss="offcanvas">
-
-                        </li> */}
+                  
                         <li data-bs-dismiss="offcanvas">
                             <Link style={styles.link} to="/">Rankings</Link>
                         </li>
@@ -83,9 +81,9 @@ function Nav({connectWallet,disconnectWallet}) {
                         <li data-bs-dismiss="offcanvas">
                             <Link style={styles.link} to="/">Partners</Link>
                         </li>
-                        <hr className="mb-4" />
+                        <hr />
                         <li data-bs-dismiss="offcanvas">
-                            <Link style={styles.link} to="/">Games</Link>
+                            <Link style={styles.link} to="/admin">Admin</Link>
                         </li>
                         <hr />
                 

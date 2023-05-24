@@ -1,7 +1,9 @@
+import { useSelector } from "react-redux";
 import Media from "./media";
 import Subscribe from "./subscribe";
 
 function Footer() {
+    const {bannerMap} = useSelector((state) => state.app)
 
     const styles = {
         links:{
@@ -18,12 +20,24 @@ function Footer() {
             textDecoration:"none",
             // fontSize:"15px",
             // color:'white'
+        },
+        wideBannerImage:{
+            height: "240px",
+            width: "600px",
         }
     }
 
 
     return (  
         <>
+            <div className="d-flex mt-5 justify-content-center">
+                <img
+                    alt="not found"
+                    style={styles.wideBanner}
+                    src={bannerMap['banner3']}
+                    className="rounded mt-2"
+                />
+            </div>
             <hr className="mt-5 mb-3" />
             <div className="d-flex justify-content-between mt-2 mb-3">
                 <h1 className="shadow" style={styles.logo}>CoinList</h1>

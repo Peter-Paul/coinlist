@@ -6,7 +6,9 @@ const initialState = {
     userAddress:undefined,
     connected:false,
     votes:undefined,
-    voteMap:undefined
+    voteMap:undefined,
+    backendUrl:undefined,
+    bannerMap:undefined
 }
 
 export const appSlice = createSlice({
@@ -18,6 +20,8 @@ export const appSlice = createSlice({
             state.coinMap = {...action.payload.coinMap}
             state.votes = [...action.payload.votes]
             state.voteMap = {...action.payload.voteMap}
+            state.backendUrl = action.payload.backendUrl
+            state.bannerMap = action.payload.bannerMap
         },
 
         connectUser: (state,action) => {
@@ -39,10 +43,15 @@ export const appSlice = createSlice({
                 {id:state.votes.length+1,address:userAddress,coin:address,latestTimestamp:Math.floor( new Date().getTime() / 1000 )}]
 
             state.voteMap = {...state.voteMap,[voteMapKey]:Math.floor( new Date().getTime() / 1000 )}
+        },
+
+        updateBanner: (state,action) => {
+            const {name,url} = action.payload
+            state.bannerMap = {...state.bannerMap,[name]:url}
         }
     }
 })
 
-export const { connectUser, loadState, updateVotes } = appSlice.actions
+export const { connectUser, loadState, updateVotes, updateBanner } = appSlice.actions
 
 export default appSlice.reducer

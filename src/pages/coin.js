@@ -135,7 +135,7 @@ function Coin({validTimestamp,voteCoin}) {
                                 <h3 className="card-title">
                                     Tags
                                 </h3>
-                                <small>{coin.tag.map( t => <span key={t} className="badge text-bg-light me-1">{t}</span> )}</small>
+                                <small>{coin.tags.map( t => <span key={t} className="badge text-bg-light me-1">{t}</span> )}</small>
                             </div>
                         </div>
                     </div>
