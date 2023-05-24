@@ -24,3 +24,9 @@ yarn-error.log*
 
 # lock file
 *lock.json
+
+# Backend
+
+# uploads
+/backend/uploads/*
+.env

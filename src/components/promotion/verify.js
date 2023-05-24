@@ -26,7 +26,7 @@ function Verify({styles,validTimestamp,voteCoin}) {
             </div>
 
             <div className="mt-4">
-              <Table data={data.filter( d => d.tag.includes("doxxed") )} title={"DOXXED COINS"} allowRoute={false}
+              <Table data={data.filter( d => d.tags.includes("doxxed") )} title={"DOXXED COINS"} allowRoute={false}
               validTimestamp={validTimestamp} userAddress={userAddress} 
               voteMap={voteMap} connected={connected} voteCoin={voteCoin}/>
             </div>

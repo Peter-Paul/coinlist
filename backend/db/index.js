@@ -10,6 +10,7 @@ class Database{
     insert = "INSERT INTO"
     coinTable="coins"
     voteTable="votes"
+    bannerTable="banners"
 
     constructor(){
         this.pool = new Pool({
@@ -56,13 +57,19 @@ class Database{
         } )
     }
 
-    updateRow(table,address,data){
+    updateRow(table,key,value){
         return new Promise( (resolve,reject) => {
 
             if(table===this.coinTable){
                 const sql = `UPDATE ${table} SET "CoinData" = $1 WHERE "Address" = $2`
-                const update = JSON.stringify(data)
-                this.pool.query(sql, [update,address], (err, res)=>{
+                const update = JSON.stringify(value)
+                this.pool.query(sql, [update,key], (err, res)=>{
+                    if(err) reject(err)
+                    else resolve(res.rows)
+                })
+            }else if (table === this.bannerTable){
+                const sql = `UPDATE ${table} SET "Url" = $1 WHERE "Name" = $2`
+                this.pool.query(sql, [value,key], (err, res)=>{
                     if(err) reject(err)
                     else resolve(res.rows)
                 })

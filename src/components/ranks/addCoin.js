@@ -1,21 +1,26 @@
 import { useState } from "react";
 
 function AddCoin({changeView}) {
+
+    // const requiredKeys = ["address","name","symbol","description","launch","contact"]
+
     const [coin, addCoin] = useState(
         {
+            address:"",
             name:"",
             symbol:"",
             description:"",
-            launchDate:"",
-            contractAddress:"",
-            chain:"eth",
+            launch:"",
+            chain:"ethereum",
+            contact:"",
             website:"",
-            audit:"",
+            github:"",
             telegram:"",
             twitter:"",
             facebook:"",
             linkedin:"",
-            contact:""
+            promoted:false,
+            show:false
         }
     )
     
@@ -27,45 +32,50 @@ function AddCoin({changeView}) {
 
     const handleCoinChange = (e) => addCoin( { ...coin, [e.target.name] : e.target.value } )
 
+    const addToken = evt => {
+        evt.preventDefault();
+
+
+    }
+
     return ( 
         <>
             <div className="mb-5">
                 <button className="btn btn-outline-light ms-3" onClick={changeView}><i className="me-2 fa fa-angle-left"></i> Rankings </button>
             </div>
-            <form>
+            <form onSubmit={addToken}>
                 <div className="row">
                     <div className="col-md-6 col-12">
                         <h4>Coin Info</h4>
-                        <label className="form-label">Name</label>
+                        <label className="form-label">Name <span className="text-danger" style={{fontSize:"10px"}} > *Required</span> </label>
                         <input name="name" style={styles.input} className="form-control mb-3 form-control-md bg-dark shadow" 
                         placeholder="e.g Bitcoin" value={coin.name} onChange={ e => handleCoinChange(e) }/>
                         
-                        <label className="form-label">Symbol</label>
+                        <label className="form-label">Symbol <span className="text-danger" style={{fontSize:"10px"}} > *Required</span> </label>
                         <input name="symbol" style={styles.input} className="form-control mb-3 form-control-md bg-dark shadow" 
                         placeholder="e.g BTC" value={coin.symbol} onChange={ e => handleCoinChange(e) }/> 
 
-                        <label className="form-label">Description</label>
+                        <label className="form-label">Description <span className="text-danger" style={{fontSize:"10px"}} > *Required</span> </label>
                         <textarea name="description" style={styles.input} className="form-control mb-3 form-control-md bg-dark shadow" 
                         placeholder="e.g Bitcoin is decentralized digital currency" value={coin.description} onChange={ e => handleCoinChange(e) }></textarea>         
 
-                        <label className="form-label">Launch date (YYYY-MM-DD)</label>
-                        <input name="launchDate" style={styles.input} className="form-control mb-3 form-control-md bg-dark shadow" 
-                        placeholder="e.g 2023-05-05" value={coin.launchDate} onChange={ e => handleCoinChange(e) }/> 
+                        <label className="form-label">Launch date (YYYY-MM-DD) <span className="text-danger" style={{fontSize:"10px"}} > *Required</span> </label>
+                        <input name="launch" style={styles.input} className="form-control mb-3 form-control-md bg-dark shadow" 
+                        placeholder="e.g 2023-05-05" value={coin.launch} onChange={ e => handleCoinChange(e) }/> 
 
-                        <label className="form-label">Contract Address</label>
-                        <input name="contractAddress" style={styles.input} className="form-control mb-3 form-control-md bg-dark shadow" 
-                        placeholder="e.g 0x...." value={coin.contractAddress} onChange={ e => handleCoinChange(e) }/> 
+                        <label className="form-label">Contract Address <span className="text-danger" style={{fontSize:"10px"}} > *Required</span> </label>
+                        <input name="address" style={styles.input} className="form-control mb-3 form-control-md bg-dark shadow" 
+                        placeholder="e.g 0x...." value={coin.address} onChange={ e => handleCoinChange(e) }/> 
                         
-                        <label className="form-label">Chain</label>
+                        <label className="form-label">Chain <span className="text-danger" style={{fontSize:"10px"}} > *Required</span> </label>
                         <select name="chain" className="form-select bg-dark shadow" aria-label="Default select example" style={styles.input}
                         onChange={ handleCoinChange } value={coin.chain}>
-                            <option value="eth">Ethereum</option>
-                            <option value="bsc">Binance Smart Chain</option>
-                            <option value="polygon">Polygon</option>
+                            <option value="ethereum">Ethereum</option>
+                            <option value="binance-smart-chain">Binance Smart Chain</option>
                         </select>
 
                         <h4 className="mt-3">Contact</h4>
-                        <label className="form-label">Contact Email</label>
+                        <label className="form-label">Contact Email <span className="text-danger" style={{fontSize:"10px"}} > *Required</span> </label>
                         <input type="email" name="contact" style={styles.input} className="form-control mb-3 form-control-md bg-dark shadow" 
                         placeholder="Enter email" value={coin.contact} onChange={ e => handleCoinChange(e) }/> 
                     </div>
