@@ -48,10 +48,32 @@ export const appSlice = createSlice({
         updateBanner: (state,action) => {
             const {name,url} = action.payload
             state.bannerMap = {...state.bannerMap,[name]:url}
+        },
+        
+        uploadCoin: (state,action) => {
+            const coin = action.payload
+            const {address} = coin
+            state.coins = [...state.coins,coin]
+            state.coinMap = {...state.coinMap, [address]:coin }
+        },
+
+        updateCoin: (state,action) => {
+            const coin = action.payload
+            const {address} = coin
+            state.coins = state.coins.map( c => (c.address === address) ? coin : c )
+            state.coinMap = {...state.coinMap, [address]:coin }
+        },
+
+        deleteCoin: (state,action) => {
+            const address = action.payload
+            const { [address]:remove , ...rest } = state.coinMap
+            state.coins = state.coins.filter( c => c.address !== address )
+            state.coinMap = rest
         }
+
     }
 })
 
-export const { connectUser, loadState, updateVotes, updateBanner } = appSlice.actions
+export const { connectUser, loadState, updateVotes, updateBanner, updateCoin, deleteCoin, uploadCoin } = appSlice.actions
 
 export default appSlice.reducer

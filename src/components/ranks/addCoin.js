@@ -1,8 +1,13 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { uploadCoin } from "../../state/app.reducers";
+// import CoinService from "../../services/coins";
 
-function AddCoin({changeView}) {
+function AddCoin({changeView,baseUrl}) {
 
-    // const requiredKeys = ["address","name","symbol","description","launch","contact"]
+    const requiredKeys = ["address","name","symbol","description","launch","contact"]
+
+    const dispatch = useDispatch()
 
     const [coin, addCoin] = useState(
         {
@@ -12,6 +17,7 @@ function AddCoin({changeView}) {
             description:"",
             launch:"",
             chain:"ethereum",
+            tags:[],
             contact:"",
             website:"",
             github:"",
@@ -20,7 +26,9 @@ function AddCoin({changeView}) {
             facebook:"",
             linkedin:"",
             promoted:false,
-            show:false
+            show:false,
+            votes:"0",
+            price:"0",
         }
     )
     
@@ -32,9 +40,33 @@ function AddCoin({changeView}) {
 
     const handleCoinChange = (e) => addCoin( { ...coin, [e.target.name] : e.target.value } )
 
-    const addToken = evt => {
+    const addToken = async evt => {
         evt.preventDefault();
+        for (let r of requiredKeys){
+            if(!coin[r]) {
+                console.log("Missing required information")
+                return
+            }
+        }
+        
+        const launchInfo = coin.launch.split("-")
+        if ( launchInfo.length < 3 ) { console.log("Invalid date syntax"); return}
 
+        try{
+
+            let [ year, month, day ] = launchInfo.map( x => parseInt(x) )
+            console.log(launchInfo.map( x => parseInt(x) ))
+            month = month--
+            const data = {...coin,
+                    launch: Math.floor(new Date(year,month,day).getTime() / 1000).toString()
+                }
+            // const coinService = new CoinService(baseUrl)
+            // const response =  await coinService.postCoin(data)
+                console.log(data)
+            dispatch( uploadCoin(data) )
+        }catch(error){
+            console.log(`Error creating coin: ${error}`); return
+        }
 
     }
 
@@ -72,6 +104,8 @@ function AddCoin({changeView}) {
                         onChange={ handleCoinChange } value={coin.chain}>
                             <option value="ethereum">Ethereum</option>
                             <option value="binance-smart-chain">Binance Smart Chain</option>
+                            <option value="polygon-pos">Polygon</option>
+                            <option value="arbitrum-one">Arbitrum</option>
                         </select>
 
                         <h4 className="mt-3">Contact</h4>

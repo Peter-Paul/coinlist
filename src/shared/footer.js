@@ -24,6 +24,10 @@ function Footer() {
         wideBannerImage:{
             height: "240px",
             width: "600px",
+        },
+        wideBannerImageMobile:{
+            height: "140px",
+            width: "350px",
         }
     }
 
@@ -31,11 +35,17 @@ function Footer() {
     return (  
         <>
             <div className="d-flex mt-5 justify-content-center">
+            <img
+                    alt="not found"
+                    style={styles.wideBannerImage}
+                    src={bannerMap['banner3']}
+                    className="rounded mt-2 d-none d-md-block"
+                />
                 <img
                     alt="not found"
-                    style={styles.wideBanner}
+                    style={styles.wideBannerImageMobile}
                     src={bannerMap['banner3']}
-                    className="rounded mt-2"
+                    className="rounded mt-2 d-block d-md-none"
                 />
             </div>
             <hr className="mt-5 mb-3" />

@@ -2,7 +2,7 @@ import DataTable from 'react-data-table-component';
 import { Link } from 'react-router-dom';
 
 
-function Table({data,title,allowRoute,connected,userAddress,validTimestamp,voteCoin,voteMap,admin=false}) {
+function Table({data,title,allowRoute,connected,userAddress,validTimestamp,voteCoin,voteMap,admin=false,removeCoin,patchCoin}) {
     
     const styles = {
         coinName:{
@@ -10,6 +10,8 @@ function Table({data,title,allowRoute,connected,userAddress,validTimestamp,voteC
             textDecoration: "none"
         }
     }
+
+    const tags2show = ["audited"]
 
     const customFigure = figure => {
         const [zero, minimum, thousand,million,billion, trillion] = [ 0, 0.0001, 10**3, 10**6, 10**9, 10**12 ]
@@ -47,6 +49,10 @@ function Table({data,title,allowRoute,connected,userAddress,validTimestamp,voteC
                 return "ETH"
             case "binance-smart-chain":
                 return "BSC"
+            case "arbitrum-one":
+                return "ARBITRUM"
+            case "polygon-pos":
+                return "MATIC"
             default:
                 return "CUSTOM";
         }
@@ -60,17 +66,17 @@ function Table({data,title,allowRoute,connected,userAddress,validTimestamp,voteC
                 return (
                     <>
                         { !allowRoute &&
-                            <div className='d-flex flex-column'>
-                                <strong>{row.name}</strong>
-                                <small>{row.tags.map( t => <span key={t} className="badge text-bg-dark me-1">{t}</span> )}</small>
+                            <div className='d-flex flex-column my-3'>
+                                <strong className='mb-1' style={{fontSize:"15px"}}>{row.name}</strong>
+                                <h6>{row.tags.map( t => (tags2show.includes(t)) && <span key={t} className="badge text-bg-success me-1 mb-1">{t}</span> )}</h6>
                             </div>
                         }
                         {
                             allowRoute &&
                             <Link style={styles.coinName} to={`/${row.address}`}>
-                                <div className="d-flex flex-column">
-                                    <strong>{row.name}</strong>
-                                    <small>{row.tags.map( t => <span key={t} className="badge text-bg-dark me-1">{t}</span> )}</small>
+                                <div className="d-flex flex-column my-3">
+                                    <strong className='mb-1' style={{fontSize:"15px"}}>{row.name}</strong>
+                                    <h6>{row.tags.map( t => (tags2show.includes(t)) && <span key={t} className="badge text-bg-success me-1 mb-1">{t}</span> )}</h6>
                                 </div>
                             </Link>
                         }
@@ -89,7 +95,11 @@ function Table({data,title,allowRoute,connected,userAddress,validTimestamp,voteC
             cell: row => {
                 return (
                     <>
-                        {customSymbol(row.chain)}
+                        <div className="p-2 bg-warning text-dark">
+                            <strong>
+                                {customSymbol(row.chain)}
+                            </strong>
+                        </div>
                     </>
                 )
             }
@@ -156,9 +166,13 @@ function Table({data,title,allowRoute,connected,userAddress,validTimestamp,voteC
                 const {address,promoted} = row
                 return (
                     <>
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" role="switch" id={address} checked={promoted} />
-                            <label class="form-check-label" for={address}>
+                        <div className="form-check form-switch">
+                            <input className="form-check-input" type="checkbox" role="switch" id={address} checked={promoted} 
+                                onChange={ () => patchCoin( {...row, 
+                                    promoted: promoted ?  false : true
+                                } ) }
+                            />
+                            <label className="form-check-label" htmlFor={address}>
                                 {/* Checked switch checkbox input */}
                             </label>
                         </div>
@@ -176,9 +190,13 @@ function Table({data,title,allowRoute,connected,userAddress,validTimestamp,voteC
                 const {address,show} = row
                 return (
                     <>
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" role="switch" id={address} checked={show} />
-                            <label class="form-check-label" for={address}>
+                        <div className="form-check form-switch">
+                            <input className="form-check-input" type="checkbox" role="switch" id={address} checked={show} 
+                                onChange={ () => patchCoin( {...row, 
+                                    show: show ?  false : true
+                                } ) }
+                            />
+                            <label className="form-check-label" htmlFor={address}>
                                 {/* Checked switch checkbox input */}
                             </label>
                         </div>
@@ -188,18 +206,25 @@ function Table({data,title,allowRoute,connected,userAddress,validTimestamp,voteC
             }
         },
         {
-            name: 'DOXXED',
+            name: 'KYC',
             selector: row => row.show,
             sortable: true,
             omit: !admin,
             cell: row => { 
                 const {address,tags} = row
-                const tag = "doxxed"
+                const tag = "kyc"
                 return (
                     <>
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" role="switch" id={address} checked={tags.includes(tag)} />
-                            <label class="form-check-label" for={address}>
+                        <div className="form-check form-switch">
+                            <input className="form-check-input" type="checkbox" role="switch" id={address} checked={tags.includes(tag)} 
+                                onChange={ () => patchCoin( {...row, 
+                                    tags: tags.includes(tag) ?  
+                                    tags.filter( t => t !== tag)
+                                    : 
+                                    [...tags,tag]
+                                } ) }
+                            />
+                            <label className="form-check-label" htmlFor={address}>
                                 {/* Checked switch checkbox input */}
                             </label>
                         </div>
@@ -218,9 +243,16 @@ function Table({data,title,allowRoute,connected,userAddress,validTimestamp,voteC
                 const tag = "audited"
                 return (
                     <>
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" role="switch" id={address} checked={tags.includes(tag)} />
-                            <label class="form-check-label" for={address}>
+                        <div className="form-check form-switch">
+                            <input className="form-check-input" type="checkbox" role="switch" id={address} checked={tags.includes(tag)} 
+                                onChange={ () => patchCoin( {...row, 
+                                    tags: tags.includes(tag) ?  
+                                    tags.filter( t => t !== tag)
+                                    : 
+                                    [...tags,tag]
+                                } ) }
+                            />
+                            <label className="form-check-label" htmlFor={address}>
                                 {/* Checked switch checkbox input */}
                             </label>
                         </div>
@@ -239,12 +271,64 @@ function Table({data,title,allowRoute,connected,userAddress,validTimestamp,voteC
                 const tag = "new"
                 return (
                     <>
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" role="switch" id={address} checked={tags.includes(tag)} />
-                            <label class="form-check-label" for={address}>
+                        <div className="form-check form-switch">
+                            <input className="form-check-input" type="checkbox" role="switch" id={address} checked={tags.includes(tag)}
+                                onChange={ () => patchCoin( {...row, 
+                                    tags: tags.includes(tag) ?  
+                                    tags.filter( t => t !== tag)
+                                    : 
+                                    [...tags,tag]
+                                } ) }
+                            />
+                            <label className="form-check-label" htmlFor={address}>
                                 {/* Checked switch checkbox input */}
                             </label>
                         </div>
+                    
+                    </>
+                )
+            }
+        },
+        {
+            name: 'PINKSALE',
+            selector: row => row.show,
+            sortable: true,
+            omit: !admin,
+            cell: row => { 
+                const {address,tags} = row
+                const tag = "pinksale"
+                return (
+                    <>
+                        <div className="form-check form-switch">
+                            <input className="form-check-input" type="checkbox" role="switch" id={address} checked={tags.includes(tag)}
+                                onChange={ () => patchCoin( {...row, 
+                                    tags: tags.includes(tag) ?  
+                                    tags.filter( t => t !== tag)
+                                    : 
+                                    [...tags,tag]
+                                } ) }
+                            />
+                            <label className="form-check-label" htmlFor={address}>
+                                {/* Checked switch checkbox input */}
+                            </label>
+                        </div>
+                    
+                    </>
+                )
+            }
+        },
+        {
+            name: 'REMOVE',
+            selector: row => row.show,
+            sortable: true,
+            omit: !admin,
+            cell: row => { 
+                const {address} = row
+                return (
+                    <>
+                        <button className='btn btn-sm btn-danger' onClick={() => removeCoin(address) }>
+                            <i className='fa fa-trash'></i>
+                        </button>
                     
                     </>
                 )

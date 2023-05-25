@@ -2,7 +2,6 @@ import './App.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Nav from './shared/nav';
 import Ranks from './pages/ranks';
-import Token from './pages/token';
 import Footer from './shared/footer';
 import { useDispatch, useSelector } from 'react-redux';
 import { connectUser, loadState, updateVotes, updateBanner } from './state/app.reducers';
@@ -11,20 +10,20 @@ import Coin from './pages/coin';
 import Promotion from './pages/promotion';
 import { BrowserProvider } from 'ethers';
 import Admin from './pages/admin';
-// import BannerService from './services/banners';
+import BannerService from './services/banners';
 import axios from 'axios';
 import CoinService from './services/coins';
+import Partners from './pages/partners';
+import Utils from './utils';
 
 const data = [
   {
-      id:1,
       address:"0xf68df6df642e8387afc9d03214b78f3087ef8a99",
       name: "Doge Reloaded",
       symbol: "RELOADED",
       chain: "ethereum",
-      mrkCap: "1200000",
       votes: "100000",
-      tags:["new","audited","doxxed"],
+      tags:["new","audited","kyc","pinksale"],
       description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sapien faucibus et molestie ac feugiat sed lectus vestibulum. Porttitor eget dolor morbi non arcu risus quis varius. Nec feugiat nisl pretium fusce id. Convallis posuere morbi leo urna. Dolor sit amet consectetur adipiscing elit duis tristique sollicitudin nibh. Sit amet nisl purus in. Morbi quis commodo odio aenean sed adipiscing diam. Amet volutpat consequat mauris nunc. Tellus rutrum tellus pellentesque eu tincidunt tortor. Purus non enim praesent elementum. Sit amet justo donec enim diam vulputate. Sit amet risus nullam eget felis eget. Etiam erat velit scelerisque in dictum non consectetur a. Convallis a cras semper auctor neque vitae. Congue nisi vitae suscipit tellus mauris a diam. Viverra orci sagittis eu volutpat.",
       contact:"ppmunga@gmail.com",
       launch:"1685164374",
@@ -38,14 +37,12 @@ const data = [
       show:true,
   },
   {
-      id:2,
       name: "QUAI",
       address: "0x40821cd074dfecb1524286923bc69315075b5c89",
       symbol: "QUAI",
       chain: "ethereum",
-      mrkCap: "10000",
       votes: "10000",
-      tags:["trending","audited","doxxed"],
+      tags:["trending","audited","kyc","pinksale"],
       description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sapien faucibus et molestie ac feugiat sed lectus vestibulum. Porttitor eget dolor morbi non arcu risus quis varius. Nec feugiat nisl pretium fusce id. Convallis posuere morbi leo urna. Dolor sit amet consectetur adipiscing elit duis tristique sollicitudin nibh. Sit amet nisl purus in. Morbi quis commodo odio aenean sed adipiscing diam. Amet volutpat consequat mauris nunc. Tellus rutrum tellus pellentesque eu tincidunt tortor. Purus non enim praesent elementum. Sit amet justo donec enim diam vulputate. Sit amet risus nullam eget felis eget. Etiam erat velit scelerisque in dictum non consectetur a. Convallis a cras semper auctor neque vitae. Congue nisi vitae suscipit tellus mauris a diam. Viverra orci sagittis eu volutpat.",
       contact:"ppmunga@gmail.com",
       launch:"1685164374",
@@ -59,14 +56,12 @@ const data = [
       show:true,
   },
   {
-      id:3,
       name: "Inverted Pepe",
       address:"0xFE60FbA03048EfFB4aCf3f0088Ec2f53d779D3BB",
       symbol: "$3D3D",
       chain: "ethereum",
-      mrkCap: "45000",
       votes: "10000",
-      tags:["trending","audited","doxxed"],
+      tags:["trending","audited","kyc","pinksale"],
       description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sapien faucibus et molestie ac feugiat sed lectus vestibulum. Porttitor eget dolor morbi non arcu risus quis varius. Nec feugiat nisl pretium fusce id. Convallis posuere morbi leo urna. Dolor sit amet consectetur adipiscing elit duis tristique sollicitudin nibh. Sit amet nisl purus in. Morbi quis commodo odio aenean sed adipiscing diam. Amet volutpat consequat mauris nunc. Tellus rutrum tellus pellentesque eu tincidunt tortor. Purus non enim praesent elementum. Sit amet justo donec enim diam vulputate. Sit amet risus nullam eget felis eget. Etiam erat velit scelerisque in dictum non consectetur a. Convallis a cras semper auctor neque vitae. Congue nisi vitae suscipit tellus mauris a diam. Viverra orci sagittis eu volutpat.",
       contact:"ppmunga@gmail.com",
       launch:"1684571988",
@@ -80,14 +75,12 @@ const data = [
       show:true,
   },
   {
-      id:4,
       name: "EthShares",
       address: "0x5f12D4012185e044B5FEd1B3dBD9B8B1e7Ffb27f",
       symbol: "ETS",
       chain: "binance-smart-chain",
-      mrkCap: "500000",
       votes: "86000",
-      tags:["trending","audited","doxxed"],
+      tags:["trending","audited","kyc","pinksale"],
       description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sapien faucibus et molestie ac feugiat sed lectus vestibulum. Porttitor eget dolor morbi non arcu risus quis varius. Nec feugiat nisl pretium fusce id. Convallis posuere morbi leo urna. Dolor sit amet consectetur adipiscing elit duis tristique sollicitudin nibh. Sit amet nisl purus in. Morbi quis commodo odio aenean sed adipiscing diam. Amet volutpat consequat mauris nunc. Tellus rutrum tellus pellentesque eu tincidunt tortor. Purus non enim praesent elementum. Sit amet justo donec enim diam vulputate. Sit amet risus nullam eget felis eget. Etiam erat velit scelerisque in dictum non consectetur a. Convallis a cras semper auctor neque vitae. Congue nisi vitae suscipit tellus mauris a diam. Viverra orci sagittis eu volutpat.",
       contact:"ppmunga@gmail.com",
       launch:"1685164374",
@@ -101,14 +94,12 @@ const data = [
       show:true,
   },
   {
-      id:5,
       name: "PepeCola",
       address: "0x55fB228730ED971269EBF284C7500d5fF572A141",
       symbol: "PEPECOLA",
       chain: "ethereum",
-      mrkCap: "750000",
       votes: "20000",
-      tags:["trending","new","doxxed"],
+      tags:["trending","new","kyc","pinksale"],
       description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sapien faucibus et molestie ac feugiat sed lectus vestibulum. Porttitor eget dolor morbi non arcu risus quis varius. Nec feugiat nisl pretium fusce id. Convallis posuere morbi leo urna. Dolor sit amet consectetur adipiscing elit duis tristique sollicitudin nibh. Sit amet nisl purus in. Morbi quis commodo odio aenean sed adipiscing diam. Amet volutpat consequat mauris nunc. Tellus rutrum tellus pellentesque eu tincidunt tortor. Purus non enim praesent elementum. Sit amet justo donec enim diam vulputate. Sit amet risus nullam eget felis eget. Etiam erat velit scelerisque in dictum non consectetur a. Convallis a cras semper auctor neque vitae. Congue nisi vitae suscipit tellus mauris a diam. Viverra orci sagittis eu volutpat.",
       contact:"ppmunga@gmail.com",
       launch:"1685262458",
@@ -122,20 +113,20 @@ const data = [
       show:true,
   }
 ]
-const bannersList = [
-  {
-      "name": "banner3",
-      "url": "https://res.cloudinary.com/dwf6iuvbh/image/upload/v1684819403/banner_muaak9.png"
-  },
-  {
-      "name": "banner2",
-      "url": "https://res.cloudinary.com/dwf6iuvbh/image/upload/v1684875458/banner2_tqhfed.png"
-  },
-  {
-      "name": "banner1",
-      "url": "https://res.cloudinary.com/dwf6iuvbh/image/upload/v1684921197/banner1_m5me1i.png"
-  }
-]
+// const bannerList = [
+//   {
+//       "name": "banner3",
+//       "url": "https://res.cloudinary.com/dwf6iuvbh/image/upload/v1684819403/banner_muaak9.png"
+//   },
+//   {
+//       "name": "banner2",
+//       "url": "https://res.cloudinary.com/dwf6iuvbh/image/upload/v1684875458/banner2_tqhfed.png"
+//   },
+//   {
+//       "name": "banner1",
+//       "url": "https://res.cloudinary.com/dwf6iuvbh/image/upload/v1684921197/banner1_m5me1i.png"
+//   }
+// ]
 
 const voteData = [
   {
@@ -149,20 +140,30 @@ const voteData = [
 
 function App() {
   const secondsPerDay =  86400
-  const {coinMap,coins,votes,voteMap,userAddress,connected,bannerMap} = useSelector((state) => state.app)
+  const {coinMap,coins,votes,voteMap,userAddress,connected,backendUrl,bannerMap} = useSelector((state) => state.app)
   const dispatch = useDispatch()
   const [cloudinaryKey,setCloudinaryKey] = useState(undefined)
   const [priceDisplay,setpriceDisplay] = useState(undefined)
+  const name = "DoctoreCoins"
 
   const validTimestamp = (time) =>   time < (  (new Date().getTime() / 1000) - secondsPerDay )
 
   const styles = {
     navigation:{
-      backgroundColor:"#282c34"
-    }
+      backgroundColor:"#003153"
+    },
+    loading:{
+      display: "flex",
+      justifyContent: "center",
+      alignItems:"center",
+      textAlign: "center",
+      minHeight:"100vh"
+  }
   }
   
   const onInit = useCallback( async () => {
+    const utils = new Utils()
+    console.log(utils.getConfig())
     const backendUrl = process.env.REACT_APP_BACKEND_BASE_URL
     const key = process.env.REACT_APP_CLOUDINARY_API_KEY
     const coinMap = {}
@@ -170,8 +171,8 @@ function App() {
     const bannerMap = {}
     
     setCloudinaryKey( key )
-    // const bannerService = new BannerService(backendUrl)
-    // const bannersList = await bannerService.getBanners()
+    const bannerService = new BannerService(backendUrl)
+    const bannersList = await bannerService.getBanners()
 
     const coinService = new CoinService(backendUrl)
     const coinList = await coinService.getCoins()
@@ -229,14 +230,14 @@ function App() {
   }
 
   const uploadBanner = async (image,name) => {
-    // const service = new BannerService(backendUrl)
+    const service = new BannerService(backendUrl)
     console.log(cloudinaryKey)
     const formData = new FormData()
     formData.append("file",image, `${name}`)
     formData.append("upload_preset",`ml_default`)
     const api = `https://api.cloudinary.com/v1_1/${cloudinaryKey}/image/upload`
     const res = await axios.post(api, formData)
-    // service.updateBanner(name,res.data.secure_url) 
+    service.updateBanner(name,res.data.secure_url) 
     dispatch( updateBanner({name,url:res.data.secure_url}) )
     console.log(res.data.secure_url)
   }
@@ -252,11 +253,11 @@ function App() {
 
   return (
     <>
-      { (coins && coinMap && votes && voteMap  && bannerMap) &&
+      { (coins && coinMap && votes && voteMap && backendUrl && bannerMap) &&
           <Router>
             <div className="mb-3 sticky-top " style={styles.navigation}>
                 <div className='container my-5'>
-                  <Nav connectWallet={connectWallet} disconnectWallet={disconnectWallet} userConnection={{userAddress,connected}}/>
+                  <Nav connectWallet={connectWallet} disconnectWallet={disconnectWallet} userConnection={{userAddress,connected}} name={name}/>
                 </div>
             </div>
             <div className="container mt-5">
@@ -265,20 +266,23 @@ function App() {
                                 element={ <Ranks priceDisplay={priceDisplay}
                                 validTimestamp={validTimestamp} voteCoin={voteCoin}/> }
                         />
-                        <Route  exact path="/token/*" 
+                        {/* <Route  exact path="/token/*" 
                                 element={ <Token  /> }
-                        />
+                        /> */}
                         <Route  exact path="/:address" 
                                 element={ <Coin 
                                 validTimestamp={validTimestamp} voteCoin={voteCoin} /> }
                         />
                         <Route  exact path="/promote" 
                                 element={ <Promotion 
-                                validTimestamp={validTimestamp} voteCoin={voteCoin} /> }
+                                validTimestamp={validTimestamp} voteCoin={voteCoin} name={name} /> }
                         />
                         <Route  exact path="/admin" 
                                 element={ <Admin 
                                 validTimestamp={validTimestamp} voteCoin={voteCoin} uploadBanner={uploadBanner}/> }
+                        />
+                        <Route  exact path="/partners" 
+                                element={ <Partners/> }
                         />
                       </Routes>
                       <Footer />
@@ -287,7 +291,14 @@ function App() {
       }
 
       { !(coins && coinMap) &&
-          <p>Loading...</p>
+        <div style={styles.loading}>
+            <div>
+              <div className="loadingio-spinner-gear-kf6jkp8svg"><div className="ldio-lw2jfx443j">
+              <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+              </div></div>
+
+            </div>
+        </div>
       }
     </>
   );
