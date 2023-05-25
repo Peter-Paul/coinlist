@@ -3,9 +3,12 @@ import Media from "./media";
 import Subscribe from "./subscribe";
 import { useSelector } from "react-redux";
 
-function Nav({connectWallet,disconnectWallet}) {
+function Nav({connectWallet,disconnectWallet,name}) {
     const {userAddress,connected} = useSelector((state) => state.app)
     const styles = {
+        navBar:{
+            backgroundColor: "#003153"
+        },
         logo:{
             fontFamily:"Righteous"
         },
@@ -28,7 +31,7 @@ function Nav({connectWallet,disconnectWallet}) {
     return ( 
         <>
       
-            <div className="d-flex justify-content-between">
+            <div className="d-flex justify-content-between" style={styles.navBar}>
                 <div>
                     <button className="btn btn-lg btn-dark" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">
                         <i className="fa fa-bars"></i>
@@ -55,12 +58,12 @@ function Nav({connectWallet,disconnectWallet}) {
                 </div>
 
                 
-                <h1 className="shadow" style={styles.logo}>CoinList</h1>
+                <h1 className="" style={styles.logo}>{name}</h1>
             </div>
 
             <div className="offcanvas offcanvas-start bg-dark" style={{width:"350px"}} data-bs-scroll="true" tabIndex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
                 <div className="offcanvas-header">
-                    <h5 style={styles.logo} className="offcanvas-title" id="offcanvasWithBothOptionsLabel">CoinList</h5>
+                    <h5 style={styles.logo} className="offcanvas-title" id="offcanvasWithBothOptionsLabel">{name}</h5>
                     <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div className="offcanvas-body" >
@@ -69,17 +72,17 @@ function Nav({connectWallet,disconnectWallet}) {
                         <li data-bs-dismiss="offcanvas">
                             <Link style={styles.link} to="/">Rankings</Link>
                         </li>
-                        <hr className="mb-4" />
+                        {/* <hr className="mb-4" />
                         <li data-bs-dismiss="offcanvas">
                             <Link style={styles.link} to="/token">Token</Link>
-                        </li>      
+                        </li>       */}
                         <hr className="mb-4" />
                         <li data-bs-dismiss="offcanvas">
                             <Link style={styles.link} to="/promote">Promotions</Link>
                         </li>
                         <hr className="mb-4" />
                         <li data-bs-dismiss="offcanvas">
-                            <Link style={styles.link} to="/">Partners</Link>
+                            <Link style={styles.link} to="/partners">Partners</Link>
                         </li>
                         <hr />
                         <li data-bs-dismiss="offcanvas">

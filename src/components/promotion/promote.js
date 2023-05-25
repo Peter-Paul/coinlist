@@ -15,7 +15,7 @@ function Promote({validTimestamp,voteCoin}) {
             minHeight:"50vh"
         },
         discount10:{
-            backgroundColor: "white",
+            backgroundColor: "#ffc107",
             color: "black",
             borderRadius:"50px",
         },

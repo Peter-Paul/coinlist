@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 function Ranks({priceDisplay,validTimestamp,voteCoin}) {
     const [tag, setTag] = useState("trending")
     const [tableView, showTables] = useState(true)
-    const {coins:data,voteMap,userAddress,connected,bannerMap} = useSelector((state) => state.app)
+    const {coins:data,voteMap,userAddress,connected,bannerMap,baseUrl} = useSelector((state) => state.app)
     const styles = {
         card:{
             width:"140px"
@@ -18,6 +18,10 @@ function Ranks({priceDisplay,validTimestamp,voteCoin}) {
         wideBannerImage:{
             height: "115px",
             width: "1022px",
+        },
+        wideBannerImageMobile:{
+            height: "100px",
+            width: "370px",
         },
     }
     
@@ -50,19 +54,31 @@ function Ranks({priceDisplay,validTimestamp,voteCoin}) {
                     <div className="d-flex justify-content-evenly">
                         <img
                             alt="not found"
-                            style={styles.wideBanner}
+                            style={styles.wideBannerImage}
                             src={bannerMap['banner1']}
-                            className="rounded mt-2"
+                            className="rounded mt-2 d-none d-md-block"
+                        />
+                        <img
+                            alt="not found"
+                            style={styles.wideBannerImageMobile}
+                            src={bannerMap['banner1']}
+                            className="rounded responsive mt-2 d-block d-md-none"
                         />
                     </div>
 
 
                     <div className="d-flex justify-content-evenly">
+                    <img
+                            alt="not found"
+                            style={styles.wideBannerImage}
+                            src={bannerMap['banner2']}
+                            className="rounded my-3 responsive d-none d-md-block"
+                        />
                         <img
                             alt="not found"
-                            style={styles.wideBanner}
+                            style={styles.wideBannerImageMobile}
                             src={bannerMap['banner2']}
-                            className="rounded my-3"
+                            className="rounded my-3 responsive d-block d-md-none"
                         />
                     </div>
 
@@ -74,10 +90,11 @@ function Ranks({priceDisplay,validTimestamp,voteCoin}) {
                        voteMap={voteMap} connected={connected} voteCoin={voteCoin} />
 
                     <div className="mt-5 mb-3">
-                        <button className="btn btn-light me-3 mb-2" onClick={ () => setTag('trending') }>Trending</button>
-                        <button className="btn btn-outline-secondary me-3 mb-2" onClick={ () => setTag('new') }>New</button>
-                        <button className="btn btn-outline-secondary me-3 mb-2" onClick={ () => setTag('audited') }>Audited</button>
-                        <button className="btn btn-outline-secondary me-3 mb-2" onClick={ () => setTag('doxxed') }>Doxxed</button>
+                        <button className="btn btn-warning me-3 mb-2" onClick={ () => setTag('trending') }>Trending</button>
+                        <button className="btn btn-outline-light me-3 mb-2" onClick={ () => setTag('new') }>New</button>
+                        <button className="btn btn-outline-light me-3 mb-2" onClick={ () => setTag('audited') }>Audit</button>
+                        <button className="btn btn-outline-light me-3 mb-2" onClick={ () => setTag('kyc') }>KYC</button>
+                        <button className="btn btn-outline-light me-3 mb-2" onClick={ () => setTag('pinksale') }>Pinksale</button>
                     </div>
 
                     <Table data={data.filter( d => d.tags.includes(tag) )} title={"ASSET"}
@@ -87,7 +104,7 @@ function Ranks({priceDisplay,validTimestamp,voteCoin}) {
         }
 
         {   !tableView &&
-            <AddCoin changeView={ () => { showTables(true) } } />
+            <AddCoin changeView={ () => { showTables(true) } } baseUrl={baseUrl} />
         }
        </>
     )
