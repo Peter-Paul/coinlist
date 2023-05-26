@@ -10,9 +10,9 @@ import Coin from './pages/coin';
 import Promotion from './pages/promotion';
 import { BrowserProvider } from 'ethers';
 import Admin from './pages/admin';
-import BannerService from './services/banners';
+// import BannerService from './services/banners';
 import axios from 'axios';
-import CoinService from './services/coins';
+// import CoinService from './services/coins';
 import Partners from './pages/partners';
 import Utils from './utils';
 
@@ -113,20 +113,20 @@ const data = [
       show:true,
   }
 ]
-// const bannerList = [
-//   {
-//       "name": "banner3",
-//       "url": "https://res.cloudinary.com/dwf6iuvbh/image/upload/v1684819403/banner_muaak9.png"
-//   },
-//   {
-//       "name": "banner2",
-//       "url": "https://res.cloudinary.com/dwf6iuvbh/image/upload/v1684875458/banner2_tqhfed.png"
-//   },
-//   {
-//       "name": "banner1",
-//       "url": "https://res.cloudinary.com/dwf6iuvbh/image/upload/v1684921197/banner1_m5me1i.png"
-//   }
-// ]
+const bannersList = [
+  {
+      "name": "banner3",
+      "url": "https://res.cloudinary.com/dwf6iuvbh/image/upload/v1684819403/banner_muaak9.png"
+  },
+  {
+      "name": "banner2",
+      "url": "https://res.cloudinary.com/dwf6iuvbh/image/upload/v1684875458/banner2_tqhfed.png"
+  },
+  {
+      "name": "banner1",
+      "url": "https://res.cloudinary.com/dwf6iuvbh/image/upload/v1684921197/banner1_m5me1i.png"
+  }
+]
 
 const voteData = [
   {
@@ -140,9 +140,9 @@ const voteData = [
 
 function App() {
   const secondsPerDay =  86400
-  const {coinMap,coins,votes,voteMap,userAddress,connected,backendUrl,bannerMap} = useSelector((state) => state.app)
+  const {coinMap,coins,votes,voteMap,userAddress,connected,bannerMap} = useSelector((state) => state.app)
   const dispatch = useDispatch()
-  const [cloudinaryKey,setCloudinaryKey] = useState(undefined)
+  // const [cloudinaryKey,setCloudinaryKey] = useState(undefined)
   const [priceDisplay,setpriceDisplay] = useState(undefined)
   const name = "DoctoreCoins"
 
@@ -165,20 +165,20 @@ function App() {
     const utils = new Utils()
     console.log(utils.getConfig())
     const backendUrl = process.env.REACT_APP_BACKEND_BASE_URL
-    const key = process.env.REACT_APP_CLOUDINARY_API_KEY
+    // const key = process.env.REACT_APP_CLOUDINARY_API_KEY
     const coinMap = {}
     const voteMap = {}
     const bannerMap = {}
     
-    setCloudinaryKey( key )
-    const bannerService = new BannerService(backendUrl)
-    const bannersList = await bannerService.getBanners()
+    // setCloudinaryKey( key )
+    // const bannerService = new BannerService(backendUrl)
+    // const bannersList = await bannerService.getBanners()
 
-    const coinService = new CoinService(backendUrl)
-    const coinList = await coinService.getCoins()
+    // const coinService = new CoinService(backendUrl)
+    // const coinList = await coinService.getCoins()
 
-    console.log(coinList)
-    console.log(bannersList)
+    // console.log(coinList)
+    // console.log(bannersList)
     for (let b of bannersList){
       bannerMap[b.name] = b.url
     }
@@ -230,14 +230,15 @@ function App() {
   }
 
   const uploadBanner = async (image,name) => {
-    const service = new BannerService(backendUrl)
-    console.log(cloudinaryKey)
+    // const service = new BannerService(backendUrl)
+    // console.log(cloudinaryKey)
     const formData = new FormData()
     formData.append("file",image, `${name}`)
     formData.append("upload_preset",`ml_default`)
-    const api = `https://api.cloudinary.com/v1_1/${cloudinaryKey}/image/upload`
+    // const api = `https://api.cloudinary.com/v1_1/${cloudinaryKey}/image/upload`
+    const api = `https://api.cloudinary.com/v1_1/dwf6iuvbh/image/upload`
     const res = await axios.post(api, formData)
-    service.updateBanner(name,res.data.secure_url) 
+    // service.updateBanner(name,res.data.secure_url) 
     dispatch( updateBanner({name,url:res.data.secure_url}) )
     console.log(res.data.secure_url)
   }
@@ -253,7 +254,7 @@ function App() {
 
   return (
     <>
-      { (coins && coinMap && votes && voteMap && backendUrl && bannerMap) &&
+      { (coins && coinMap && votes && voteMap  && bannerMap) &&
           <Router>
             <div className="mb-3 sticky-top " style={styles.navigation}>
                 <div className='container my-5'>
