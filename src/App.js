@@ -13,7 +13,7 @@ import Admin from './pages/admin';
 // import BannerService from './services/banners';
 import axios from 'axios';
 // import CoinService from './services/coins';
-import Partners from './pages/partners';
+// import Partners from './pages/partners';
 import Utils from './utils';
 import BottomBanners from './shared/bottomBanner';
 
