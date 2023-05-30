@@ -15,6 +15,7 @@ import axios from 'axios';
 // import CoinService from './services/coins';
 import Partners from './pages/partners';
 import Utils from './utils';
+import BottomBanners from './shared/bottomBanner';
 
 const data = [
   {
@@ -111,20 +112,115 @@ const data = [
       linkedIn:"https://linkedin.com",
       promoted: true,
       show:true,
-  }
+  },
+  {
+    name: "Royall Coin",
+    address: "0xa175299524F372f9Bd4eE50F8FADc12b4f871492",
+    symbol: "$RC",
+    chain: "arbitrum-one",
+    votes: "100",
+    tags:["trending","new"],
+    description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sapien faucibus et molestie ac feugiat sed lectus vestibulum. Porttitor eget dolor morbi non arcu risus quis varius. Nec feugiat nisl pretium fusce id. Convallis posuere morbi leo urna. Dolor sit amet consectetur adipiscing elit duis tristique sollicitudin nibh. Sit amet nisl purus in. Morbi quis commodo odio aenean sed adipiscing diam. Amet volutpat consequat mauris nunc. Tellus rutrum tellus pellentesque eu tincidunt tortor. Purus non enim praesent elementum. Sit amet justo donec enim diam vulputate. Sit amet risus nullam eget felis eget. Etiam erat velit scelerisque in dictum non consectetur a. Convallis a cras semper auctor neque vitae. Congue nisi vitae suscipit tellus mauris a diam. Viverra orci sagittis eu volutpat.",
+    contact:"ppmunga@gmail.com",
+    launch:"1693515600",
+    website:"https://github.com",
+    github:"https://github.com",
+    telegram:"https://github.com",
+    twitter:"https://twitter.com",
+    facebook:"https://facebook.com",
+    linkedIn:"https://linkedin.com",
+    promoted: false,
+    show:true,
+},
+{
+  name: "yPredict",
+  address: "0xdFaF2680239d678d9551669727b93b62Ad0D18Cc",
+  symbol: "YPRED",
+  chain: "polygon-pos",
+  votes: "10",
+  tags:["trending","new"],
+  description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sapien faucibus et molestie ac feugiat sed lectus vestibulum. Porttitor eget dolor morbi non arcu risus quis varius. Nec feugiat nisl pretium fusce id. Convallis posuere morbi leo urna. Dolor sit amet consectetur adipiscing elit duis tristique sollicitudin nibh. Sit amet nisl purus in. Morbi quis commodo odio aenean sed adipiscing diam. Amet volutpat consequat mauris nunc. Tellus rutrum tellus pellentesque eu tincidunt tortor. Purus non enim praesent elementum. Sit amet justo donec enim diam vulputate. Sit amet risus nullam eget felis eget. Etiam erat velit scelerisque in dictum non consectetur a. Convallis a cras semper auctor neque vitae. Congue nisi vitae suscipit tellus mauris a diam. Viverra orci sagittis eu volutpat.",
+  contact:"ppmunga@gmail.com",
+  launch:"1693515600",
+  website:"https://github.com",
+  github:"https://github.com",
+  telegram:"https://github.com",
+  twitter:"https://twitter.com",
+  facebook:"https://facebook.com",
+  linkedIn:"https://linkedin.com",
+  promoted: true,
+  show:true,
+}
 ]
 const bannersList = [
   {
+    "name": "banner6",
+    "url": "https://res.cloudinary.com/dwf6iuvbh/image/upload/v1685381621/download_t0nblf.png"
+  },
+  {
+    "name": "banner5",
+    "url": "https://res.cloudinary.com/dwf6iuvbh/image/upload/v1685380240/trade_s36d1o.gif"
+  },
+  {
+    "name": "banner4",
+    "url": "https://res.cloudinary.com/dwf6iuvbh/image/upload/v1685379668/250x250_k4rysx.gif"
+  },
+  {
       "name": "banner3",
-      "url": "https://res.cloudinary.com/dwf6iuvbh/image/upload/v1684819403/banner_muaak9.png"
+      "url": "https://res.cloudinary.com/dwf6iuvbh/image/upload/v1684860902/banner1_nw8ltb.gif"
   },
   {
       "name": "banner2",
-      "url": "https://res.cloudinary.com/dwf6iuvbh/image/upload/v1684875458/banner2_tqhfed.png"
+      "url": "https://res.cloudinary.com/dwf6iuvbh/image/upload/v1684923456/banner1_ybu95g.png"
   },
   {
       "name": "banner1",
       "url": "https://res.cloudinary.com/dwf6iuvbh/image/upload/v1684921197/banner1_m5me1i.png"
+  }
+]
+
+const partners = [
+  "https://res.cloudinary.com/dwf6iuvbh/image/upload/v1685457805/arken-logo_qtt4td.png",
+  "https://res.cloudinary.com/dwf6iuvbh/image/upload/v1685457805/arken-logo_qtt4td.png",
+  "https://res.cloudinary.com/dwf6iuvbh/image/upload/v1685457805/arken-logo_qtt4td.png",
+  "https://res.cloudinary.com/dwf6iuvbh/image/upload/v1685457805/arken-logo_qtt4td.png",
+  "https://res.cloudinary.com/dwf6iuvbh/image/upload/v1685457805/arken-logo_qtt4td.png",
+  "https://res.cloudinary.com/dwf6iuvbh/image/upload/v1685457805/arken-logo_qtt4td.png",
+  "https://res.cloudinary.com/dwf6iuvbh/image/upload/v1685457805/arken-logo_qtt4td.png",
+  "https://res.cloudinary.com/dwf6iuvbh/image/upload/v1685457805/arken-logo_qtt4td.png",
+]
+
+
+const tweets = [
+  {
+    image:"https://res.cloudinary.com/dwf6iuvbh/image/upload/v1684970243/im-405914_fw13td.jpg",
+    user:"leo_vel",
+    content:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sodales ut eu sem integer vitae justo eget magna.",
+    time:"Posted 3 mins ago",
+  },
+  {
+    image:"https://res.cloudinary.com/dwf6iuvbh/image/upload/v1684970243/im-405914_fw13td.jpg",
+    user:"leo_vel",
+    content:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sodales ut eu sem integer vitae justo eget magna.",
+    time:"Posted 2h ago",
+  },
+  {
+    image:"https://res.cloudinary.com/dwf6iuvbh/image/upload/v1684970243/im-405914_fw13td.jpg",
+    user:"leo_vel",
+    content:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sodales ut eu sem integer vitae justo eget magna.",
+    time:"Posted 7h ago",
+  },
+  {
+    image:"https://res.cloudinary.com/dwf6iuvbh/image/upload/v1684970243/im-405914_fw13td.jpg",
+    user:"leo_vel",
+    content:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sodales ut eu sem integer vitae justo eget magna.",
+    time:"Posted 1day",
+  },
+  {
+    image:"https://res.cloudinary.com/dwf6iuvbh/image/upload/v1684970243/im-405914_fw13td.jpg",
+    user:"leo_vel",
+    content:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sodales ut eu sem integer vitae justo eget magna.",
+    time:"Posted 1day",
   }
 ]
 
@@ -142,6 +238,8 @@ function App() {
   const secondsPerDay =  86400
   const {coinMap,coins,votes,voteMap,userAddress,connected,bannerMap} = useSelector((state) => state.app)
   const dispatch = useDispatch()
+  const [showLowerLeft,setshowLowerLeft] = useState(true)
+  const [showLowerRight,setshowLowerRight] = useState(true)
   // const [cloudinaryKey,setCloudinaryKey] = useState(undefined)
   const [priceDisplay,setpriceDisplay] = useState(undefined)
   const name = "DoctoreCoins"
@@ -265,7 +363,7 @@ function App() {
                       <Routes>
                         <Route  exact path="/" 
                                 element={ <Ranks priceDisplay={priceDisplay}
-                                validTimestamp={validTimestamp} voteCoin={voteCoin}/> }
+                                validTimestamp={validTimestamp} voteCoin={voteCoin} tweets={tweets}/> }
                         />
                         {/* <Route  exact path="/token/*" 
                                 element={ <Token  /> }
@@ -286,7 +384,29 @@ function App() {
                                 element={ <Partners/> }
                         />
                       </Routes>
-                      <Footer />
+                      <Footer partners={partners} name={name} />
+              </div>
+              <div className='position-relative' >
+                {
+                  showLowerLeft && 
+                  <>
+                    <div className="position-fixed bottom-0 start-0 d-none d-md-block">
+                      <div className='d-flex justify-content-end'>
+                        <button type="button" className="btn-close" onClick={() => setshowLowerLeft(false)}></button>
+                      </div>
+                        <BottomBanners/>
+                    </div>
+                  </>
+                }
+                {
+                  showLowerRight && 
+                  <div className="position-fixed bottom-0 end-0 d-none d-md-block">
+                    <div className='d-flex justify-content-end'>
+                        <button type="button" className="btn-close" onClick={() => setshowLowerRight(false)}></button>
+                      </div>
+                      <BottomBanners/>
+                  </div>
+                }
               </div>
           </Router>
       }

@@ -2,9 +2,10 @@ import { Link } from "react-router-dom";
 import Media from "./media";
 import Subscribe from "./subscribe";
 import { useSelector } from "react-redux";
+import "./nav.css"
 
 function Nav({connectWallet,disconnectWallet,name}) {
-    const {userAddress,connected} = useSelector((state) => state.app)
+    const {userAddress,connected,bannerMap} = useSelector((state) => state.app)
     const styles = {
         navBar:{
             backgroundColor: "#003153"
@@ -38,12 +39,14 @@ function Nav({connectWallet,disconnectWallet,name}) {
                     </button>
                 </div>
 
+                <div></div>
+
                 <div className="d-none d-md-block">
 
                     {
                         connected ?
                             <div>
-                                <button className="btn btn-outline-light" onClick={()=>disconnectWallet()}>
+                                <button className="btn btn-lg btn-outline-light" onClick={()=>disconnectWallet()}>
                                     <span className="me-1">
                                         {`${userAddress.substr(0,10)}...`}
                                     </span>
@@ -52,7 +55,7 @@ function Nav({connectWallet,disconnectWallet,name}) {
                             </div>
                         :
                             <div>
-                                <button className="btn btn-outline-light" onClick={()=>connectWallet()}>Connect Wallet</button>
+                                <button className="btn btn-lg btn-outline-light" onClick={()=>connectWallet()}> <i className="fa fa-plug me-1"></i> Connect Wallet</button>
                             </div>
                     }
                 </div>
@@ -89,7 +92,12 @@ function Nav({connectWallet,disconnectWallet,name}) {
                             <Link style={styles.link} to="/admin">Admin</Link>
                         </li>
                         <hr />
-                
+                        <img
+                            alt="not found"
+                            style={styles.banner}
+                            src={bannerMap['banner4']}
+                            className="my-5"
+                        />  
                         <li className="mt-auto" data-bs-dismiss="offcanvas">
                             <Subscribe/>
                         </li>

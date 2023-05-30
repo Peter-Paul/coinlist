@@ -11,7 +11,7 @@ function Table({data,title,allowRoute,connected,userAddress,validTimestamp,voteC
         }
     }
 
-    const tags2show = ["audited"]
+    const tags2show = ["audited","kyc"]
 
     const customFigure = figure => {
         const [zero, minimum, thousand,million,billion, trillion] = [ 0, 0.0001, 10**3, 10**6, 10**9, 10**12 ]
@@ -20,41 +20,57 @@ function Table({data,title,allowRoute,connected,userAddress,validTimestamp,voteC
         }else if(figure>zero && figure<minimum){
             return `>${minimum}`
         }else if(figure>=minimum && figure<thousand){
-            return `${(figure).toFixed(4)}`
+            return `${(figure).toFixed(3)}`
         }else if(figure>=thousand && figure<million){
-            return `${(figure/thousand).toFixed(4)}K`
+            return `${(figure/thousand).toFixed(2)}K`
         }else if(figure>=million && figure<billion){
-            return `${(figure/million).toFixed(4)}M`
+            return `${(figure/million).toFixed(2)}M`
         }else if(figure>=billion && figure<trillion){
-            return `${(figure/billion).toFixed(4)}B`
+            return `${(figure/billion).toFixed(2)}B`
         }else{
-            return `${(figure/billion).toFixed(4)}T`
+            return `${(figure/billion).toFixed(2)}T`
         }
     }
 
     const customLaunch = launch => {
         const daySecs = 86400
+        const month =  30
+        const year =  365
         const now = Math.floor( new Date().getTime() / 1000 )
-        const days = ((launch - now) / daySecs ).toFixed(1)
+        let days = Math.floor((launch - now) / daySecs )
         if(days < 0 ){
-            return `${Math.abs(days)} days ago`
+            days = Math.abs(days)
+            if( days < month){
+                return `${days} days ago`
+            }else if (days < year && days > month){
+                return `${Math.floor(days/month)} month(s) ago`
+            }else{
+                return `${Math.floor(days/year)} year(s) ago`
+            }
         }else{
-            return `${Math.abs(days)} days to go`
+            days = Math.abs(days)
+            if( days < month){
+                return `${days} days to go`
+            }else if (days < year && days > month){
+                return `${Math.floor(days/month)} month(s) to go`
+            }else{
+                return `${Math.floor(days/year)} year(s) to go`
+            }
         }
     }
 
     const customSymbol = symbol => {
         switch (symbol) {
             case "ethereum":
-                return "ETH"
+                return {name:"ETH",color:"#EFBBCC",text:"black"}
             case "binance-smart-chain":
-                return "BSC"
+                return {name:"BSC",color:"#ffc107",text:"black"}
             case "arbitrum-one":
-                return "ARBITRUM"
+                return {name:"ARBITRUM",color:"blue",text:"white"}
             case "polygon-pos":
-                return "MATIC"
+                return {name:"MATIC",color:"purple",text:"black"}
             default:
-                return "CUSTOM";
+                return {name:"CUSTOM",color:"grey",text:"black"}
         }
     }
 
@@ -68,7 +84,10 @@ function Table({data,title,allowRoute,connected,userAddress,validTimestamp,voteC
                         { !allowRoute &&
                             <div className='d-flex flex-column my-3'>
                                 <strong className='mb-1' style={{fontSize:"15px"}}>{row.name}</strong>
-                                <h6>{row.tags.map( t => (tags2show.includes(t)) && <span key={t} className="badge text-bg-success me-1 mb-1">{t}</span> )}</h6>
+                                <h6>{row.tags.map( t => (tags2show.includes(t)) && <span key={t} className="badge text-bg-success me-1 mb-1">
+                                <i className='fa fa-shield me-1'></i>{t}</span> 
+                                    )}
+                                </h6>
                             </div>
                         }
                         {
@@ -76,7 +95,10 @@ function Table({data,title,allowRoute,connected,userAddress,validTimestamp,voteC
                             <Link style={styles.coinName} to={`/${row.address}`}>
                                 <div className="d-flex flex-column my-3">
                                     <strong className='mb-1' style={{fontSize:"15px"}}>{row.name}</strong>
-                                    <h6>{row.tags.map( t => (tags2show.includes(t)) && <span key={t} className="badge text-bg-success me-1 mb-1">{t}</span> )}</h6>
+                                    <h6>{row.tags.map( t => (tags2show.includes(t)) && <span key={t} className="badge text-bg-success me-1 mb-1">
+                                        <i className='fa fa-shield me-1'></i>{t}</span> 
+                                        )}
+                                    </h6>
                                 </div>
                             </Link>
                         }
@@ -88,16 +110,26 @@ function Table({data,title,allowRoute,connected,userAddress,validTimestamp,voteC
             name: 'SYMBOL',
             selector: row => row.symbol,
             sortable: true,
+            cell: row => {
+                return (
+                    <>
+                        <strong>
+                            {row.symbol}
+                        </strong>
+                    </>
+                )
+            }
         },
         {
             name: 'CHAIN',
             selector: row => row.chain,
             cell: row => {
+                const {name,color,text} = customSymbol(row.chain)
                 return (
                     <>
-                        <div className="p-2 bg-warning text-dark">
+                        <div className="p-2" style={{backgroundColor:color,color:text}}>
                             <strong>
-                                {customSymbol(row.chain)}
+                                {name}
                             </strong>
                         </div>
                     </>
@@ -105,13 +137,15 @@ function Table({data,title,allowRoute,connected,userAddress,validTimestamp,voteC
             }
         },
         {
-            name: 'Price',
+            name: 'PRICE',
             selector: row => row.price,
             sortable: true,
             cell: row => {
                 return (
                     <>
-                        {customFigure(row.price)}
+                        <strong>
+                            {customFigure(row.price)}
+                        </strong>
                     </>
                 )
             }
@@ -123,7 +157,9 @@ function Table({data,title,allowRoute,connected,userAddress,validTimestamp,voteC
                 const {launch} = row
                 return(
                     <>
-                        { customLaunch(parseInt(launch)) }
+                        <strong>
+                            { customLaunch(parseInt(launch)) }
+                        </strong>
                     </>
                 )
             },
@@ -140,9 +176,19 @@ function Table({data,title,allowRoute,connected,userAddress,validTimestamp,voteC
                                 <>
                                     {
                                         voter===undefined || validTimestamp(voter) ? 
-                                        <button className='btn btn-sm btn-outline-light' onClick={()=>voteCoin(row.address)}>{customFigure(parseFloat(row.votes))}</button>
+                                        <button className='btn btn-light' onClick={()=>voteCoin(row.address)}>
+                                            <i className='fa fa-check me-1'></i>
+                                            <strong>
+                                                {customFigure(parseFloat(row.votes))}
+                                            </strong>
+                                        </button>
                                         :
-                                        <button className='btn btn-sm btn-outline-success'>{customFigure(parseFloat(row.votes))}</button>
+                                        <button className='btn btn-success'>
+                                            <i className='fa fa-check me-1'></i>
+                                            <strong>
+                                                {customFigure(parseFloat(row.votes))}
+                                            </strong>
+                                        </button>
                                     }
                                 </>
                             
@@ -150,7 +196,12 @@ function Table({data,title,allowRoute,connected,userAddress,validTimestamp,voteC
                             }
 
                             { !connected &&
-                                <button className='btn btn-sm btn-outline-light' disabled>{customFigure(parseFloat(row.votes))}</button> 
+                                <button className='btn btn-sm btn-outline-light' disabled>
+                                    <i className='fa fa-check me-1'></i>
+                                    <strong>
+                                        {customFigure(parseFloat(row.votes))}
+                                    </strong>
+                                </button>
                             }
                         </>
                         ) 
@@ -337,11 +388,52 @@ function Table({data,title,allowRoute,connected,userAddress,validTimestamp,voteC
     ];
     
     const customStyles = {
-        headCells: {
+        table:{
+            style:{
+                backgroundColor: "#212529",
+                borderRadius:"20px 20px 0px 0px"
+            }
+        },
+        pagination:{
+            style:{
+                backgroundColor: "#0076CE",
+                borderRadius:"0px 0px 20px 20px"
+            }
+        },
+        headRow: {
             style: {
-                backgroundColor :"#212529"
+                backgroundColor :"#212529",
+                borderRadius:"20px 20px 0px 0px"
+
             },
         },
+        headCells: {
+            style: {
+                backgroundColor :"#212529",
+                borderRadius:"20px 20px 0px 0px",
+                fontFamily: "Questrial",
+                fontSize: "16px"
+            },
+        },
+        subHeader: {
+            style: {
+                backgroundColor :"#212529",
+                borderRadius:"20px 20px 0px 0px"
+
+            },
+        },
+        head: {
+            style: {
+                backgroundColor :"#212529",
+                borderRadius:"20px 20px 0px 0px"
+
+            },
+        },
+        rows:{
+            style:{
+                backgroundColor: "#0076CE",
+            }
+        }
         
     }
  

@@ -55,7 +55,7 @@ function Promote({validTimestamp,voteCoin}) {
                     </div>
 
                     <div className="p-3 my-5 text-center shadow-lg" style={styles.discount10}>
-                        <h4>Get 10% discount on any ads!</h4>
+                        <h5><strong>Get 10% discount on any ads!</strong></h5>
                         <p>Put a backlink to CoinLink on your project website and receive a 10% discount for any ad package!</p>
                         <p>Holders of 100,000+ $COINLIST get 10% discount on all ads!</p>
                     </div>
