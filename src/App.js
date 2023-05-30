@@ -380,9 +380,9 @@ function App() {
                                 element={ <Admin 
                                 validTimestamp={validTimestamp} voteCoin={voteCoin} uploadBanner={uploadBanner}/> }
                         />
-                        <Route  exact path="/partners" 
+                        {/* <Route  exact path="/partners" 
                                 element={ <Partners/> }
-                        />
+                        /> */}
                       </Routes>
                       <Footer partners={partners} name={name} />
               </div>
