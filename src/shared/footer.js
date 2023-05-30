@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import Media from "./media";
 import Subscribe from "./subscribe";
 
-function Footer() {
+function Footer({partners,name}) {
     const {bannerMap} = useSelector((state) => state.app)
 
     const styles = {
@@ -22,8 +22,8 @@ function Footer() {
             // color:'white'
         },
         wideBannerImage:{
-            height: "240px",
-            width: "600px",
+            height: "260px",
+            width: "800px",
         },
         wideBannerImageMobile:{
             height: "140px",
@@ -49,8 +49,33 @@ function Footer() {
                 />
             </div>
             <hr className="mt-5 mb-3" />
+            
+            {
+                partners && 
+                <>
+                    <h2 className="text-center mb-3"> <i className="fa fa-users"></i> Partners</h2>
+                    <div className="d-flex justify-content-center row">
+                            <>
+                            {    partners.map( p => {
+                                    return (
+                                        <img
+                                            key={p}
+                                            alt="not found"
+                                            // style={{width:"150px",height:"80px"}}
+                                            src={p}
+                                            className="rounded mt-2 col-2"
+                                        />
+                                    )
+                                } )}
+                            </>
+                    </div>
+                </>
+            }
+            
+            <hr className="mt-5 mb-3" />
+
             <div className="d-flex justify-content-between mt-2 mb-3">
-                <h1 className="shadow" style={styles.logo}>CoinList</h1>
+                <h1 style={styles.logo}>{name}</h1>
                 <div>
                     <Media />
                 </div>

@@ -49,16 +49,22 @@ function Promotion({validTimestamp,voteCoin}) {
                     <button className="nav-link mx-2" 
                         style={ ( activeState==="promote"  ) ? styles.activePage : styles.inactivePage } 
                         onClick={ () => setActive("promote") }>
-                        Promote Coin
+                            <strong>
+                                Promote Coin
+                            </strong>
                     </button>
                     <button className="nav-link mx-2" 
                         style={ ( activeState==="audit" ) ? styles.activePage : styles.inactivePage }  
                         onClick={ () => setActive("audit") }>
-                        Audit Coin
+                            <strong>
+                                Audit Coin
+                            </strong>
                     </button>
                     <button className="nav-link mx-2" style={ ( activeState==="dox" ) ? styles.activePage : styles.inactivePage }  
                     onClick={ () => setActive("dox") }>
-                        Dox Coin
+                        <strong>
+                                Dox Coin
+                        </strong>
                     </button>
                 </nav>
             </div>

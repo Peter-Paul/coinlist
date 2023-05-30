@@ -12,9 +12,16 @@ code {
     monospace;
 }
 
-p{
-  font-size: 18px;
+li,p,.btn,strong,h2,h3,h4,h5,.nav-link{
   font-family: "Questrial";
+}
+
+h2,h4,h3{
+  color: #ffc107
+}
+
+li,p{
+  font-size: 18px;
 }
 
 @keyframes ldio-lw2jfx443j {
@@ -73,7 +80,7 @@ transform-origin: 0 0; /* see note above */
 .photo-holder {
   width: 100%;
   height: 200px;
-  min-height: 300px;
+  min-height: 200px;
   position: relative;
   /* border-radius: 15px; */
 }
@@ -84,3 +91,4 @@ transform-origin: 0 0; /* see note above */
   background-position: center;
   /* border-radius: 15px; */
 }
+

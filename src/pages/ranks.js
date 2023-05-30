@@ -4,7 +4,7 @@ import Table from "../components/ranks/table";
 import AddCoin from "../components/ranks/addCoin";
 import { useSelector } from "react-redux";
 
-function Ranks({priceDisplay,validTimestamp,voteCoin}) {
+function Ranks({priceDisplay,validTimestamp,voteCoin,tweets}) {
     const [tag, setTag] = useState("trending")
     const [tableView, showTables] = useState(true)
     const {coins:data,voteMap,userAddress,connected,bannerMap,baseUrl} = useSelector((state) => state.app)
@@ -20,7 +20,7 @@ function Ranks({priceDisplay,validTimestamp,voteCoin}) {
             width: "1022px",
         },
         wideBannerImageMobile:{
-            height: "100px",
+            height: "60px",
             width: "370px",
         },
     }
@@ -51,24 +51,40 @@ function Ranks({priceDisplay,validTimestamp,voteCoin}) {
                         </div>
                     }
                     
-                    <div className="d-flex justify-content-evenly">
+                    <div className="d-flex justify-content-evenly my-3">
                         <img
                             alt="not found"
                             style={styles.wideBannerImage}
                             src={bannerMap['banner1']}
-                            className="rounded mt-2 d-none d-md-block"
+                            className="rounded d-none d-md-block"
                         />
                         <img
                             alt="not found"
                             style={styles.wideBannerImageMobile}
                             src={bannerMap['banner1']}
-                            className="rounded responsive mt-2 d-block d-md-none"
+                            className="rounded responsive d-block d-md-none"
+                        />
+                    </div>
+
+                    <div className="d-flex justify-content-center mt-4 row">
+                        <img
+                            alt="not found"
+                            style={{width:"500px",height:"200px", borderRadius:"15px"}}
+                            src={bannerMap['banner5']}
+                            className="d-none d-md-block"
+                        />
+
+                        <img
+                            alt="not found"
+                            style={{width:"500px",height:"200px", borderRadius:"15px"}}
+                            src={bannerMap['banner5']}
+                            className="d-none d-md-block"
                         />
                     </div>
 
 
-                    <div className="d-flex justify-content-evenly">
-                    <img
+                    <div className="d-flex justify-content-evenly my-3">
+                        <img
                             alt="not found"
                             style={styles.wideBannerImage}
                             src={bannerMap['banner2']}
@@ -89,12 +105,45 @@ function Ranks({priceDisplay,validTimestamp,voteCoin}) {
                        validTimestamp={validTimestamp} allowRoute={true} userAddress={userAddress} 
                        voteMap={voteMap} connected={connected} voteCoin={voteCoin} />
 
+
+
+                    {
+                        tweets && 
+                        <>
+                            <div className="d-flex justify-content-evenly mt-4 row">
+                                {
+                                    tweets.map( ({user,content,time,image}) => {
+                                        return (
+                                            <>          
+                                                <div className="col-12 col-md-2 mx-1 my-3" key={time}>
+                                                    <div className="card shadow text-light bg-dark border-warning">
+                                                        <div  className="photo-holder">
+                                                            <div style={{backgroundImage:`url(${image})`}} className="photo-img" alt=""></div>
+                                                        </div>
+                                                        <div className="card-body">
+                                                            <h5 className="card-title"> <strong>@{user}</strong></h5>
+                                                            <p className="card-text">{`${content.slice(0,30)}...`}</p>
+                                                        </div>
+                                                        <div className="card-footer">
+                                                            <small className="text-body-secondary">{time}</small>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </>
+                                        )
+                                    } )
+                                }
+                            </div>
+                        
+                        </>
+                    }
+
                     <div className="mt-5 mb-3">
-                        <button className="btn btn-warning me-3 mb-2" onClick={ () => setTag('trending') }>Trending</button>
-                        <button className="btn btn-outline-light me-3 mb-2" onClick={ () => setTag('new') }>New</button>
-                        <button className="btn btn-outline-light me-3 mb-2" onClick={ () => setTag('audited') }>Audit</button>
-                        <button className="btn btn-outline-light me-3 mb-2" onClick={ () => setTag('kyc') }>KYC</button>
-                        <button className="btn btn-outline-light me-3 mb-2" onClick={ () => setTag('pinksale') }>Pinksale</button>
+                        <button className="btn btn-warning me-3 mb-2" onClick={ () => setTag('trending') }> <i className="fa fa-fire me-1"></i> Trending</button>
+                        <button className="btn btn-outline-light me-3 mb-2" onClick={ () => setTag('new') }> <i className="fa fa-bell me-1"></i> New</button>
+                        <button className="btn btn-outline-light me-3 mb-2" onClick={ () => setTag('audited') }> <i className="fa fa-shield me-1"></i> Audit</button>
+                        <button className="btn btn-outline-light me-3 mb-2" onClick={ () => setTag('kyc') }> <i className="fa fa-key me-1"></i> KYC</button>
+                        <button className="btn btn-outline-light me-3 mb-2" onClick={ () => setTag('pinksale') }> <i className="fa fa-rocket me-1"></i> Pinksale</button>
                     </div>
 
                     <Table data={data.filter( d => d.tags.includes(tag) )} title={"ASSET"}
@@ -106,6 +155,7 @@ function Ranks({priceDisplay,validTimestamp,voteCoin}) {
         {   !tableView &&
             <AddCoin changeView={ () => { showTables(true) } } baseUrl={baseUrl} />
         }
+        
        </>
     )
 }
