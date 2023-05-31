@@ -63,7 +63,7 @@ function Footer({partners,name}) {
                                             alt="not found"
                                             // style={{width:"150px",height:"80px"}}
                                             src={p}
-                                            className="rounded mt-2 col-2"
+                                            className="rounded mt-2 col-4 col-md-2"
                                         />
                                     )
                                 } )}
@@ -82,28 +82,22 @@ function Footer({partners,name}) {
             </div>
 
             <div className="d-flex justify-content-evenly mb-5 row">
-                <div className="col-md-3 col-12">
+                <div className="col-md-4 col-12">
                     <h4>Coin rankings</h4>
                     <ul style={styles.links}>
                         <li style={styles.link}>List of Coins</li>
                         <li style={styles.link}>Add Your Coin</li>
                         <li style={styles.link}>Promote Your Project</li>
                     </ul>
-
-                    <h4>Games</h4>
-                    <ul style={styles.links}>
-                        <li style={styles.link}>Trending Games</li>
-                        <li style={styles.link}>Add Your Game</li>
-                    </ul>
                 </div>
-                <div className="col-md-3 col-12">
+                {/* <div className="col-md-4 col-12">
                     <h4>CoinList Token</h4>
                     <ul style={styles.links}>
                         <li style={styles.link}>About</li>
                         <li style={styles.link}>Staking</li>
                     </ul>
-                </div>
-                <div className="col-md-3 col-12">
+                </div> */}
+                <div className="col-md-4 col-12">
                     <h4>Company</h4>
                     <ul style={styles.links}>
                         <li style={styles.link}>Partners</li>
@@ -112,7 +106,7 @@ function Footer({partners,name}) {
                         <li style={styles.link}>Terms and Conditions</li>
                     </ul>
                 </div>
-                <div className="col-md-3 col-12">
+                <div className="col-md-4 col-12">
                     <Subscribe/>
                 </div>
             </div>

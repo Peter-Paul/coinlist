@@ -391,26 +391,26 @@ function Table({data,title,allowRoute,connected,userAddress,validTimestamp,voteC
         table:{
             style:{
                 backgroundColor: "#212529",
-                borderRadius:"20px 20px 0px 0px"
+                borderRadius:"6px 6px 0px 0px"
             }
         },
         pagination:{
             style:{
                 backgroundColor: "#0076CE",
-                borderRadius:"0px 0px 20px 20px"
+                borderRadius:"0px 0px 6px 6px"
             }
         },
         headRow: {
             style: {
                 backgroundColor :"#212529",
-                borderRadius:"20px 20px 0px 0px"
+                borderRadius:"6px 6px 0px 0px"
 
             },
         },
         headCells: {
             style: {
                 backgroundColor :"#212529",
-                borderRadius:"20px 20px 0px 0px",
+                borderRadius:"6px 6px 0px 0px",
                 fontFamily: "Questrial",
                 fontSize: "16px"
             },
@@ -418,14 +418,14 @@ function Table({data,title,allowRoute,connected,userAddress,validTimestamp,voteC
         subHeader: {
             style: {
                 backgroundColor :"#212529",
-                borderRadius:"20px 20px 0px 0px"
+                borderRadius:"6px 6px 0px 0px"
 
             },
         },
         head: {
             style: {
                 backgroundColor :"#212529",
-                borderRadius:"20px 20px 0px 0px"
+                borderRadius:"6px 6px 0px 0px"
 
             },
         },
