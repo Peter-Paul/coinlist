@@ -30,11 +30,11 @@ function Promotion({validTimestamp,voteCoin}) {
         },
         activePage:{
             color: "black",
-            backgroundColor: "white"
+            backgroundColor: "#0076CE"
         },
         inactivePage:{
             color: "white",
-            borderColor:"white",
+            borderColor:"#0076CE",
             borderWidth:"1px",
             borderStyle:"solid",
         }

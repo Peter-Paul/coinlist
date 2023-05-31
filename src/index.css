@@ -12,12 +12,39 @@ code {
     monospace;
 }
 
-li,p,.btn,strong,h2,h3,h4,h5,.nav-link{
+li,p,.btn,strong,h1,h2,h3,h4,h5,small,.nav-link{
   font-family: "Questrial";
 }
 
-h2,h4,h3{
+h1,h2,h3,h4,h5{
   color: #ffc107
+}
+
+.bg-dell-blue{
+  background-color: #0076CE;
+}
+
+.text-dell-blue{
+  color: #0076CE;
+}
+
+.btn-dell-blue{
+  background-color: #0076CE;
+  color: white;
+}
+
+.btn-outline-dell-blue{
+  border-color: #0076CE;
+  color: white;
+}
+
+.btn-dell-blue:hover {
+  background-color: #0264ae;
+}
+
+.btn-outline-dell-blue:hover {
+  background-color: #0076CE;
+  border-color: #0076CE;
 }
 
 li,p{

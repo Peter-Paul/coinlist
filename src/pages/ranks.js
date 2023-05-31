@@ -23,6 +23,18 @@ function Ranks({priceDisplay,validTimestamp,voteCoin,tweets}) {
             height: "60px",
             width: "370px",
         },
+        gifBanner:{
+            width:"500px",
+            height:"200px", 
+            borderRadius:"15px"
+        },
+        tweetCard:{
+            backgroundColor:"#003153",
+            borderColor:"#0076CE"
+        },
+        tweetCardUser:{
+            color:"#0076CE"
+        }
     }
     
     return (
@@ -66,20 +78,19 @@ function Ranks({priceDisplay,validTimestamp,voteCoin,tweets}) {
                         />
                     </div>
 
-                    <div className="d-flex justify-content-center mt-4 row">
-                        <img
-                            alt="not found"
-                            style={{width:"500px",height:"200px", borderRadius:"15px"}}
-                            src={bannerMap['banner5']}
-                            className="d-none d-md-block"
-                        />
-
-                        <img
-                            alt="not found"
-                            style={{width:"500px",height:"200px", borderRadius:"15px"}}
-                            src={bannerMap['banner5']}
-                            className="d-none d-md-block"
-                        />
+                    <div className="d-none d-md-block">
+                        <div className="d-flex justify-content-center mt-4 row ">
+                            <img
+                                alt="not found"
+                                style={styles.gifBanner}
+                                src={bannerMap['banner5']}
+                            />
+                            <img
+                                alt="not found"
+                                style={styles.gifBanner}
+                                src={bannerMap['banner5']}
+                            />
+                        </div>
                     </div>
 
 
@@ -116,13 +127,13 @@ function Ranks({priceDisplay,validTimestamp,voteCoin,tweets}) {
                                         return (
                                             <>          
                                                 <div className="col-12 col-md-2 mx-1 my-3" key={time}>
-                                                    <div className="card shadow text-light bg-dark border-warning">
+                                                    <div className="card shadow " style={styles.tweetCard}>
                                                         <div  className="photo-holder">
                                                             <div style={{backgroundImage:`url(${image})`}} className="photo-img" alt=""></div>
                                                         </div>
                                                         <div className="card-body">
-                                                            <h5 className="card-title"> <strong>@{user}</strong></h5>
-                                                            <p className="card-text">{`${content.slice(0,30)}...`}</p>
+                                                            <h5 className="card-title text-dell-blue"> <strong>@{user}</strong></h5>
+                                                            <p className="card-text text-light">{`${content.slice(0,30)}...`}</p>
                                                         </div>
                                                         <div className="card-footer">
                                                             <small className="text-body-secondary">{time}</small>
@@ -139,7 +150,7 @@ function Ranks({priceDisplay,validTimestamp,voteCoin,tweets}) {
                     }
 
                     <div className="mt-5 mb-3">
-                        <button className="btn btn-warning me-3 mb-2" onClick={ () => setTag('trending') }> <i className="fa fa-fire me-1"></i> Trending</button>
+                        <button className="btn btn-dell-blue me-3 mb-2" onClick={ () => setTag('trending') }> <i className="fa fa-fire me-1"></i> Trending</button>
                         <button className="btn btn-outline-light me-3 mb-2" onClick={ () => setTag('new') }> <i className="fa fa-bell me-1"></i> New</button>
                         <button className="btn btn-outline-light me-3 mb-2" onClick={ () => setTag('audited') }> <i className="fa fa-shield me-1"></i> Audit</button>
                         <button className="btn btn-outline-light me-3 mb-2" onClick={ () => setTag('kyc') }> <i className="fa fa-key me-1"></i> KYC</button>

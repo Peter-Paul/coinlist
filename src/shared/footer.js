@@ -63,7 +63,7 @@ function Footer({partners,name}) {
                                             alt="not found"
                                             // style={{width:"150px",height:"80px"}}
                                             src={p}
-                                            className="rounded mt-2 col-2"
+                                            className="rounded mt-2 col-4 col-md-2"
                                         />
                                     )
                                 } )}
