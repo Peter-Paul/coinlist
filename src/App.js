@@ -16,6 +16,7 @@ import axios from 'axios';
 // import Partners from './pages/partners';
 import Utils from './utils';
 import BottomBanners from './shared/bottomBanner';
+import Telegram from './services/telegram';
 
 const data = [
   {
@@ -242,6 +243,7 @@ function App() {
   const [showLowerRight,setshowLowerRight] = useState(true)
   // const [cloudinaryKey,setCloudinaryKey] = useState(undefined)
   const [priceDisplay,setpriceDisplay] = useState(undefined)
+  const [telegramPosts,setTelegramPosts] = useState(undefined)
   const name = "DoctoreCoins"
 
   const validTimestamp = (time) =>   time < (  (new Date().getTime() / 1000) - secondsPerDay )
@@ -307,7 +309,11 @@ function App() {
     for (let v of voteData){
       voteMap[`${v.address}/${v.coin}`] = v.latestTimestamp
     }
-    dispatch( loadState({coins:data,coinMap,votes:voteData,voteMap,backendUrl,bannerMap}) )
+    
+    const telegram = new Telegram()
+    setTelegramPosts(await telegram.getPosts())
+
+    dispatch( loadState({coins:data,coinMap,votes:voteData,voteMap,backendUrl,bannerMap,}) )
     
     
   }, [dispatch])
@@ -352,7 +358,7 @@ function App() {
 
   return (
     <>
-      { (coins && coinMap && votes && voteMap  && bannerMap) &&
+      { (coins && coinMap && votes && voteMap  && bannerMap && telegramPosts && telegramPosts.length>0) &&
           <Router>
             <div className="mb-3 sticky-top " style={styles.navigation}>
                 <div className='container my-5'>
@@ -363,7 +369,7 @@ function App() {
                       <Routes>
                         <Route  exact path="/" 
                                 element={ <Ranks priceDisplay={priceDisplay}
-                                validTimestamp={validTimestamp} voteCoin={voteCoin} tweets={tweets}/> }
+                                validTimestamp={validTimestamp} voteCoin={voteCoin} tweets={tweets} telegramPosts={telegramPosts} /> }
                         />
                         {/* <Route  exact path="/token/*" 
                                 element={ <Token  /> }
