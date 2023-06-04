@@ -4,7 +4,7 @@ import Table from "../components/ranks/table";
 import AddCoin from "../components/ranks/addCoin";
 import { useSelector } from "react-redux";
 
-function Ranks({priceDisplay,validTimestamp,voteCoin,tweets,telegramPosts}) {
+function Ranks({priceDisplay,validTimestamp,voteCoin,telegramPosts}) {
     const [tag, setTag] = useState("trending")
     const [tableView, showTables] = useState(true)
     const {coins:data,voteMap,userAddress,connected,bannerMap,baseUrl} = useSelector((state) => state.app)
@@ -145,28 +145,29 @@ function Ranks({priceDisplay,validTimestamp,voteCoin,tweets,telegramPosts}) {
 
 
                     {
-                        tweets && 
+                        telegramPosts && 
                         <>
                             <div className="d-flex justify-content-evenly mt-4 row">
                                 {
-                                    telegramPosts.map( ({user,caption,date,imageUrl}) => {
-                                        return (
-                                            <>          
-                                                <div className="col-12 col-md-3 my-3" key={date}>
-                                                    <div className="card shadow " style={styles.tweetCard}>
-                                                        <div  className="photo-holder">
-                                                            <div style={{backgroundImage:`url(${imageUrl})`}} className="photo-img" alt=""></div>
-                                                        </div>
-                                                        <div className="card-body">
-                                                            {/* <h5 className="card-title text-dell-blue"> <strong>@{user}</strong></h5> */}
-                                                            <p className="card-text text-light">{`${caption.slice(0,160)}...`}</p>
-                                                        </div>
-                                                        <div className="card-footer">
-                                                            <small className="text-body-secondary">{timePosted(date)}</small>
-                                                        </div>
+                                    telegramPosts.map( ({caption,date,imageUrl}) => {
+                                        return (                                                   
+                                            <div className="col-12 col-md-3 my-3" key={caption}>
+                                                <div className="card shadow " style={styles.tweetCard}>
+                                                    <div  className="photo-holder">
+                                                        <div style={{backgroundImage:`url(${imageUrl})`}} className="photo-img" alt=""></div>
+                                                    </div>
+                                                    <div className="card-body">
+                                                        {/* <h5 className="card-title text-dell-blue"> <strong>@{user}</strong></h5> */}
+                                                        <p className="card-text text-light">
+                                                            {`${caption.slice(0,120)}`}
+                                                            <button type="button" className="btn btn-link">continue...</button>
+                                                        </p>
+                                                    </div>
+                                                    <div className="card-footer">
+                                                        <small className="text-body-secondary">{timePosted(date)}</small>
                                                     </div>
                                                 </div>
-                                            </>
+                                            </div>
                                         )
                                     } )
                                 }

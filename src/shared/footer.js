@@ -1,13 +1,15 @@
 import { useSelector } from "react-redux";
 import Media from "./media";
 import Subscribe from "./subscribe";
+import { Link } from "react-router-dom";
 
 function Footer({partners,name}) {
     const {bannerMap} = useSelector((state) => state.app)
 
     const styles = {
         links:{
-            listStyleType:"none"
+            listStyleType:"none",
+            textColor:"white"
         },
         logo:{
             fontFamily:"Righteous"
@@ -35,7 +37,7 @@ function Footer({partners,name}) {
     return (  
         <>
             <div className="d-flex mt-5 justify-content-center">
-            <img
+                <img
                     alt="not found"
                     style={styles.wideBannerImage}
                     src={bannerMap['banner3']}
@@ -54,20 +56,24 @@ function Footer({partners,name}) {
                 partners && 
                 <>
                     <h2 className="text-center mb-3"> <i className="fa fa-users"></i> Partners</h2>
-                    <div className="d-flex justify-content-center row">
-                            <>
-                            {    partners.map( p => {
+                    <div className="d-flex justify-content-evenly row rounded" >
+                            {    partners.map( ({id,url,name,link}) => {
                                     return (
-                                        <img
-                                            key={p}
-                                            alt="not found"
-                                            // style={{width:"150px",height:"80px"}}
-                                            src={p}
-                                            className="rounded mt-2 col-4 col-md-2"
-                                        />
+                                        <div className="col-12 col-md-2" key={id}>    
+                                            <div className="card shadow mb-3" style={{backgroundColor:"#003153",borderColor:"#0076CE"}}>
+                                                <div  className="partner-holder ">
+                                                    <div style={{backgroundImage:`url(${url})`}} className="partner-img" alt=""></div>
+                                                </div>
+                                                <div className="card-body">
+                                                    <p className="text-center text-warning">
+                                                        <strong style={{cursor:"pointer"}} onClick={() => { window.open(link,"_blank") }}>{name}</strong>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                  
                                     )
-                                } )}
-                            </>
+                            } )}
                     </div>
                 </>
             }
@@ -85,27 +91,15 @@ function Footer({partners,name}) {
                 <div className="col-md-4 col-12">
                     <h4>Coin rankings</h4>
                     <ul style={styles.links}>
-                        <li style={styles.link}>List of Coins</li>
-                        <li style={styles.link}>Add Your Coin</li>
-                        <li style={styles.link}>Promote Your Project</li>
+                        <li>
+                            <Link style={styles.link} to="/"><span className="text-light">List of Coins</span></Link>
+                        </li>
+                        <li style={styles.link}>
+                            <Link style={styles.link} to="/promote"><span className="text-light">Promote Coins</span></Link>
+                        </li>
                     </ul>
                 </div>
-                {/* <div className="col-md-4 col-12">
-                    <h4>CoinList Token</h4>
-                    <ul style={styles.links}>
-                        <li style={styles.link}>About</li>
-                        <li style={styles.link}>Staking</li>
-                    </ul>
-                </div> */}
-                <div className="col-md-4 col-12">
-                    <h4>Company</h4>
-                    <ul style={styles.links}>
-                        <li style={styles.link}>Partners</li>
-                        <li style={styles.link}>Disclaimer</li>
-                        <li style={styles.link}>Privacy Policy</li>
-                        <li style={styles.link}>Terms and Conditions</li>
-                    </ul>
-                </div>
+  
                 <div className="col-md-4 col-12">
                     <Subscribe/>
                 </div>
