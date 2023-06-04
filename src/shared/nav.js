@@ -46,7 +46,7 @@ function Nav({connectWallet,disconnectWallet,name}) {
                     {
                         connected ?
                             <div>
-                                <button className="btn btn-lg btn-outline-dell-blue" onClick={()=>disconnectWallet()}>
+                                <button className="btn btn-lg btn-outline-primary" onClick={()=>disconnectWallet()}>
                                     <span className="me-1">
                                         {`${userAddress.substr(0,10)}...`}
                                     </span>
@@ -55,7 +55,7 @@ function Nav({connectWallet,disconnectWallet,name}) {
                             </div>
                         :
                             <div>
-                                <button className="btn btn-lg btn-outline-dell-blue" onClick={()=>connectWallet()}> <i className="fa fa-plug me-1"></i> Connect Wallet</button>
+                                <button className="btn btn-lg btn-outline-primary" onClick={()=>connectWallet()}> <i className="fa fa-plug me-1"></i> Connect Wallet</button>
                             </div>
                     }
                 </div>

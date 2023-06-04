@@ -20,7 +20,7 @@ function Table({data,title,allowRoute,connected,userAddress,validTimestamp,voteC
         }else if(figure>zero && figure<minimum){
             return `>${minimum}`
         }else if(figure>=minimum && figure<thousand){
-            return `${(figure).toFixed(3)}`
+            return `${(figure).toFixed(2)}`
         }else if(figure>=thousand && figure<million){
             return `${(figure/thousand).toFixed(2)}K`
         }else if(figure>=million && figure<billion){
@@ -62,15 +62,15 @@ function Table({data,title,allowRoute,connected,userAddress,validTimestamp,voteC
     const customSymbol = symbol => {
         switch (symbol) {
             case "ethereum":
-                return {name:"ETH",color:"#EFBBCC",text:"black"}
+                return {name:"ETH",color:"#EFBBCC",text:"white"}
             case "binance-smart-chain":
-                return {name:"BSC",color:"#ffc107",text:"black"}
+                return {name:"BSC",color:"#ffc107",text:"white"}
             case "arbitrum-one":
-                return {name:"ARBITRUM",color:"blue",text:"white"}
+                return {name:"ARBITRUM",color:"#0076CE",text:"white"}
             case "polygon-pos":
-                return {name:"MATIC",color:"purple",text:"black"}
+                return {name:"MATIC",color:"purple",text:"white"}
             default:
-                return {name:"CUSTOM",color:"grey",text:"black"}
+                return {name:"CUSTOM",color:"grey",text:"white"}
         }
     }
 
@@ -82,7 +82,7 @@ function Table({data,title,allowRoute,connected,userAddress,validTimestamp,voteC
                 return (
                     <>
                         { !allowRoute &&
-                            <div className='d-flex flex-column my-3'>
+                            <div className='d-flex flex-column my-2'>
                                 <strong className='mb-1' style={{fontSize:"15px"}}>{row.name}</strong>
                                 <h6>{row.tags.map( t => (tags2show.includes(t)) && <span key={t} className="badge text-bg-success me-1 mb-1">
                                 <i className='fa fa-shield me-1'></i>{t}</span> 
@@ -93,7 +93,7 @@ function Table({data,title,allowRoute,connected,userAddress,validTimestamp,voteC
                         {
                             allowRoute &&
                             <Link style={styles.coinName} to={`/${row.address}`}>
-                                <div className="d-flex flex-column my-3">
+                                <div className="d-flex flex-column my-2">
                                     <strong className='mb-1' style={{fontSize:"15px"}}>{row.name}</strong>
                                     <h6>{row.tags.map( t => (tags2show.includes(t)) && <span key={t} className="badge text-bg-success me-1 mb-1">
                                         <i className='fa fa-shield me-1'></i>{t}</span> 
@@ -396,7 +396,8 @@ function Table({data,title,allowRoute,connected,userAddress,validTimestamp,voteC
         },
         pagination:{
             style:{
-                backgroundColor: "#0076CE",
+                // backgroundColor: "#0076CE",
+                backgroundColor: "blue",
                 borderRadius:"0px 0px 6px 6px"
             }
         },
@@ -431,7 +432,8 @@ function Table({data,title,allowRoute,connected,userAddress,validTimestamp,voteC
         },
         rows:{
             style:{
-                backgroundColor: "#0076CE",
+                // backgroundColor: "#0076CE",
+                backgroundColor: "blue",
             }
         }
         

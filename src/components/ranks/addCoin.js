@@ -25,6 +25,8 @@ function AddCoin({changeView,baseUrl}) {
             twitter:"",
             facebook:"",
             linkedin:"",
+            audit:"",
+            pinksale:"",
             promoted:false,
             show:false,
             votes:"0",
@@ -73,7 +75,7 @@ function AddCoin({changeView,baseUrl}) {
     return ( 
         <>
             <div className="mb-5">
-                <button className="btn btn-outline-dell-blue ms-3" onClick={changeView}><i className="me-2 fa fa-angle-left"></i> Rankings </button>
+                <button className="btn btn-outline-primary ms-3" onClick={changeView}><i className="me-2 fa fa-angle-left"></i> Rankings </button>
             </div>
             <form onSubmit={addToken}>
                 <div className="row">
@@ -108,7 +110,7 @@ function AddCoin({changeView,baseUrl}) {
                             <option value="arbitrum-one">Arbitrum</option>
                         </select>
 
-                        <h4 className="mt-3">Contact</h4>
+                        <h4 className="mt-4">Contact</h4>
                         <label className="form-label">Contact Email <span className="text-danger" style={{fontSize:"10px"}} > *Required</span> </label>
                         <input type="email" name="contact" style={styles.input} className="form-control mb-3 form-control-md bg-dark shadow" 
                         placeholder="Enter email" value={coin.contact} onChange={ e => handleCoinChange(e) }/> 
@@ -138,10 +140,19 @@ function AddCoin({changeView,baseUrl}) {
                         <label className="form-label">LinkedIn</label>
                         <input name="linkedin" style={styles.input} className="form-control mb-3 form-control-md bg-dark shadow" 
                         value={coin.linkedin} onChange={ e => handleCoinChange(e) }/>
+
+                        <label className="form-label">Audit</label>
+                        <input name="audit" style={styles.input} className="form-control mb-3 form-control-md bg-dark shadow" 
+                        value={coin.audit} onChange={ e => handleCoinChange(e) }/>
+
+                        <label className="form-label">Pinksale</label>
+                        <input name="pinksale" style={styles.input} className="form-control mb-3 form-control-md bg-dark shadow" 
+                        value={coin.pinksale} onChange={ e => handleCoinChange(e) }/>
+
                     </div>
                 </div>
                 <div className="d-grid gap-2 mt-2">
-                    <button type="submit" value="Submit" className="btn btn-dell-blue">Add Coin</button>
+                    <button type="submit" value="Submit" className="btn btn-primary">Add Coin</button>
                 </div>
             </form>
         </>

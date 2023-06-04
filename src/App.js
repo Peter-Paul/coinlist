@@ -181,14 +181,9 @@ const bannersList = [
 ]
 
 const partners = [
-  "https://res.cloudinary.com/dwf6iuvbh/image/upload/v1685457805/arken-logo_qtt4td.png",
-  "https://res.cloudinary.com/dwf6iuvbh/image/upload/v1685457805/arken-logo_qtt4td.png",
-  "https://res.cloudinary.com/dwf6iuvbh/image/upload/v1685457805/arken-logo_qtt4td.png",
-  "https://res.cloudinary.com/dwf6iuvbh/image/upload/v1685457805/arken-logo_qtt4td.png",
-  "https://res.cloudinary.com/dwf6iuvbh/image/upload/v1685457805/arken-logo_qtt4td.png",
-  "https://res.cloudinary.com/dwf6iuvbh/image/upload/v1685457805/arken-logo_qtt4td.png",
-  "https://res.cloudinary.com/dwf6iuvbh/image/upload/v1685457805/arken-logo_qtt4td.png",
-  "https://res.cloudinary.com/dwf6iuvbh/image/upload/v1685457805/arken-logo_qtt4td.png",
+  {id:1,url:"https://res.cloudinary.com/dwf6iuvbh/image/upload/v1685827951/doctoreclub_x4xdkc.png", name:"DOCTORECLUB",link:"http://T.me/DoctoreClub"},
+  {id:2,url:"https://res.cloudinary.com/dwf6iuvbh/image/upload/v1685827950/ninja_jv7ecc.png", name:"CFG NINJA",link:"https://t.me/Bladepool"},
+  {id:3,url:"https://res.cloudinary.com/dwf6iuvbh/image/upload/v1685827950/pinksale_p8zpwo.png", name:"PINKSALE",link:"http://www.pinksale.finance"},
 ]
 
 
