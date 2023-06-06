@@ -75,7 +75,7 @@ function AddCoin({changeView,baseUrl}) {
     return ( 
         <>
             <div className="mb-5">
-                <button className="btn btn-outline-primary ms-3" onClick={changeView}><i className="me-2 fa fa-angle-left"></i> Rankings </button>
+                <button className="btn btn-outline-dell-blue ms-3" onClick={changeView}><i className="me-2 fa fa-angle-left"></i> Rankings </button>
             </div>
             <form onSubmit={addToken}>
                 <div className="row">
@@ -152,7 +152,7 @@ function AddCoin({changeView,baseUrl}) {
                     </div>
                 </div>
                 <div className="d-grid gap-2 mt-2">
-                    <button type="submit" value="Submit" className="btn btn-primary">Add Coin</button>
+                    <button type="submit" value="Submit" className="btn btn-dell-blue">Add Coin</button>
                 </div>
             </form>
         </>

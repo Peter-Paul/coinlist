@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 import Media from "./media";
 import Subscribe from "./subscribe";
 import { Link } from "react-router-dom";
+import Logo from "./logo";
 
 function Footer({partners,name}) {
     const {bannerMap} = useSelector((state) => state.app)
@@ -12,7 +13,7 @@ function Footer({partners,name}) {
             textColor:"white"
         },
         logo:{
-            fontFamily:"Righteous"
+            fontFamily:"Koulen"
         },
         nav:{
             listStyleType:"none",
@@ -25,7 +26,7 @@ function Footer({partners,name}) {
         },
         wideBannerImage:{
             height: "260px",
-            width: "800px",
+            width: "730px",
         },
         wideBannerImageMobile:{
             height: "140px",
@@ -81,7 +82,7 @@ function Footer({partners,name}) {
             <hr className="mt-5 mb-3" />
 
             <div className="d-flex justify-content-between mt-2 mb-3">
-                <h1 style={styles.logo}>{name}</h1>
+                <Logo name={name} />
                 <div>
                     <Media />
                 </div>

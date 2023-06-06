@@ -17,6 +17,7 @@ import axios from 'axios';
 import Utils from './utils';
 import BottomBanners from './shared/bottomBanner';
 import Telegram from './services/telegram';
+import Sidebar from './shared/sidebar';
 
 const data = [
   {
@@ -234,7 +235,7 @@ function App() {
   const secondsPerDay =  86400
   const {coinMap,coins,votes,voteMap,userAddress,connected,bannerMap} = useSelector((state) => state.app)
   const dispatch = useDispatch()
-  const [showLowerLeft,setshowLowerLeft] = useState(true)
+  // const [showLowerLeft,setshowLowerLeft] = useState(true)
   const [showLowerRight,setshowLowerRight] = useState(true)
   // const [cloudinaryKey,setCloudinaryKey] = useState(undefined)
   const [priceDisplay,setpriceDisplay] = useState(undefined)
@@ -243,18 +244,7 @@ function App() {
 
   const validTimestamp = (time) =>   time < (  (new Date().getTime() / 1000) - secondsPerDay )
 
-  const styles = {
-    navigation:{
-      backgroundColor:"#003153"
-    },
-    loading:{
-      display: "flex",
-      justifyContent: "center",
-      alignItems:"center",
-      textAlign: "center",
-      minHeight:"100vh"
-  }
-  }
+ 
   
   const onInit = useCallback( async () => {
     const utils = new Utils()
@@ -281,7 +271,7 @@ function App() {
     console.log(bannerMap)
 
     try{
-      const displayPrices = await axios.get("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=4&page=1")
+      const displayPrices = await axios.get("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=5&page=1")
       setpriceDisplay(displayPrices.data.map( ({symbol,current_price:price,price_change_24h}) => {return {symbol,price,percentageChange:price_change_24h.toFixed(4)}} ))
     }catch(err){
       console.log(err)
@@ -345,7 +335,19 @@ function App() {
   const disconnectWallet = () =>  dispatch( connectUser( {userAddress:undefined,connected:false} ) )
 
   const voteCoin = address => dispatch( updateVotes({address,userAddress}) )
-  
+
+  const styles = {
+    navigation:{
+      backgroundColor:"#003153"
+    },
+    loading:{
+      display: "flex",
+      justifyContent: "center",
+      alignItems:"center",
+      textAlign: "center",
+      minHeight:"100vh"
+  }
+  }
   
   useEffect( () => { 
     onInit() 
@@ -353,42 +355,49 @@ function App() {
 
   return (
     <>
-      { (coins && coinMap && votes && voteMap  && bannerMap && telegramPosts && telegramPosts.length>0) &&
+      { (coins && coinMap && votes && voteMap  && bannerMap) &&
           <Router>
-            <div className="mb-3 sticky-top " style={styles.navigation}>
-                <div className='container my-5'>
-                  <Nav connectWallet={connectWallet} disconnectWallet={disconnectWallet} userConnection={{userAddress,connected}} name={name}/>
-                </div>
-            </div>
-            <div className="container mt-5">
-                      <Routes>
-                        <Route  exact path="/" 
-                                element={ <Ranks priceDisplay={priceDisplay}
-                                validTimestamp={validTimestamp} voteCoin={voteCoin} tweets={tweets} telegramPosts={telegramPosts} /> }
-                        />
-                        {/* <Route  exact path="/token/*" 
-                                element={ <Token  /> }
-                        /> */}
-                        <Route  exact path="/:address" 
-                                element={ <Coin 
-                                validTimestamp={validTimestamp} voteCoin={voteCoin} /> }
-                        />
-                        <Route  exact path="/promote" 
-                                element={ <Promotion 
-                                validTimestamp={validTimestamp} voteCoin={voteCoin} name={name} /> }
-                        />
-                        <Route  exact path="/admin" 
-                                element={ <Admin 
-                                validTimestamp={validTimestamp} voteCoin={voteCoin} uploadBanner={uploadBanner}/> }
-                        />
-                        {/* <Route  exact path="/partners" 
-                                element={ <Partners/> }
-                        /> */}
-                      </Routes>
-                      <Footer partners={partners} name={name} />
+            <div className='d-flex justify-content-between'>
+              <div className='sidebar col-2 d-none d-md-block bg-dark'>
+                <Sidebar name={name} />
               </div>
+              <div className='content justify-content-center col-12 col-md-10'>
+                <div className="mb-3 sticky-top " style={styles.navigation}>
+                    <div className='container my-5'>
+                      <Nav connectWallet={connectWallet} disconnectWallet={disconnectWallet} userConnection={{userAddress,connected}} name={name} priceDisplay={priceDisplay}/>
+                    </div>
+                </div>
+                <div className="container mt-5">
+                          <Routes>
+                            <Route  exact path="/" 
+                                    element={ <Ranks priceDisplay={priceDisplay}
+                                    validTimestamp={validTimestamp} voteCoin={voteCoin} tweets={tweets} telegramPosts={telegramPosts} /> }
+                            />
+                            {/* <Route  exact path="/token/*" 
+                                    element={ <Token  /> }
+                            /> */}
+                            <Route  exact path="/:address" 
+                                    element={ <Coin 
+                                    validTimestamp={validTimestamp} voteCoin={voteCoin} /> }
+                            />
+                            <Route  exact path="/promote" 
+                                    element={ <Promotion 
+                                    validTimestamp={validTimestamp} voteCoin={voteCoin} name={name} /> }
+                            />
+                            <Route  exact path="/admin" 
+                                    element={ <Admin 
+                                    validTimestamp={validTimestamp} voteCoin={voteCoin} uploadBanner={uploadBanner}/> }
+                            />
+                            {/* <Route  exact path="/partners" 
+                                    element={ <Partners/> }
+                            /> */}
+                          </Routes>
+                          <Footer partners={partners} name={name} />
+                </div>
+              </div>
+            </div>
               <div className='position-relative' >
-                {
+                {/* {
                   showLowerLeft && 
                   <>
                     <div className="position-fixed bottom-0 start-0 d-none d-md-block">
@@ -398,14 +407,19 @@ function App() {
                         <BottomBanners/>
                     </div>
                   </>
-                }
+                } */}
                 {
                   showLowerRight && 
                   <div className="position-fixed bottom-0 end-0 d-none d-md-block">
-                    <div className='d-flex justify-content-end'>
+                      <div className='d-flex justify-content-end'>
                         <button type="button" className="btn-close" onClick={() => setshowLowerRight(false)}></button>
                       </div>
-                      <BottomBanners/>
+                      <div className='d-flex flex-column'>
+                        <div className='mb-2'>
+                          <BottomBanners/>
+                        </div>
+                        <BottomBanners/>
+                      </div>
                   </div>
                 }
               </div>

@@ -13,7 +13,7 @@ code {
 }
 
 li,p,.btn,strong,h1,h2,h3,h4,h5,small,.nav-link{
-  font-family: "Questrial";
+  font-family: "Vazirmatn";
 }
 
 h1,h2,h3,h4,h5{
@@ -21,30 +21,30 @@ h1,h2,h3,h4,h5{
 }
 
 .bg-dell-blue{
-  background-color: #0076CE;
+  background-color: #2a52be;
 }
 
 .text-dell-blue{
-  color: #0076CE;
+  color: #2a52be;
 }
 
 .btn-dell-blue{
-  background-color: #0076CE;
+  background-color: #2a52be;
   color: white;
 }
 
 .btn-outline-dell-blue{
-  border-color: #0076CE;
+  border-color: #2a52be;
   color: white;
 }
 
 .btn-dell-blue:hover {
-  background-color: #0264ae;
+  background-color: #2445a0;
 }
 
 .btn-outline-dell-blue:hover {
-  background-color: #0076CE;
-  border-color: #0076CE;
+  background-color: #2a52be;
+  border-color: #2a52be;
 }
 
 li,p{
@@ -134,3 +134,14 @@ transform-origin: 0 0; /* see note above */
   /* border-radius: 15px; */
 }
 
+
+.sidebar{
+  background-color: #2a52be;
+  height: 100vh;
+  /* width: 15%; */
+  overflow-y: scroll;
+}
+.content{
+  height: 100vh;
+  overflow-y: scroll;
+}

@@ -13,22 +13,22 @@ function Table({data,title,allowRoute,connected,userAddress,validTimestamp,voteC
 
     const tags2show = ["audited","kyc"]
 
-    const customFigure = figure => {
+    const customFigure = (figure,places) => {
         const [zero, minimum, thousand,million,billion, trillion] = [ 0, 0.0001, 10**3, 10**6, 10**9, 10**12 ]
         if(figure<=zero){
             return "-"
         }else if(figure>zero && figure<minimum){
             return `>${minimum}`
         }else if(figure>=minimum && figure<thousand){
-            return `${(figure).toFixed(2)}`
+            return `${(figure).toFixed(places)}`
         }else if(figure>=thousand && figure<million){
-            return `${(figure/thousand).toFixed(2)}K`
+            return `${(figure/thousand).toFixed(places)}K`
         }else if(figure>=million && figure<billion){
-            return `${(figure/million).toFixed(2)}M`
+            return `${(figure/million).toFixed(places)}M`
         }else if(figure>=billion && figure<trillion){
-            return `${(figure/billion).toFixed(2)}B`
+            return `${(figure/billion).toFixed(places)}B`
         }else{
-            return `${(figure/billion).toFixed(2)}T`
+            return `${(figure/billion).toFixed(places)}T`
         }
     }
 
@@ -144,7 +144,7 @@ function Table({data,title,allowRoute,connected,userAddress,validTimestamp,voteC
                 return (
                     <>
                         <strong>
-                            {customFigure(row.price)}
+                            {customFigure(row.price,4)}
                         </strong>
                     </>
                 )
@@ -179,14 +179,14 @@ function Table({data,title,allowRoute,connected,userAddress,validTimestamp,voteC
                                         <button className='btn btn-light' onClick={()=>voteCoin(row.address)}>
                                             <i className='fa fa-check me-1'></i>
                                             <strong>
-                                                {customFigure(parseFloat(row.votes))}
+                                                {customFigure(parseFloat(row.votes),3)}
                                             </strong>
                                         </button>
                                         :
                                         <button className='btn btn-success'>
                                             <i className='fa fa-check me-1'></i>
                                             <strong>
-                                                {customFigure(parseFloat(row.votes))}
+                                                {customFigure(parseFloat(row.votes),3)}
                                             </strong>
                                         </button>
                                     }
@@ -199,7 +199,7 @@ function Table({data,title,allowRoute,connected,userAddress,validTimestamp,voteC
                                 <button className='btn btn-sm btn-outline-light' disabled>
                                     <i className='fa fa-check me-1'></i>
                                     <strong>
-                                        {customFigure(parseFloat(row.votes))}
+                                        {customFigure(parseFloat(row.votes),3)}
                                     </strong>
                                 </button>
                             }
@@ -397,7 +397,7 @@ function Table({data,title,allowRoute,connected,userAddress,validTimestamp,voteC
         pagination:{
             style:{
                 // backgroundColor: "#0076CE",
-                backgroundColor: "blue",
+                backgroundColor: "#2a52be",
                 borderRadius:"0px 0px 6px 6px"
             }
         },
@@ -433,7 +433,8 @@ function Table({data,title,allowRoute,connected,userAddress,validTimestamp,voteC
         rows:{
             style:{
                 // backgroundColor: "#0076CE",
-                backgroundColor: "blue",
+                backgroundColor: "#2a52be",
+                fontSize:"15px"
             }
         }
         
