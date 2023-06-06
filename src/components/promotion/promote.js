@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import Table from "../ranks/table";
+import Apply from "./apply";
 
 function Promote({validTimestamp,voteCoin}) {
     const {coins:data,voteMap,userAddress,connected} = useSelector((state) => state.app)
@@ -12,7 +13,11 @@ function Promote({validTimestamp,voteCoin}) {
             justifyContent: "center",
             alignItems:"center",
             textAlign: "center",
-            minHeight:"50vh"
+            minHeight:"50vh",
+            margin:"20px 0px 20px"
+        },
+        promoItem:{
+            fontSize:"16px"
         },
         discount10:{
             backgroundColor: "#ffc107",
@@ -54,19 +59,9 @@ function Promote({validTimestamp,voteCoin}) {
                 <h1>Coin Promotion</h1>
                 <div className="col-12 col-md-8 mt-3">
                     <p> In the past, project rankings were based on votes, but we found that some projects were able to obtain massive amounts of votes to secure a higher ranking, resulting in an unfair advantage. With our new Boost system, we've created a more transparent and fair method for all our community members and project owners.</p>
-                    <p>We've partnered with the biggest Telegram influencers who can help you boost your marketing and fill presale in seconds! These are influencers in big communities who have lots of followers worldwide. We've worked with all of them and thus they helped our presale to end within 15 seconds. Please contact @Doctoreclub for more information</p>
+                    <p>We've partnered with the biggest Telegram influencers who can help you boost your marketing and fill presale in seconds! These are influencers in big communities who have lots of followers worldwide. We've worked with all of them and thus they helped our presale to end within 15 seconds</p>
                     
-                    {/* <h4 className="mt-5">Get 25% discount on any ads!</h4>
-                    <div className="d-flex flex-column p-2" style={styles.discount25}>
-                        <h5>Get 25% off instantly by paying partly in <span className="badge text-bg-light ms-1">$COINLIST</span></h5>
-                        <p>Pay 40% of total price in BNB, and 35% in $COINLIST equivalent, and get 25% discount</p>
-                    </div>
-
-                    <div className="p-3 my-5 text-center shadow-lg" style={styles.discount10}>
-                        <h5><strong>Get 10% discount on any ads!</strong></h5>
-                        <p>Put a backlink to CoinLink on your project website and receive a 10% discount for any ad package!</p>
-                        <p>Holders of 100,000+ $COINLIST get 10% discount on all ads!</p>
-                    </div> */}
+                    <Apply/>
                 </div>
                 <div className="col-12 col-md-4">
                     <div className="card text-center mb-2" style={styles.promoBlue}>
@@ -93,15 +88,6 @@ function Promote({validTimestamp,voteCoin}) {
                         </div>
                     </div>
 
-                    {/* <div className="card text-center bg-dark mb-2">
-                        <div className="card-body">
-                            <h5 className="card-title">KYC For Projects | Doxxing</h5>
-                            <ul className="list-group bg-dark list-group-flush">
-                                    <li className="list-group-item bg-dark text-light">Project Owners - 1 BNB</li>
-                                    <li className="list-group-item bg-dark text-light">Entire Team - 1.5 BNB</li>
-                            </ul>
-                        </div>
-                    </div> */}
                 </div>
             </div>
 
@@ -112,10 +98,10 @@ function Promote({validTimestamp,voteCoin}) {
                             <div className="d-flex flex-column">
                                 <h5>Promoted Coins Section</h5>
                                 <ul className="list-group bg-dark list-group-flush">
-                                    <li className="list-group-item bg-dark text-light">1 Day Promotion - 0.5 BNB</li>
-                                    <li className="list-group-item bg-dark text-light">3 Days Promotion - 1.00 BNB</li>
-                                    <li className="list-group-item bg-dark text-light">5 Days Promotion - 1.5 BNB</li>
-                                    <li className="list-group-item bg-dark text-light">7 Days Promotion - 2.00 BNB</li>
+                                    <li className="list-group-item bg-dark text-light" style={styles.promoItem}>1 Day Promotion - 1 BNB</li>
+                                    <li className="list-group-item bg-dark text-light" style={styles.promoItem}>3 Days Promotion - 2 BNB</li>
+                                    <li className="list-group-item bg-dark text-light" style={styles.promoItem}>5 Days Promotion - 3 BNB</li>
+                                    <li className="list-group-item bg-dark text-light" style={styles.promoItem}>7 Days Promotion - 4 BNB</li>
                                 </ul>
                             </div>
                         </div>
@@ -125,10 +111,10 @@ function Promote({validTimestamp,voteCoin}) {
                             <div className="d-flex flex-column">
                                 <h5>Rotating Banner (600x240px)</h5>
                                 <ul className="list-group bg-dark list-group-flush">
-                                    <li className="list-group-item bg-dark text-light">1 Day Promotion - 0.30 BNB</li>
-                                    <li className="list-group-item bg-dark text-light">3 Days Promotion - 0.55 BNB</li>
-                                    <li className="list-group-item bg-dark text-light">5 Days Promotion - 0.85 BNB</li>
-                                    <li className="list-group-item bg-dark text-light">7 Days Promotion - 1.20 BNB</li>
+                                    <li className="list-group-item bg-dark text-light" style={styles.promoItem}>1 Day Promotion - 0.50 BNB</li>
+                                    <li className="list-group-item bg-dark text-light" style={styles.promoItem}>3 Days Promotion - 1.25 BNB</li>
+                                    <li className="list-group-item bg-dark text-light" style={styles.promoItem}>5 Days Promotion - 2.00 BNB</li>
+                                    <li className="list-group-item bg-dark text-light" style={styles.promoItem}>7 Days Promotion - 2.75 BNB</li>
                                 </ul>
                             </div>
                         </div>
@@ -138,11 +124,11 @@ function Promote({validTimestamp,voteCoin}) {
                             <div className="d-flex flex-column">
                                 <h5>Pop-Up (250x250px)</h5>
                                 <ul className="list-group bg-dark list-group-flush">
-                                    <li className="list-group-item bg-dark text-light">1 Day Promotion (Sidebar) - 2.00 BNB</li>
-                                    <li className="list-group-item bg-dark text-light">1 Day Promotion (Left) - 0.65 BNB</li>
-                                    <li className="list-group-item bg-dark text-light">1 Day Promotion (Right) - 0.55 BNB</li>
-                                    <li className="list-group-item bg-dark text-light">1 Day Promotion (Dual) - 1.00 BNB</li>
-                                    <li className="list-group-item bg-dark text-light">1 Day Promotion (Triad) - 2.85 BNB</li>
+                                    <li className="list-group-item bg-dark text-light" style={styles.promoItem}>1 Day (Sidebar) - 1.0 BNB</li>
+                                    <li className="list-group-item bg-dark text-light" style={styles.promoItem}>1 Day (Right Up) - 0.5 BNB</li>
+                                    <li className="list-group-item bg-dark text-light" style={styles.promoItem}>1 Day (Right Down) - 0.5 BNB</li>
+                                    <li className="list-group-item bg-dark text-light" style={styles.promoItem}>1 Day (Dual) - 0.9 BNB</li>
+                                    <li className="list-group-item bg-dark text-light" style={styles.promoItem}>1 Day (Triad) - 1.5 BNB</li>
                                 </ul>
                             </div>
                         </div>
