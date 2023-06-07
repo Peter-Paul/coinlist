@@ -125,8 +125,8 @@ function Promote({validTimestamp,voteCoin}) {
                                 <h5>Pop-Up (250x250px)</h5>
                                 <ul className="list-group bg-dark list-group-flush">
                                     <li className="list-group-item bg-dark text-light" style={styles.promoItem}>1 Day (Sidebar) - 1.0 BNB</li>
-                                    <li className="list-group-item bg-dark text-light" style={styles.promoItem}>1 Day (Right Up) - 0.5 BNB</li>
-                                    <li className="list-group-item bg-dark text-light" style={styles.promoItem}>1 Day (Right Down) - 0.5 BNB</li>
+                                    <li className="list-group-item bg-dark text-light" style={styles.promoItem}>1 Day (Left) - 0.5 BNB</li>
+                                    <li className="list-group-item bg-dark text-light" style={styles.promoItem}>1 Day (Right) - 0.5 BNB</li>
                                     <li className="list-group-item bg-dark text-light" style={styles.promoItem}>1 Day (Dual) - 0.9 BNB</li>
                                     <li className="list-group-item bg-dark text-light" style={styles.promoItem}>1 Day (Triad) - 1.5 BNB</li>
                                 </ul>

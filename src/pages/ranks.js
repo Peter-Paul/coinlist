@@ -4,6 +4,7 @@ import Table from "../components/ranks/table";
 import AddCoin from "../components/ranks/addCoin";
 import { useSelector } from "react-redux";
 import TelegramPosts from "../components/ranks/telegramPosts";
+import PriceDisplay from "../shared/priceDisplay";
 
 function Ranks({priceDisplay,validTimestamp,voteCoin,telegramPosts}) {
     const [tag, setTag] = useState("trending")
@@ -44,7 +45,10 @@ function Ranks({priceDisplay,validTimestamp,voteCoin,telegramPosts}) {
        <>
         { tableView &&
                 <>
-                    
+                    <div className="d-block d-md-block d-custom-none">
+                        <PriceDisplay priceDisplay={priceDisplay} />
+                    </div>
+
                     <div className="d-flex justify-content-evenly my-3">
                         <img
                             alt="not found"
@@ -65,12 +69,12 @@ function Ranks({priceDisplay,validTimestamp,voteCoin,telegramPosts}) {
                             <img
                                 alt="not found"
                                 style={styles.gifBanner}
-                                src={bannerMap['banner5']}
+                                src={bannerMap['banner4']}
                             />
                             <img
                                 alt="not found"
                                 style={styles.gifBanner}
-                                src={bannerMap['banner5']}
+                                src={bannerMap['banner4']}
                             />
                         </div>
                     </div>

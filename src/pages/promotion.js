@@ -1,11 +1,12 @@
-import { useState } from "react";
+// import { useState } from "react";
 import Promote from "../components/promotion/promote";
 import Verify from "../components/promotion/verify";
 import Audit from "../components/promotion/audit";
+import { Link, useParams } from "react-router-dom";
 
 function Promotion({validTimestamp,voteCoin}) {
-    
-    const [ activeState, setActive ] = useState("promote")
+    const {service:activeState} = useParams()
+    // const [ activeState, setActive ] = useState("promote")
  
     const styles = {
         promotion:{
@@ -44,28 +45,29 @@ function Promotion({validTimestamp,voteCoin}) {
 
     return ( 
         <>
+            {console.log(activeState)}
             <div>
                 <nav className="nav nav-pills nav-justified mb-4">
-                    <button className="nav-link mx-2" 
+                    <Link className="nav-link mx-2" 
                         style={ ( activeState==="promote"  ) ? styles.activePage : styles.inactivePage } 
-                        onClick={ () => setActive("promote") }>
+                        to={"/services/promote"}>
                             <strong>
                                 Promote Coin
                             </strong>
-                    </button>
-                    <button className="nav-link mx-2" 
+                    </Link>
+                    <Link className="nav-link mx-2" 
                         style={ ( activeState==="audit" ) ? styles.activePage : styles.inactivePage }  
-                        onClick={ () => setActive("audit") }>
+                        to={"/services/audit"}>
                             <strong>
                                 Audit Coin
                             </strong>
-                    </button>
-                    <button className="nav-link mx-2" style={ ( activeState==="dox" ) ? styles.activePage : styles.inactivePage }  
-                    onClick={ () => setActive("dox") }>
+                    </Link>
+                    <Link className="nav-link mx-2" style={ ( activeState==="kyc" ) ? styles.activePage : styles.inactivePage }  
+                    to={"/services/kyc"}>
                         <strong>
                                 KYC
                         </strong>
-                    </button>
+                    </Link>
                 </nav>
             </div>
 
@@ -78,7 +80,7 @@ function Promotion({validTimestamp,voteCoin}) {
                 <Audit styles={styles} validTimestamp={validTimestamp} voteCoin={voteCoin}/>
             }
             
-            { activeState==="dox" &&
+            { activeState==="kyc" &&
                 <Verify styles={styles} validTimestamp={validTimestamp} voteCoin={voteCoin}/>
             }
          

@@ -1,7 +1,4 @@
-import { useSelector } from "react-redux";
-
-function BottomBanners() {
-    const {bannerMap} = useSelector((state) => state.app)
+function BottomBanners({bannerUrl}) {
     const styles = {
         banner:{
             height: "250px",
@@ -13,7 +10,7 @@ function BottomBanners() {
             <img
                 alt="not found"
                 style={styles.banner}
-                src={bannerMap['banner4']}
+                src={bannerUrl}
                 className="d-none d-md-block"
             />  
         </>

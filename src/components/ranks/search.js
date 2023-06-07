@@ -11,7 +11,7 @@ function Search({changeView}) {
 
     return (
         <>
-            <div className="d-flex justify-content-between mb-5 row">
+            <div className="d-flex justify-content-between mb-3 row">
                 <div className="col-12 col-md-6 mb-2">
                     <button className="btn btn-outline-dell-blue" onClick={changeView}> <i className="fa fa-plus me-1"></i> Add Coin </button>
                     <Link className="btn btn-outline-dell-blue ms-3" to={"/promote"}> <i className="fa fa-bolt me-1"></i> Promotion</Link>

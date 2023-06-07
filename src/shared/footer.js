@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import Logo from "./logo";
 
 function Footer({partners,name}) {
-    const {bannerMap} = useSelector((state) => state.app)
+    const {bannerMap,doctoreTwitter,doctoreTelegram} = useSelector((state) => state.app)
 
     const styles = {
         links:{
@@ -26,7 +26,7 @@ function Footer({partners,name}) {
         },
         wideBannerImage:{
             height: "260px",
-            width: "730px",
+            width: "700px",
         },
         wideBannerImageMobile:{
             height: "140px",
@@ -84,7 +84,7 @@ function Footer({partners,name}) {
             <div className="d-flex justify-content-between mt-2 mb-3">
                 <Logo name={name} />
                 <div>
-                    <Media />
+                    <Media twitter={doctoreTwitter} telegram={doctoreTelegram} />
                 </div>
             </div>
 
@@ -92,17 +92,23 @@ function Footer({partners,name}) {
                 <div className="col-md-4 col-12">
                     <h4>Coin rankings</h4>
                     <ul style={styles.links}>
-                        <li>
-                            <Link style={styles.link} to="/"><span className="text-light">List of Coins</span></Link>
+                        <li className="mb-1">
+                            <Link style={styles.link} to="/"  onClick={ () => window.scrollTo({top: 0})}><span className="text-light">List of Coins</span></Link>
                         </li>
-                        <li style={styles.link}>
-                            <Link style={styles.link} to="/promote"><span className="text-light">Promote Coins</span></Link>
+                        <li className="mb-1">
+                            <Link style={styles.link} to="/services/promote" onClick={ () => window.scrollTo({top: 0})}><span className="text-light">Promote Coins</span></Link>
+                        </li>
+                        <li className="mb-1">
+                            <Link style={styles.link} to="/services/audit" onClick={ () => window.scrollTo({top: 0})}><span className="text-light">Audit Coins</span></Link>
+                        </li>
+                        <li className="mb-1">
+                            <Link style={styles.link} to="/services/kyc" onClick={ () => window.scrollTo({top: 0})}><span className="text-light">Verify Coins</span></Link>
                         </li>
                     </ul>
                 </div>
   
                 <div className="col-md-4 col-12">
-                    <Subscribe/>
+                    <Subscribe />
                 </div>
             </div>
         </>

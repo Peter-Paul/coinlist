@@ -135,13 +135,31 @@ transform-origin: 0 0; /* see note above */
 }
 
 
-.sidebar{
-  background-color: #2a52be;
-  height: 100vh;
-  /* width: 15%; */
-  overflow-y: scroll;
-}
-.content{
-  height: 100vh;
-  overflow-y: scroll;
+
+
+
+@media (min-width:1880px) {
+  .d-custom-block{
+    display: block!important;
+  }
+  
+  .d-custom-none{
+    display: none!important;
+  }
+
+  .sidebar{
+    /* background-color: #2a52be!important; */
+    height: 100vh!important;
+    /* width: 15%!important; */
+    overflow-y: scroll!important;
+  }
+  .content{
+    height: 100vh!important;
+    overflow-y: scroll!important;
+  }
+
+  .col-custom-10{
+    flex: 0 0 auto;
+    width: 83.33333333%;
+  }
 }

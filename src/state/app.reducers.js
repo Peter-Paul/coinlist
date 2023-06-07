@@ -2,6 +2,8 @@ import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
     name:"Doctorecoins",
+    doctoreTwitter:"https://twitter.com/doctoreclub",
+    doctoreTelegram:"https://t.me/doctoreclub",
     coins:undefined,
     coinMap:undefined,
     userAddress:undefined,
