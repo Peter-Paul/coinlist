@@ -4,7 +4,7 @@ import Subscribe from "./subscribe";
 import Media from "./media";
 
 function NavContent({smallView=false}) {
-    const {bannerMap} = useSelector((state) => state.app)
+    const {bannerMap,doctoreTwitter,doctoreTelegram} = useSelector((state) => state.app)
 
     const styles = {
         navBar:{
@@ -34,22 +34,22 @@ function NavContent({smallView=false}) {
         <ul className="d-flex flex-column me-2" style={styles.nav} >
                   
                         <li data-bs-dismiss={smallView?"offcanvas":""}>
-                            <Link style={styles.link} to="/"><i className="fa fa-table me-2"></i>Rankings</Link>
+                            <Link style={styles.link} to="/" onClick={ () => window.scrollTo({top: 0})}><i className="fa fa-table me-2"></i>Rankings</Link>
                         </li>
                         <hr className="mb-4" />
                         <li data-bs-dismiss={smallView?"offcanvas":""}>
-                            <Link style={styles.link} to="/promote"> <i className="fa fa-bolt me-2"></i>Promotions</Link>
+                            <Link style={styles.link} to="/services/promote" onClick={ () => window.scrollTo({top: 0})}> <i className="fa fa-bolt me-2"></i>Promotions</Link>
                         </li>
 
                         <hr />
                         <li data-bs-dismiss={smallView?"offcanvas":""}>
-                            <Link style={styles.link} to="/admin"><i className="fa fa-lock me-2"></i>Admin</Link>
+                            <Link style={styles.link} to="/admin" onClick={ () => window.scrollTo({top: 0})}><i className="fa fa-lock me-2"></i>Admin</Link>
                         </li>
                         <hr />
                         <img
                             alt="not found"
                             style={styles.banner}
-                            src={bannerMap['banner4']}
+                            src={bannerMap['banner7']}
                             className="my-5"
                         />  
                         <li className="mt-auto" data-bs-dismiss={smallView?"offcanvas":""}>
@@ -57,7 +57,7 @@ function NavContent({smallView=false}) {
                         </li>
                         <hr />
                         <li className="mt-auto" data-bs-dismiss={smallView?"offcanvas":""}>
-                            <Media />
+                            <Media twitter={doctoreTwitter} telegram={doctoreTelegram}/>
                         </li>
                     </ul>
     );

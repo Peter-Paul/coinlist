@@ -156,16 +156,20 @@ const data = [
 ]
 const bannersList = [
   {
-    "name": "banner6",
+    "name": "banner7",
     "url": "https://res.cloudinary.com/dwf6iuvbh/image/upload/v1685381621/download_t0nblf.png"
   },
   {
+    "name": "banner6",
+    "url": "https://res.cloudinary.com/dwf6iuvbh/image/upload/v1686144626/250x250_tiv0ll.png"
+  },
+  {
     "name": "banner5",
-    "url": "https://res.cloudinary.com/dwf6iuvbh/image/upload/v1685380240/trade_s36d1o.gif"
+    "url": "https://res.cloudinary.com/dwf6iuvbh/image/upload/v1685379668/250x250_k4rysx.gif"
   },
   {
     "name": "banner4",
-    "url": "https://res.cloudinary.com/dwf6iuvbh/image/upload/v1685379668/250x250_k4rysx.gif"
+    "url": "https://res.cloudinary.com/dwf6iuvbh/image/upload/v1685380240/trade_s36d1o.gif"
   },
   {
       "name": "banner3",
@@ -235,7 +239,7 @@ function App() {
   const secondsPerDay =  86400
   const {coinMap,coins,votes,voteMap,userAddress,connected,bannerMap} = useSelector((state) => state.app)
   const dispatch = useDispatch()
-  // const [showLowerLeft,setshowLowerLeft] = useState(true)
+  const [showLowerLeft,setshowLowerLeft] = useState(true)
   const [showLowerRight,setshowLowerRight] = useState(true)
   // const [cloudinaryKey,setCloudinaryKey] = useState(undefined)
   const [priceDisplay,setpriceDisplay] = useState(undefined)
@@ -358,10 +362,10 @@ function App() {
       { (coins && coinMap && votes && voteMap  && bannerMap) &&
           <Router>
             <div className='d-flex justify-content-between'>
-              <div className='sidebar col-2 d-none d-md-block bg-dark'>
+              <div className='sidebar col-2 d-none d-custom-block bg-dark '>
                 <Sidebar name={name} />
               </div>
-              <div className='content justify-content-center col-12 col-md-10'>
+              <div className='content justify-content-center col-12 col-custom-10'>
                 <div className="mb-3 sticky-top " style={styles.navigation}>
                     <div className='container my-5'>
                       <Nav connectWallet={connectWallet} disconnectWallet={disconnectWallet} userConnection={{userAddress,connected}} name={name} priceDisplay={priceDisplay}/>
@@ -380,7 +384,7 @@ function App() {
                                     element={ <Coin 
                                     validTimestamp={validTimestamp} voteCoin={voteCoin} /> }
                             />
-                            <Route  exact path="/promote" 
+                            <Route  exact path="/services/:service" 
                                     element={ <Promotion 
                                     validTimestamp={validTimestamp} voteCoin={voteCoin} name={name} /> }
                             />
@@ -397,29 +401,24 @@ function App() {
               </div>
             </div>
               <div className='position-relative' >
-                {/* {
+                {
                   showLowerLeft && 
                   <>
                     <div className="position-fixed bottom-0 start-0 d-none d-md-block">
                       <div className='d-flex justify-content-end'>
                         <button type="button" className="btn-close" onClick={() => setshowLowerLeft(false)}></button>
                       </div>
-                        <BottomBanners/>
+                        <BottomBanners bannerUrl={bannerMap['banner6']}/>
                     </div>
                   </>
-                } */}
+                }
                 {
                   showLowerRight && 
                   <div className="position-fixed bottom-0 end-0 d-none d-md-block">
                       <div className='d-flex justify-content-end'>
                         <button type="button" className="btn-close" onClick={() => setshowLowerRight(false)}></button>
                       </div>
-                      <div className='d-flex flex-column'>
-                        <div className='mb-2'>
-                          <BottomBanners/>
-                        </div>
-                        <BottomBanners/>
-                      </div>
+                      <BottomBanners bannerUrl={bannerMap['banner5']}/>
                   </div>
                 }
               </div>

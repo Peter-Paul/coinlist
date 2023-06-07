@@ -13,7 +13,7 @@ function Verify({validTimestamp,voteCoin}) {
                 <h3 className="my-3"> How is verification processed? </h3>
                 <p className="mt-4">You must participate in a video call that will be recorded. In the event of a rug or honeypot plan, the recording will be posted to your social media groups for the benefit of the scam victims. Your project will be marked as having been validated by the Doctoreclub team, enhancing your credibility with investors and the whole crypto community.</p>
                 
-                <Apply price={300} />
+                <Apply price={1000} />
 
             </div>
 

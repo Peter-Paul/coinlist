@@ -27,12 +27,12 @@ function Admin({validTimestamp,voteCoin,uploadBanner}) {
             borderLeftStyle:"solid",
         },
         activePage:{
-            color: "black",
-            backgroundColor: "white"
+            color: "white",
+            backgroundColor: "#2a52be"
         },
         inactivePage:{
             color: "white",
-            borderColor:"white",
+            borderColor:"#2a52be",
             borderWidth:"1px",
             borderStyle:"solid",
         }
