@@ -109,14 +109,14 @@ transform-origin: 0 0; /* see note above */
   height: 200px;
   min-height: 200px;
   position: relative;
-  /* border-radius: 15px; */
+  border-radius: 6px;
 }
 .photo-img{
   height: 100%;
   position: relative;
   background-size: cover;
   background-position: center;
-  /* border-radius: 15px; */
+  border-radius: 6px;
 }
 
 .partner-holder {
@@ -124,14 +124,14 @@ transform-origin: 0 0; /* see note above */
   height: 200px;
   min-height: 200px;
   position: relative;
-  /* border-radius: 15px; */
+  border-radius: 6px;
 }
 .partner-img{
   height: 100%;
   position: relative;
   background-size: cover;
   background-position: center;
-  /* border-radius: 15px; */
+  border-radius: 6px;
 }
 
 
