@@ -62,7 +62,7 @@ function Table({data,title,allowRoute,connected,userAddress,validTimestamp,voteC
     const customSymbol = symbol => {
         switch (symbol) {
             case "ethereum":
-                return {name:"ETH",color:"#EFBBCC",text:"white"}
+                return {name:"ETH",color:"black",text:"white"}
             case "binance-smart-chain":
                 return {name:"BSC",color:"#ffc107",text:"white"}
             case "arbitrum-one":
@@ -179,14 +179,14 @@ function Table({data,title,allowRoute,connected,userAddress,validTimestamp,voteC
                                         <button className='btn btn-light' onClick={()=>voteCoin(row.address)}>
                                             <i className='fa fa-check me-1'></i>
                                             <strong>
-                                                {customFigure(parseFloat(row.votes),3)}
+                                                {customFigure(parseFloat(row.votes),0)}
                                             </strong>
                                         </button>
                                         :
                                         <button className='btn btn-success'>
                                             <i className='fa fa-check me-1'></i>
                                             <strong>
-                                                {customFigure(parseFloat(row.votes),3)}
+                                                {customFigure(parseFloat(row.votes),0)}
                                             </strong>
                                         </button>
                                     }
@@ -199,7 +199,7 @@ function Table({data,title,allowRoute,connected,userAddress,validTimestamp,voteC
                                 <button className='btn btn-sm btn-outline-light' disabled>
                                     <i className='fa fa-check me-1'></i>
                                     <strong>
-                                        {customFigure(parseFloat(row.votes),3)}
+                                        {customFigure(parseFloat(row.votes),0)}
                                     </strong>
                                 </button>
                             }

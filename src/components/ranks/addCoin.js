@@ -4,35 +4,36 @@ import { uploadCoin } from "../../state/app.reducers";
 // import CoinService from "../../services/coins";
 
 function AddCoin({changeView,baseUrl}) {
+    const defaultCoin = {
+        address:"",
+        name:"",
+        symbol:"",
+        description:"",
+        launch:"",
+        chain:"ethereum",
+        contact:"",
+        tags:[],
+        website:"",
+        github:"",
+        telegram:"",
+        twitter:"",
+        facebook:"",
+        linkedin:"",
+        audit:"",
+        pinksale:"",
+        promoted:false,
+        show:false,
+        votes:"0",
+        price:"0",
+    }
+    // const requiredKeys = ["address","name","symbol","description","launch","contact"]
 
-    const requiredKeys = ["address","name","symbol","description","launch","contact"]
+    const [noError,setNoError] = useState({msg:"",state:true})
+    const [noSuccess,setNoSuccess] = useState(true)
 
     const dispatch = useDispatch()
 
-    const [coin, addCoin] = useState(
-        {
-            address:"",
-            name:"",
-            symbol:"",
-            description:"",
-            launch:"",
-            chain:"ethereum",
-            tags:[],
-            contact:"",
-            website:"",
-            github:"",
-            telegram:"",
-            twitter:"",
-            facebook:"",
-            linkedin:"",
-            audit:"",
-            pinksale:"",
-            promoted:false,
-            show:false,
-            votes:"0",
-            price:"0",
-        }
-    )
+    const [coin, addCoin] = useState({...defaultCoin})
     
     const styles = {
         input:{
@@ -44,15 +45,20 @@ function AddCoin({changeView,baseUrl}) {
 
     const addToken = async evt => {
         evt.preventDefault();
-        for (let r of requiredKeys){
-            if(!coin[r]) {
-                console.log("Missing required information")
-                return
-            }
+
+        const required = Object.values(coin).slice(0,7)
+
+        if(required.includes("")){
+            setNoError({msg:"Kindly check that all required information is provided",state:false})
+            return
         }
+
         
         const launchInfo = coin.launch.split("-")
-        if ( launchInfo.length < 3 ) { console.log("Invalid date syntax"); return}
+        if ( launchInfo.length < 3 ) { 
+            setNoError({msg:"Kindly check that date format is correct",state:false}) 
+            return
+        }
 
         try{
 
@@ -65,8 +71,12 @@ function AddCoin({changeView,baseUrl}) {
             // const coinService = new CoinService(baseUrl)
             // const response =  await coinService.postCoin(data)
                 console.log(data)
+                setNoSuccess(false)
+                addCoin({...defaultCoin})
             dispatch( uploadCoin(data) )
         }catch(error){
+            setNoError({msg:"Failed to add coin. Kindly check with DoctoreClub regarding this issue.",state:false});
+            setNoError(false)
             console.log(`Error creating coin: ${error}`); return
         }
 
@@ -77,7 +87,7 @@ function AddCoin({changeView,baseUrl}) {
             <div className="mb-5">
                 <button className="btn btn-outline-dell-blue ms-3" onClick={changeView}><i className="me-2 fa fa-angle-left"></i> Rankings </button>
             </div>
-            <form onSubmit={addToken}>
+            <form onSubmit={(e) => addToken(e) }>
                 <div className="row">
                     <div className="col-md-6 col-12">
                         <h4>Coin Info</h4>
@@ -151,9 +161,33 @@ function AddCoin({changeView,baseUrl}) {
 
                     </div>
                 </div>
-                <div className="d-grid gap-2 mt-2">
-                    <button type="submit" value="Submit" className="btn btn-dell-blue">Add Coin</button>
-                </div>
+
+                    {
+                        (noError.state && noSuccess) &&
+                        <div className="d-grid gap-2 mt-2">
+                            <button type="submit" value="Submit" className={`btn btn-dell-blue 
+                             `}>Add Coin</button>
+                        </div>
+                    }
+
+                    {
+                        !noSuccess &&
+                        <div className={`alert alert-success alert-dismissible fade show 
+                            `} role="alert">
+                            <p><strong>Congratulations on adding your coin!</strong> We will now review and  get back to you :)</p>
+                            <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close" onClick={() => setNoSuccess(true)}></button>
+                        </div>
+                    }
+
+                    {
+                        !noError.state &&
+                        <div className={`alert alert-danger alert-dismissible fade show 
+                            `} role="alert">
+                            <p>Opps! <strong>{noError.msg}.</strong>  Close this alert and try again!</p>
+                            <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close" onClick={() => setNoError({msg:"",state:true})}></button>
+                        </div> 
+                    }
+
             </form>
         </>
      );
