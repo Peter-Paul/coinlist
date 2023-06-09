@@ -157,31 +157,38 @@ const data = [
 const bannersList = [
   {
     "name": "banner7",
-    "url": "https://res.cloudinary.com/dwf6iuvbh/image/upload/v1685381621/download_t0nblf.png"
+    "url": "https://res.cloudinary.com/dwf6iuvbh/image/upload/v1685381621/download_t0nblf.png",
+    "link":"https://www.aidoge.com/en?clickId=fx_b27164_d2c81d290eb954455adb89bb2f9416e5_1"
   },
   {
     "name": "banner6",
-    "url": "https://res.cloudinary.com/dwf6iuvbh/image/upload/v1686144626/250x250_tiv0ll.png"
+    "url": "https://res.cloudinary.com/dwf6iuvbh/image/upload/v1686144626/250x250_tiv0ll.png",
+    "link":"https://www.aidoge.com/en?clickId=fx_b27164_d2c81d290eb954455adb89bb2f9416e5_1"
   },
   {
     "name": "banner5",
-    "url": "https://res.cloudinary.com/dwf6iuvbh/image/upload/v1685379668/250x250_k4rysx.gif"
+    "url": "https://res.cloudinary.com/dwf6iuvbh/image/upload/v1685379668/250x250_k4rysx.gif",
+    "link":"https://www.aidoge.com/en?clickId=fx_b27164_d2c81d290eb954455adb89bb2f9416e5_1"
   },
   {
     "name": "banner4",
-    "url": "https://res.cloudinary.com/dwf6iuvbh/image/upload/v1685380240/trade_s36d1o.gif"
+    "url": "https://res.cloudinary.com/dwf6iuvbh/image/upload/v1685380240/trade_s36d1o.gif",
+    "link":"https://www.aidoge.com/en?clickId=fx_b27164_d2c81d290eb954455adb89bb2f9416e5_1"
   },
   {
       "name": "banner3",
-      "url": "https://res.cloudinary.com/dwf6iuvbh/image/upload/v1684860902/banner1_nw8ltb.gif"
+      "url": "https://res.cloudinary.com/dwf6iuvbh/image/upload/v1684860902/banner1_nw8ltb.gif",
+      "link":"https://www.aidoge.com/en?clickId=fx_b27164_d2c81d290eb954455adb89bb2f9416e5_1"
   },
   {
       "name": "banner2",
-      "url": "https://res.cloudinary.com/dwf6iuvbh/image/upload/v1684923456/banner1_ybu95g.png"
+      "url": "https://res.cloudinary.com/dwf6iuvbh/image/upload/v1684923456/banner1_ybu95g.png",
+      "link":"https://www.aidoge.com/en?clickId=fx_b27164_d2c81d290eb954455adb89bb2f9416e5_1"
   },
   {
       "name": "banner1",
-      "url": "https://res.cloudinary.com/dwf6iuvbh/image/upload/v1684921197/banner1_m5me1i.png"
+      "url": "https://res.cloudinary.com/dwf6iuvbh/image/upload/v1684921197/banner1_m5me1i.png",
+      "link":"https://www.aidoge.com/en?clickId=fx_b27164_d2c81d290eb954455adb89bb2f9416e5_1"
   }
 ]
 
@@ -191,39 +198,6 @@ const partners = [
   {id:3,url:"https://res.cloudinary.com/dwf6iuvbh/image/upload/v1685827950/pinksale_p8zpwo.png", name:"PINKSALE",link:"http://www.pinksale.finance"},
 ]
 
-
-const tweets = [
-  {
-    image:"https://res.cloudinary.com/dwf6iuvbh/image/upload/v1684970243/im-405914_fw13td.jpg",
-    user:"leo_vel",
-    content:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sodales ut eu sem integer vitae justo eget magna.",
-    time:"Posted 3 mins ago",
-  },
-  {
-    image:"https://res.cloudinary.com/dwf6iuvbh/image/upload/v1684970243/im-405914_fw13td.jpg",
-    user:"leo_vel",
-    content:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sodales ut eu sem integer vitae justo eget magna.",
-    time:"Posted 2h ago",
-  },
-  {
-    image:"https://res.cloudinary.com/dwf6iuvbh/image/upload/v1684970243/im-405914_fw13td.jpg",
-    user:"leo_vel",
-    content:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sodales ut eu sem integer vitae justo eget magna.",
-    time:"Posted 7h ago",
-  },
-  {
-    image:"https://res.cloudinary.com/dwf6iuvbh/image/upload/v1684970243/im-405914_fw13td.jpg",
-    user:"leo_vel",
-    content:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sodales ut eu sem integer vitae justo eget magna.",
-    time:"Posted 1day",
-  },
-  {
-    image:"https://res.cloudinary.com/dwf6iuvbh/image/upload/v1684970243/im-405914_fw13td.jpg",
-    user:"leo_vel",
-    content:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sodales ut eu sem integer vitae justo eget magna.",
-    time:"Posted 1day",
-  }
-]
 
 const voteData = [
   {
@@ -268,8 +242,8 @@ function App() {
 
     // console.log(coinList)
     // console.log(bannersList)
-    for (let b of bannersList){
-      bannerMap[b.name] = b.url
+    for (let {name,url,link} of bannersList){
+      bannerMap[name] = {url,link}
     }
     
     console.log(bannerMap)
@@ -375,7 +349,7 @@ function App() {
                           <Routes>
                             <Route  exact path="/" 
                                     element={ <Ranks priceDisplay={priceDisplay}
-                                    validTimestamp={validTimestamp} voteCoin={voteCoin} tweets={tweets} telegramPosts={telegramPosts} /> }
+                                    validTimestamp={validTimestamp} voteCoin={voteCoin} telegramPosts={telegramPosts} /> }
                             />
                             {/* <Route  exact path="/token/*" 
                                     element={ <Token  /> }
@@ -408,7 +382,7 @@ function App() {
                       <div className='d-flex justify-content-end'>
                         <button type="button" className="btn-close" onClick={() => setshowLowerLeft(false)}></button>
                       </div>
-                        <BottomBanners bannerUrl={bannerMap['banner6']}/>
+                        <BottomBanners banner={bannerMap['banner6']}/>
                     </div>
                   </>
                 }
@@ -418,7 +392,7 @@ function App() {
                       <div className='d-flex justify-content-end'>
                         <button type="button" className="btn-close" onClick={() => setshowLowerRight(false)}></button>
                       </div>
-                      <BottomBanners bannerUrl={bannerMap['banner5']}/>
+                      <BottomBanners banner={bannerMap['banner5']}/>
                   </div>
                 }
               </div>

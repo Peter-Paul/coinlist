@@ -41,14 +41,16 @@ function Footer({partners,name}) {
                 <img
                     alt="not found"
                     style={styles.wideBannerImage}
-                    src={bannerMap['banner3']}
+                    src={bannerMap['banner3'].url}
                     className="rounded mt-2 d-none d-md-block"
+                    onClick={() => { window.open(bannerMap['banner3'].link,"_blank") }}
                 />
                 <img
                     alt="not found"
                     style={styles.wideBannerImageMobile}
-                    src={bannerMap['banner3']}
+                    src={bannerMap['banner3'].url}
                     className="rounded mt-2 d-block d-md-none"
+                    onClick={() => { window.open(bannerMap['banner3'].link,"_blank") }}
                 />
             </div>
             <hr className="mt-5 mb-3" />

@@ -53,14 +53,16 @@ function Ranks({priceDisplay,validTimestamp,voteCoin,telegramPosts}) {
                         <img
                             alt="not found"
                             style={styles.wideBannerImage}
-                            src={bannerMap['banner1']}
+                            src={bannerMap['banner1'].url}
                             className="rounded d-none d-md-block"
+                            onClick={() => { window.open(bannerMap['banner1'].link,"_blank") }}
                         />
                         <img
                             alt="not found"
                             style={styles.wideBannerImageMobile}
-                            src={bannerMap['banner1']}
+                            src={bannerMap['banner1'].url}
                             className="rounded responsive d-block d-md-none"
+                            onClick={() => { window.open(bannerMap['banner1'].link,"_blank") }}
                         />
                     </div>
 
@@ -69,12 +71,14 @@ function Ranks({priceDisplay,validTimestamp,voteCoin,telegramPosts}) {
                             <img
                                 alt="not found"
                                 style={styles.gifBanner}
-                                src={bannerMap['banner4']}
+                                src={bannerMap['banner4'].url}
+                                onClick={() => { window.open(bannerMap['banner4'].link,"_blank") }}
                             />
                             <img
                                 alt="not found"
                                 style={styles.gifBanner}
-                                src={bannerMap['banner4']}
+                                src={bannerMap['banner4'].url}
+                                onClick={() => { window.open(bannerMap['banner4'].link,"_blank") }}
                             />
                         </div>
                     </div>
@@ -84,14 +88,16 @@ function Ranks({priceDisplay,validTimestamp,voteCoin,telegramPosts}) {
                         <img
                             alt="not found"
                             style={styles.wideBannerImage}
-                            src={bannerMap['banner2']}
+                            src={bannerMap['banner2'].url}
                             className="rounded responsive d-none d-md-block"
+                            onClick={() => { window.open(bannerMap['banner2'].link,"_blank") }}
                         />
                         <img
                             alt="not found"
                             style={styles.wideBannerImageMobile}
-                            src={bannerMap['banner2']}
+                            src={bannerMap['banner2'].url}
                             className="rounded responsive d-block d-md-none"
+                            onClick={() => { window.open(bannerMap['banner2'].link,"_blank") }}
                         />
                     </div>
 
