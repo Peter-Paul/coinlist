@@ -1,4 +1,4 @@
-function BottomBanners({bannerUrl}) {
+function BottomBanners({banner}) {
     const styles = {
         banner:{
             height: "250px",
@@ -10,8 +10,9 @@ function BottomBanners({bannerUrl}) {
             <img
                 alt="not found"
                 style={styles.banner}
-                src={bannerUrl}
+                src={banner.url}
                 className="d-none d-md-block"
+                onClick={() => { window.open(banner.link,"_blank") }}
             />  
         </>
     );

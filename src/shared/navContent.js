@@ -49,8 +49,9 @@ function NavContent({smallView=false}) {
                         <img
                             alt="not found"
                             style={styles.banner}
-                            src={bannerMap['banner7']}
+                            src={bannerMap['banner7'].url}
                             className="my-5"
+                            onClick={() => { window.open(bannerMap['banner7'].link,"_blank") }}
                         />  
                         <li className="mt-auto" data-bs-dismiss={smallView?"offcanvas":""}>
                             <Subscribe/>
