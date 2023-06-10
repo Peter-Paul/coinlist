@@ -1,9 +1,9 @@
 import { useSelector } from "react-redux";
+import BannerUpload from "./bannerUpload";
 
 function Banner({uploadBanner}) {
     const {bannerMap} = useSelector((state) => state.app)
     
-
     const styles = {
         wideBanner: {
             height: "115px",
@@ -60,24 +60,12 @@ function Banner({uploadBanner}) {
                             <img
                                 alt="not found"
                                 style={styles.smallBanner}
-                                src={bannerMap['banner5']}
+                                src={bannerMap['banner5'].url}
                             />
                         </div>
                         <div className="d-flex justify-content-center my-3">
-
-                            <label htmlFor="banner5" className="ms-1 p-3" style={styles.label}>
-                                Upload Right Banner
-                            </label>
-                            <input
-                                type="file"
-                                id="banner5"
-                                name="myImage"
-                                onChange={(event) => {
-                                    console.log(event.target.files[0]);
-                                    uploadBanner(event.target.files[0],"banner5");
-                                }}
-                                hidden
-                            />
+                            <BannerUpload position={"Upload Right Banner"} 
+                                uploadBanner={uploadBanner} banner={"banner5"} />
                         </div>
                     </div>
 
@@ -86,24 +74,12 @@ function Banner({uploadBanner}) {
                             <img
                                 alt="not found"
                                 style={styles.smallBanner}
-                                src={bannerMap['banner6']}
+                                src={bannerMap['banner6'].url}
                             />
                         </div>
                         <div className="d-flex justify-content-center my-3">
-
-                            <label htmlFor="banner6" className="ms-1 p-3" style={styles.label}>
-                                Upload Left Banner
-                            </label>
-                            <input
-                                type="file"
-                                id="banner6"
-                                name="myImage"
-                                onChange={(event) => {
-                                    console.log(event.target.files[0]);
-                                    uploadBanner(event.target.files[0],"banner6");
-                                }}
-                                hidden
-                            />
+                            <BannerUpload position={"Upload Left Banner"} 
+                                uploadBanner={uploadBanner} banner={"banner6"} />
                         </div>
                     </div>
 
@@ -112,24 +88,12 @@ function Banner({uploadBanner}) {
                             <img
                                 alt="not found"
                                 style={styles.smallBanner}
-                                src={bannerMap['banner7']}
+                                src={bannerMap['banner7'].url}
                             />
                         </div>
                         <div className="d-flex justify-content-center my-3">
-
-                            <label htmlFor="banner7" className="ms-1 p-3" style={styles.label}>
-                                Upload Sidebar Banner
-                            </label>
-                            <input
-                                type="file"
-                                id="banner7"
-                                name="myImage"
-                                onChange={(event) => {
-                                    console.log(event.target.files[0]);
-                                    uploadBanner(event.target.files[0],"banner7");
-                                }}
-                                hidden
-                            />
+                            <BannerUpload position={"Upload Sidebar Banner"} 
+                                uploadBanner={uploadBanner} banner={"banner7"} />
                         </div>
                     </div>
 
@@ -137,32 +101,57 @@ function Banner({uploadBanner}) {
             }
 
 
+            { bannerMap && bannerMap['banner3'] &&
+
+                <div className="d-flex justify-content-evenly">
+                    <div>
+                        <div className="d-flex justify-content-evenly">
+                            <img
+                                alt="not found"
+                                style={styles.rotatingBanner}
+                                src={bannerMap['banner3'].url}
+                            />
+                        </div>
+                        <div className="d-flex justify-content-center my-3">
+                            <BannerUpload position={"Upload Footer Banner"} 
+                                uploadBanner={uploadBanner} banner={"banner3"} />
+                        </div>
+
+                    </div>
+
+                    <div>
+                        <div className="d-flex justify-content-evenly">
+                            <img
+                                alt="not found"
+                                style={styles.rotatingBanner}
+                                src={bannerMap['banner4'].url}
+                            />
+                        </div>
+                        <div className="d-flex justify-content-center my-3">
+                            <BannerUpload position={"Upload Double Banner"} 
+                                uploadBanner={uploadBanner} banner={"banner4"} />
+                        </div>
+
+                    </div>
+
+
+                </div>
+            }
+
+            
             { bannerMap && bannerMap['banner1'] &&
                 <div>
                     <div className="d-flex justify-content-center">
                         <img
                             alt="not found"
                             style={styles.wideBanner}
-                            src={bannerMap['banner1']}
+                            src={bannerMap['banner1'].url}
                         />
                     </div>
                     <div className="d-flex justify-content-center my-3">
-
-                        <label htmlFor="banner1" className="ms-1 p-3" style={styles.label}>
-                            Upload Wide Banner 1
-                        </label>
-                        <input
-                            type="file"
-                            id="banner1"
-                            name="myImage"
-                            onChange={(event) => {
-                                console.log(event.target.files[0]);
-                                uploadBanner(event.target.files[0],"banner1");
-                            }}
-                            hidden
-                        />
+                        <BannerUpload position={"Upload Wide Banner 1"} 
+                            uploadBanner={uploadBanner} banner={"banner1"} />
                     </div>
-
                 </div>
             }
 
@@ -173,24 +162,12 @@ function Banner({uploadBanner}) {
                         <img
                             alt="not found"
                             style={styles.wideBanner}
-                            src={bannerMap['banner2']}
+                            src={bannerMap['banner2'].url}
                         />
                     </div>
                     <div className="d-flex justify-content-center my-3">
-
-                        <label htmlFor="banner2" className="ms-1 p-3" style={styles.label}>
-                            Upload Wide Banner 2
-                        </label>
-                        <input
-                            type="file"
-                            id="banner2"
-                            name="myImage"
-                            onChange={(event) => {
-                                console.log(event.target.files[0]);
-                                uploadBanner(event.target.files[0],"banner2");
-                            }}
-                            hidden
-                        />
+                        <BannerUpload position={"Upload Wide Banner 2"} 
+                            uploadBanner={uploadBanner} banner={"banner2"} />
                     </div>
 
                 </div>
@@ -198,66 +175,7 @@ function Banner({uploadBanner}) {
 
            
 
-            { bannerMap && bannerMap['banner3'] &&
-                <div>
-                    <div className="d-flex justify-content-evenly">
-                        <img
-                            alt="not found"
-                            style={styles.rotatingBanner}
-                            src={bannerMap['banner3']}
-                        />
-                    </div>
-                    <div className="d-flex justify-content-center my-3">
 
-                        <label htmlFor="banner3" className="ms-1 p-3" style={styles.label}>
-                            Upload Footer Banner
-                        </label>
-                        <input
-                            type="file"
-                            id="banner3"
-                            name="myImage"
-                            onChange={(event) => {
-                                console.log(event.target.files[0]);
-                                uploadBanner(event.target.files[0],"banner3");
-                            }}
-                            hidden
-                        />
-                    </div>
-
-                </div>
-            }
-
-
-            {
-                bannerMap && bannerMap['banner4'] &&
-
-                <div>
-                    <div className="d-flex justify-content-evenly">
-                        <img
-                            alt="not found"
-                            style={styles.rotatingBanner}
-                            src={bannerMap['banner4']}
-                        />
-                    </div>
-                    <div className="d-flex justify-content-center my-3">
-
-                        <label htmlFor="banner4" className="ms-1 p-3" style={styles.label}>
-                            Upload Double Banner
-                        </label>
-                        <input
-                            type="file"
-                            id="banner4"
-                            name="myImage"
-                            onChange={(event) => {
-                                console.log(event.target.files[0]);
-                                uploadBanner(event.target.files[0],"banner4");
-                            }}
-                            hidden
-                        />
-                    </div>
-
-                </div>
-            }
 
 
             

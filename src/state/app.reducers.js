@@ -49,8 +49,8 @@ export const appSlice = createSlice({
         },
 
         updateBanner: (state,action) => {
-            const {name,url} = action.payload
-            state.bannerMap = {...state.bannerMap,[name]:url}
+            const {name,url,link} = action.payload
+            state.bannerMap = {...state.bannerMap,[name]:{url,link}}
         },
         
         uploadCoin: (state,action) => {
