@@ -296,7 +296,7 @@ function App() {
     }
   }
 
-  const uploadBanner = async (image,name) => {
+  const uploadBanner = async (image,name,link) => {
     // const service = new BannerService(backendUrl)
     // console.log(cloudinaryKey)
     const formData = new FormData()
@@ -306,7 +306,7 @@ function App() {
     const api = `https://api.cloudinary.com/v1_1/dwf6iuvbh/image/upload`
     const res = await axios.post(api, formData)
     // service.updateBanner(name,res.data.secure_url) 
-    dispatch( updateBanner({name,url:res.data.secure_url}) )
+    dispatch( updateBanner({name,url:res.data.secure_url,link}) )
     console.log(res.data.secure_url)
   }
 
