@@ -1,6 +1,6 @@
 require('dotenv').config()
 
-const port=process.env.BACKEND_PORT || 5000
+const port=parseInt(process.env.BACKEND_PORT) || 5000
 const dbUser = process.env.POSTGRES_USER
 const dbPassword = process.env.POSTGRES_PASSWORD
 const db = process.env.POSTGRES_DB

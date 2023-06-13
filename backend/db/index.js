@@ -11,6 +11,7 @@ class Database{
     coinTable="coins"
     voteTable="votes"
     bannerTable="banners"
+    subscriptionTable="subscription"
 
     constructor(){
         this.pool = new Pool({
@@ -45,8 +46,16 @@ class Database{
             }else if(table===this.voteTable){
                 const sql = `INSERT INTO ${table} ("VoteID","Address","Coin","Time") VALUES ($1, $2, $3, $4)`
                 const {address,coin,time} = data
-                var id=uuidv4()
+                const id=uuidv4()
                 this.pool.query(sql, [id,address,coin,time], (err, res)=>{
+                    if(err) reject(err)
+                    else resolve({...data,id})
+                })
+            }else if(table===this.subscriptionTable){
+                const sql = `INSERT INTO ${table} ("Id","Email") VALUES ($1, $2)`
+                const {email} = data
+                const id=uuidv4()
+                this.pool.query(sql, [id,email], (err, res)=>{
                     if(err) reject(err)
                     else resolve({...data,id})
                 })
@@ -68,8 +77,9 @@ class Database{
                     else resolve(res.rows)
                 })
             }else if (table === this.bannerTable){
-                const sql = `UPDATE ${table} SET "Url" = $1 WHERE "Name" = $2`
-                this.pool.query(sql, [value,key], (err, res)=>{
+                const sql = `UPDATE ${table} SET "Url" = $1, "Link" = $2 WHERE "Name" = $3`
+                const {url,link} = value
+                this.pool.query(sql, [url,link,key], (err, res)=>{
                     if(err) reject(err)
                     else resolve(res.rows)
                 })
