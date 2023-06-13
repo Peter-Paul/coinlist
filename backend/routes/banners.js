@@ -7,7 +7,7 @@ const table = "banners"
 
 
 
-router.get("/", async (req,res) => {
+router.get("/banners/", async (req,res) => {
     try{
        let response = await database.getAll(table)
         res.status(200).json(response)
@@ -17,7 +17,7 @@ router.get("/", async (req,res) => {
 })
 
 
-router.patch('/', async (req,res) => {
+router.patch('/banners/', async (req,res) => {
     try{
         const data = req.body
         const {error} = bannerSchema.validate(data)

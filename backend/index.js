@@ -5,6 +5,7 @@ const { port } =  require("./constants.js")
 const coinRoutes = require("./routes/coins.js")
 const voteRoutes = require("./routes/votes.js")
 const bannerRoutes = require("./routes/banners.js")
+const subscriptionRoutes = require("./routes/subscription.js")
 
 const app = express()
 
@@ -21,8 +22,13 @@ app.use(cors())
 // }))
 
 //routes
-app.use('/coins',coinRoutes)
-app.use('/votes',voteRoutes)
-app.use('/banners',bannerRoutes)
+app.get('/health_check', (_req, res) => {
+    res.statusCode = 200;
+    return res.json({ status: 200 });
+  });
+app.use('/backend/',coinRoutes)
+app.use('/backend/',voteRoutes)
+app.use('/backend/',bannerRoutes)
+app.use('/backend/',subscriptionRoutes)
 
 app.listen( port, () => console.log(`Node server running on port ${port}`)  )

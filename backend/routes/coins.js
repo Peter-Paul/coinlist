@@ -15,7 +15,7 @@ const validPayload = (req,res,next) => { // middleware checking payload
     next()
 }
 
-router.get('/', async (req,res) => {
+router.get('/coins/', async (req,res) => {
     try{
         let response = await database.getAll(table)
         const modResponse = response.map( ({ CoinData }) => { return { ...JSON.parse(CoinData) }} )
@@ -25,7 +25,7 @@ router.get('/', async (req,res) => {
     }
 })
 
-router.post('/', validPayload, async (req,res) => {
+router.post('/coins/', validPayload, async (req,res) => {
     try{
         const data = req.body
         let response = await database.addRow(table, data)
@@ -35,7 +35,7 @@ router.post('/', validPayload, async (req,res) => {
     }
 })
 
-router.patch('/:address', validPayload, async (req,res) => {
+router.patch('/coins/:address', validPayload, async (req,res) => {
     try{
         let address = req.params.address
         const data = req.body
@@ -46,7 +46,7 @@ router.patch('/:address', validPayload, async (req,res) => {
     }
 })
 
-router.delete('/:address', async (req,res) => {
+router.delete('/coins/:address', async (req,res) => {
     try{
         let address = req.params.address
         await database.deleteRow(table,address)

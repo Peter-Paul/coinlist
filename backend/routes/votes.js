@@ -5,7 +5,7 @@ const { voteSchema } = require("../schemas/voteType.js")
 const database = new db.Database()
 const table = "votes"
 
-router.get('/', async (req,res) => {
+router.get('/votes/', async (req,res) => {
     try{
         let response = await database.getAll(table)
         res.status(200).json(response)
@@ -14,7 +14,7 @@ router.get('/', async (req,res) => {
     }
 })
 
-router.post('/', async (req,res) => {
+router.post('/votes/', async (req,res) => {
     try{
         const data = req.body
         const {error} = voteSchema.validate(data)
@@ -22,7 +22,11 @@ router.post('/', async (req,res) => {
             res.status(400).json({error})
             return
         }
-        let response = await database.addRow(table, data)
+        const {coinData,...vote} = data
+        const {coin} = vote
+        const coinTable = "coins"
+        await database.updateRow(coinTable,coin,coinData)
+        let response = await database.addRow(table, vote)
         res.status(200).json(response)
     }catch(err){
         res.status(500).json({err})

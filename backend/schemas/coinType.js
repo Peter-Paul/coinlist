@@ -9,6 +9,7 @@ const coinSchema = Joi.object({
     description: Joi.string().required(),
     contact: Joi.string().required(),
     launch: Joi.string().required(),
+    votes: Joi.string().required(),
     website: Joi.string().required(),
     github: Joi.string().required(),
     telegram: Joi.string().required(),
