@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import Table from "../ranks/table";
 import Apply from "./apply";
 
-function Promote({validTimestamp,voteCoin}) {
+function Promote({voteCoin}) {
     const {coins:data,voteMap,userAddress,connected} = useSelector((state) => state.app)
     const styles = {
         promotion:{
@@ -51,7 +51,7 @@ function Promote({validTimestamp,voteCoin}) {
     return ( 
         <>
             <Table data={data.filter( d => d.promoted )} title={"PROMOTED"} allowRoute={false}
-            validTimestamp={validTimestamp} userAddress={userAddress} 
+            userAddress={userAddress} 
             voteMap={voteMap} connected={connected} voteCoin={voteCoin}/>
 
 

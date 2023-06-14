@@ -3,14 +3,13 @@ import "./coin.css"
 import Media from "../shared/media";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-function Coin({validTimestamp,voteCoin}) {
+function Coin({voteCoin}) {
     const {address} = useParams()
     const {coinMap,connected,voteMap,userAddress} = useSelector((state) => state.app)
     const [coin, setCoin] = useState(undefined)
-    const [voter, setVoter] = useState(undefined)
     
     // const {name,symbol} = coin
-    useEffect( ()=> { setCoin(coinMap[address]); setVoter(voteMap[`${userAddress}/${address}`]); }, 
+    useEffect( ()=> { setCoin(coinMap[address]) }, 
         [address,coinMap,userAddress,voteMap] )
 
 
@@ -79,7 +78,7 @@ function Coin({validTimestamp,voteCoin}) {
                                         <>
                                             {
 
-                                            voter===undefined || validTimestamp(voter) ?  
+                                            userAddress===undefined || !voteMap[address] ?  
                                             <button className='btn btn-lg btn-outline-light' onClick={() => voteCoin(address)}>VOTE</button>
                                             :  
                                             <button className='btn btn-lg btn-outline-success'> 

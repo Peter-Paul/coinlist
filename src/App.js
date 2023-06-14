@@ -199,19 +199,9 @@ const partners = [
 ]
 
 
-const voteData = [
-  {
-    id:1,
-    address: "0xc58F0E2007B4c52597042cB212a3683AF2ABDA06",
-    coin: "0xFE60FbA03048EfFB4aCf3f0088Ec2f53d779D3BB",
-    latestTimestamp:1684127976
-  }
-]
-
-
 function App() {
-  const secondsPerDay =  86400
-  const {coinMap,coins,votes,voteMap,userAddress,connected,bannerMap} = useSelector((state) => state.app)
+  console.log(process.env.REACT_APP_ENV)
+  const {coinMap,coins,voteMap,userAddress,connected,bannerMap} = useSelector((state) => state.app)
   const dispatch = useDispatch()
   const [showLowerLeft,setshowLowerLeft] = useState(true)
   const [showLowerRight,setshowLowerRight] = useState(true)
@@ -219,9 +209,6 @@ function App() {
   const [priceDisplay,setpriceDisplay] = useState(undefined)
   const [telegramPosts,setTelegramPosts] = useState(undefined)
   const name = "DoctoreCoins"
-
-  const validTimestamp = (time) =>   time < (  (new Date().getTime() / 1000) - secondsPerDay )
-
  
   
   const onInit = useCallback( async () => {
@@ -230,9 +217,11 @@ function App() {
     const backendUrl = process.env.REACT_APP_BACKEND_BASE_URL
     // const key = process.env.REACT_APP_CLOUDINARY_API_KEY
     const coinMap = {}
-    const voteMap = {}
     const bannerMap = {}
-    
+    const voteMap = {
+      "0x55fB228730ED971269EBF284C7500d5fF572A141": true
+    }
+
     // setCloudinaryKey( key )
     // const bannerService = new BannerService(backendUrl)
     // const bannersList = await bannerService.getBanners()
@@ -242,6 +231,8 @@ function App() {
 
     // console.log(coinList)
     // console.log(bannersList)
+    
+
     for (let {name,url,link} of bannersList){
       bannerMap[name] = {url,link}
     }
@@ -269,14 +260,11 @@ function App() {
       data[ data.indexOf(c) ] = {...c,price}
     }
     
-    for (let v of voteData){
-      voteMap[`${v.address}/${v.coin}`] = v.latestTimestamp
-    }
     
     const telegram = new Telegram()
     setTelegramPosts(await telegram.getPosts())
 
-    dispatch( loadState({coins:data,coinMap,votes:voteData,voteMap,backendUrl,bannerMap,}) )
+    dispatch( loadState({coins:data,coinMap,voteMap,backendUrl,bannerMap,}) )
     
     
   }, [dispatch])
@@ -312,7 +300,7 @@ function App() {
 
   const disconnectWallet = () =>  dispatch( connectUser( {userAddress:undefined,connected:false} ) )
 
-  const voteCoin = address => dispatch( updateVotes({address,userAddress}) )
+  const voteCoin = address => dispatch( updateVotes({address}) )
 
   const styles = {
     navigation:{
@@ -333,7 +321,7 @@ function App() {
 
   return (
     <>
-      { (coins && coinMap && votes && voteMap  && bannerMap) &&
+      { (coins && coinMap && voteMap  && bannerMap) &&
           <Router>
             <div className='d-flex justify-content-between'>
               <div className='sidebar col-2 d-none d-custom-block bg-dark '>
@@ -349,26 +337,20 @@ function App() {
                           <Routes>
                             <Route  exact path="/" 
                                     element={ <Ranks priceDisplay={priceDisplay}
-                                    validTimestamp={validTimestamp} voteCoin={voteCoin} telegramPosts={telegramPosts} /> }
+                                    voteCoin={voteCoin} telegramPosts={telegramPosts} /> }
                             />
-                            {/* <Route  exact path="/token/*" 
-                                    element={ <Token  /> }
-                            /> */}
                             <Route  exact path="/:address" 
                                     element={ <Coin 
-                                    validTimestamp={validTimestamp} voteCoin={voteCoin} /> }
+                                    voteCoin={voteCoin} /> }
                             />
                             <Route  exact path="/services/:service" 
                                     element={ <Promotion 
-                                    validTimestamp={validTimestamp} voteCoin={voteCoin} name={name} /> }
+                                    voteCoin={voteCoin} name={name} /> }
                             />
                             <Route  exact path="/admin" 
                                     element={ <Admin 
-                                    validTimestamp={validTimestamp} voteCoin={voteCoin} uploadBanner={uploadBanner}/> }
+                                    voteCoin={voteCoin} uploadBanner={uploadBanner}/> }
                             />
-                            {/* <Route  exact path="/partners" 
-                                    element={ <Partners/> }
-                            /> */}
                           </Routes>
                           <Footer partners={partners} name={name} />
                 </div>

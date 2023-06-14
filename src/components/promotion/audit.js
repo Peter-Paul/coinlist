@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import Table from "../ranks/table";
 import Apply from "./apply";
 
-function Audit({styles,validTimestamp,voteCoin}) {
+function Audit({voteCoin}) {
 
     const {coins:data,voteMap,userAddress,connected} = useSelector((state) => state.app)
     
@@ -20,7 +20,7 @@ function Audit({styles,validTimestamp,voteCoin}) {
 
             <div className="mt-4">
               <Table data={data.filter( d => d.tags.includes("audited") )} title={"AUDITED COINS"} allowRoute={false}
-              validTimestamp={validTimestamp} userAddress={userAddress} 
+              userAddress={userAddress} 
               voteMap={voteMap} connected={connected} voteCoin={voteCoin}/>
             </div>
         </>

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { uploadCoin } from "../../state/app.reducers";
-// import CoinService from "../../services/coins";
+import CoinService from "../../services/coins";
 
 function AddCoin({changeView,baseUrl}) {
     const defaultCoin = {
@@ -67,12 +67,13 @@ function AddCoin({changeView,baseUrl}) {
             month = month--
             const data = {...coin,
                     launch: Math.floor(new Date(year,month,day).getTime() / 1000).toString()
-                }
-            // const coinService = new CoinService(baseUrl)
-            // const response =  await coinService.postCoin(data)
-                console.log(data)
-                setNoSuccess(false)
-                addCoin({...defaultCoin})
+            }
+
+            const coinService = new CoinService(baseUrl)
+            await coinService.postCoin(data)
+            
+            addCoin({...defaultCoin})
+            setNoSuccess(false)
             dispatch( uploadCoin(data) )
         }catch(error){
             setNoError({msg:"Failed to add coin. Kindly check with DoctoreClub regarding this issue.",state:false});
