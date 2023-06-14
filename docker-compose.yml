@@ -28,7 +28,7 @@ services:
       - './nginx.conf:/etc/nginx/nginx.conf'
       - './build:/app'
     ports:
-      - '8080:80'
+      - '80:80'
     depends_on:
       - middleware
 
