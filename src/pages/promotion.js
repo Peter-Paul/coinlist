@@ -4,7 +4,7 @@ import Verify from "../components/promotion/verify";
 import Audit from "../components/promotion/audit";
 import { Link, useParams } from "react-router-dom";
 
-function Promotion({validTimestamp,voteCoin}) {
+function Promotion({voteCoin}) {
     const {service:activeState} = useParams()
     // const [ activeState, setActive ] = useState("promote")
  
@@ -72,16 +72,16 @@ function Promotion({validTimestamp,voteCoin}) {
             </div>
 
             { activeState==="promote" &&
-                <Promote validTimestamp={validTimestamp} voteCoin={voteCoin} />
+                <Promote voteCoin={voteCoin} />
             }
             
 
             { activeState==="audit" &&
-                <Audit styles={styles} validTimestamp={validTimestamp} voteCoin={voteCoin}/>
+                <Audit styles={styles} voteCoin={voteCoin}/>
             }
             
             { activeState==="kyc" &&
-                <Verify styles={styles} validTimestamp={validTimestamp} voteCoin={voteCoin}/>
+                <Verify styles={styles} voteCoin={voteCoin}/>
             }
          
         </>

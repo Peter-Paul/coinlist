@@ -7,12 +7,12 @@ export default class VoteService{
         this.url = `${baseUrl}${this.route}`
     }
 
-    async getVotes(){
+    async getVotes(address){
         try{
 
-            const votes = await axios.get(this.url)
+            const votes = await axios.get(`${this.url}/${address}`)
     
-            if (votes.status === 200) return votes.data.map( c => { return {...c, tags:c.tags.split(",")} })
+            if (votes.status === 200) return votes
             else return undefined
 
         }catch(err){

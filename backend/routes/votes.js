@@ -5,10 +5,22 @@ const { voteSchema } = require("../schemas/voteType.js")
 const database = new db.Database()
 const table = "votes"
 
-router.get('/votes/', async (req,res) => {
+router.get('/votes/:address', async (req,res) => {
     try{
-        let response = await database.getAll(table)
-        res.status(200).json(response)
+        // return coins voted in the past 24 hrs
+        let address = req.params.address
+        const daySeconds = 3600*24
+        const now = Math.floor( new Date().getTime() / 1000 )
+        let response = await database.getAll(table,address)
+        const votedCoins = {}
+
+        for( const {Time,Coin} of response ){
+            const difference = now - parseInt(Time)
+            if ( difference > daySeconds ) break
+            else votedCoins[Coin] = true
+        }
+
+        res.status(200).json(votedCoins)
     }catch(err){
         res.status(500).json({err})
     }
@@ -25,6 +37,7 @@ router.post('/votes/', async (req,res) => {
         const {coinData,...vote} = data
         const {coin} = vote
         const coinTable = "coins"
+        // coinData includes already updated vote count
         await database.updateRow(coinTable,coin,coinData)
         let response = await database.addRow(table, vote)
         res.status(200).json(response)

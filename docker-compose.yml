@@ -21,11 +21,13 @@ services:
   proxy:
     image: nginx:latest
     restart: always
+    environment:
+      - REACT_APP_ENV=dev
     volumes:
       - './nginx.conf:/etc/nginx/nginx.conf'
       - './build:/app'
     ports:
-      - '8080:80'
+      - '80:80'
     depends_on:
       - middleware
 

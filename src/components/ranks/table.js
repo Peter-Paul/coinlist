@@ -2,7 +2,7 @@ import DataTable from 'react-data-table-component';
 import { Link } from 'react-router-dom';
 
 
-function Table({data,title,allowRoute,connected,userAddress,validTimestamp,voteCoin,voteMap,admin=false,removeCoin,patchCoin}) {
+function Table({data,title,allowRoute,connected,userAddress,voteCoin,voteMap,admin=false,removeCoin,patchCoin}) {
     
     const styles = {
         coinName:{
@@ -169,13 +169,12 @@ function Table({data,title,allowRoute,connected,userAddress,validTimestamp,voteC
             name: 'VOTES',
             selector: row => row.votes,
             cell: row => { 
-                const voter = voteMap[`${userAddress}/${row.address}`]
                 return ( 
                         <>
                             { connected &&
                                 <>
                                     {
-                                        voter===undefined || validTimestamp(voter) ? 
+                                        userAddress===undefined || !voteMap[row.address] ? 
                                         <button className='btn btn-light' onClick={()=>voteCoin(row.address)}>
                                             <i className='fa fa-check me-1'></i>
                                             <strong>

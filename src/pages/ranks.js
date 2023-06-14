@@ -105,7 +105,7 @@ function Ranks({priceDisplay,validTimestamp,voteCoin,telegramPosts}) {
                     <Search changeView={ () => { showTables(false) } } />
 
                     <Table data={data.filter( d => d.promoted )} title={"PROMOTED"} 
-                       validTimestamp={validTimestamp} allowRoute={true} userAddress={userAddress} 
+                       allowRoute={true} userAddress={userAddress} 
                        voteMap={voteMap} connected={connected} voteCoin={voteCoin} />
 
 
@@ -121,7 +121,7 @@ function Ranks({priceDisplay,validTimestamp,voteCoin,telegramPosts}) {
                     </div>
 
                     <Table data={data.filter( d => d.tags.includes(tag) )} title={"ASSET"}
-                        validTimestamp={validTimestamp} allowRoute={true} userAddress={userAddress} 
+                        allowRoute={true} userAddress={userAddress} 
                         voteMap={voteMap} connected={connected} voteCoin={voteCoin} />
                 </>
         }

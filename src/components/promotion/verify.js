@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import Table from "../ranks/table";
 import Apply from "./apply";
 
-function Verify({validTimestamp,voteCoin}) {
+function Verify({voteCoin}) {
     const {coins:data,voteMap,userAddress,connected} = useSelector((state) => state.app)
     return (  
         <>
@@ -19,7 +19,7 @@ function Verify({validTimestamp,voteCoin}) {
 
             <div className="mt-4">
               <Table data={data.filter( d => d.tags.includes("kyc") )} title={"KYC COINS"} allowRoute={false}
-              validTimestamp={validTimestamp} userAddress={userAddress} 
+              userAddress={userAddress} 
               voteMap={voteMap} connected={connected} voteCoin={voteCoin}/>
             </div>
         </>

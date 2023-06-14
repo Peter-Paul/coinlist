@@ -2,7 +2,7 @@ import { useState } from "react";
 import CoinManagement from "../components/admin/coinManagement";
 import Banner from "../components/admin/banners";
 
-function Admin({validTimestamp,voteCoin,uploadBanner}) {
+function Admin({voteCoin,uploadBanner}) {
     const [ activeState, setActive ] = useState("coins")
 
     const styles = {
@@ -56,7 +56,7 @@ function Admin({validTimestamp,voteCoin,uploadBanner}) {
             </div>
 
             { activeState==="coins" &&
-                <CoinManagement validTimestamp={validTimestamp} voteCoin={voteCoin} />
+                <CoinManagement voteCoin={voteCoin} />
             }
 
             { activeState==="banners" &&

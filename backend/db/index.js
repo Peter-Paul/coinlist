@@ -23,8 +23,9 @@ class Database{
         })
     }
 
-    getAll(table){
-        const sql = `SELECT * FROM ${table}`
+    getAll(table,address=undefined){
+        let sql = `SELECT * FROM ${table}`
+        if (table === this.voteTable) sql = `SELECT * FROM ${table} WHERE "Address" = '${address}' ORDER BY "Time" DESC`
         return new Promise( (resolve,reject) =>{
             this.pool.query(sql, (err,res) => {
                 if(err) reject(err)
