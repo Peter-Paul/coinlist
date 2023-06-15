@@ -21,7 +21,7 @@ services:
   proxy:
     image: nginx:latest
     restart: always
-    environment:
+    # environment:
       # - REACT_APP_BACKEND_BASE_URL=http://doctorecoins/backend/
     volumes:
       - ./default.conf:/etc/nginx/conf.d/default.conf
