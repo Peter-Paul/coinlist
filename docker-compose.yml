@@ -37,12 +37,12 @@ services:
       context: .
       dockerfile: dockerfile-db
     image: "postgres-db"
-    container_name: ${PG_CONTAINER_NAME}
+    container_name: pg
     environment:
-      POSTGRES_DB: ${POSTGRES_DB}
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      PGDATA: ${PGDATA}
+      POSTGRES_DB: coinlist
+      POSTGRES_USER: coinlist
+      POSTGRES_PASSWORD: '1234'
+      PGDATA: '/data/postgres-tuto'
     volumes:
        - dbvol:/data/postgres-tuto
     ports:
