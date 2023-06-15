@@ -13,13 +13,13 @@ app.use(express.json())
 app.use(cookieParser())
 
 app.use(cors())
-// app.use(cors({
-//     // origin:["http://localhost:3000","http://localhost:8080"],
-//     origin:["*"],
-//     credentials:true,
-//     methods:['GET','POST','PUT','PATCH','DELETE','OPTIONS'],
-//     exposedHeaders:['Content-Length','Content-Type','Set-Cookie','Origin','Access-Control-Allow-Credentials','Access-Control-Allow-Origin' ]
-// }))
+app.use(cors({
+    // origin:["http://localhost:3000","http://localhost:8080"],
+    origin:["*"],
+    credentials:true,
+    methods:['GET','POST','PUT','PATCH','DELETE','OPTIONS'],
+    exposedHeaders:['Content-Length','Content-Type','Set-Cookie','Origin','Access-Control-Allow-Credentials','Access-Control-Allow-Origin' ]
+}))
 
 //routes
 app.get('/health_check', (_req, res) => {
