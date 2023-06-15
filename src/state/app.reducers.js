@@ -10,7 +10,7 @@ const initialState = {
     connected:false,
     votes:undefined,
     voteMap:undefined,
-    backendUrl:undefined,
+    baseUrl:undefined,
     bannerMap:undefined
 }
 
@@ -22,24 +22,25 @@ export const appSlice = createSlice({
             state.coins = [...action.payload.coins]
             state.coinMap = {...action.payload.coinMap}
             state.voteMap = {...action.payload.voteMap}
-            state.backendUrl = action.payload.backendUrl
+            state.baseUrl = action.payload.baseUrl
             state.bannerMap = action.payload.bannerMap
         },
 
         connectUser: (state,action) => {
             state.userAddress = action.payload.userAddress
             state.connected = action.payload.connected
+            state.voteMap = {...action.payload.voteMap}
         },
 
         updateVotes: (state,action) => {
-            const {address} = action.payload
+            const coin = action.payload.updatedCoin
+            const {address,votes} = coin
             state.coins = state.coins.map( 
                 c => (c.address === address) ? 
-                {...c,votes : (parseInt(c.votes)+1).toString()} : c )
+                {...c,votes} : c )
             
             state.coinMap = {...state.coinMap, [address]: 
-                {...state.coinMap[address],votes:(parseInt(state.coinMap[address].votes) + 1).toString()}}
-
+                {...state.coinMap[address],votes}}
 
             state.voteMap = {...state.voteMap,[address]:true}
         },

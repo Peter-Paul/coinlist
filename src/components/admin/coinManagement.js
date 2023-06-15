@@ -1,23 +1,28 @@
 import { useDispatch, useSelector } from "react-redux";
 import Table from "../ranks/table";
-// import CoinService from "../../services/coins";
+import CoinService from "../../services/coins";
 import { deleteCoin, updateCoin } from "../../state/app.reducers";
 
 function CoinManagement({voteCoin}) {
-    const {coins:data,voteMap,userAddress,connected} = useSelector((state) => state.app)
+    const {coins:data,voteMap,userAddress,connected,baseUrl} = useSelector((state) => state.app)
     const dispatch = useDispatch()
 
     const patchCoin = async coin => {
-        // const coinService = new CoinService(baseUrl)
-        // const response =  await coinService.updateCoin(coin)
-
+        if(baseUrl){
+            const coinService = new CoinService(baseUrl)
+            const response =  await coinService.updateCoin(coin)
+            console.log(response)
+        }
         dispatch( updateCoin(coin) )
 
     }
 
     const removeCoin = async address => {
-        // const coinService = new CoinService(baseUrl)
-        // const response =  await coinService.updateCoin(address)
+        if(baseUrl){
+            const coinService = new CoinService(baseUrl)
+            const response =  await coinService.deleteCoin(address)
+            console.log(response)
+        }
 
         dispatch( deleteCoin(address) )
         

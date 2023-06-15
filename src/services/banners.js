@@ -21,10 +21,10 @@ export default class BannerService{
         }
     }
 
-    async updateBanner(name,url){
+    async updateBanner(name,url,link){
         try{
 
-            const response = await axios.patch(this.url, {name,url})
+            const response = await axios.patch(this.url, {name,url,link})
     
             if (response.status === 200) return true
             else return undefined

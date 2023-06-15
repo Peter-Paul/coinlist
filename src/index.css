@@ -134,6 +134,20 @@ transform-origin: 0 0; /* see note above */
   border-radius: 6px;
 }
 
+.logo-holder {
+  width: 40px;
+  height: 40px;
+  min-height: 40px;
+  position: relative;
+  border-radius: 200px;
+}
+.logo-img{
+  height: 100%;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  border-radius: 100%;
+}
 
 
 

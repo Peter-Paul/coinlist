@@ -25,8 +25,8 @@ router.patch('/banners/', async (req,res) => {
             res.status(400).json({error})
             return
         }
-        let {name,url } = data
-        let response = await database.updateRow(table,name,url)
+        let {name,url,link} = data
+        let response = await database.updateRow(table,name,{url,link})
         res.status(200).json(response)
 
     }catch(err){

@@ -141,6 +141,7 @@ function Table({data,title,allowRoute,connected,userAddress,voteCoin,voteMap,adm
             selector: row => row.price,
             sortable: true,
             cell: row => {
+                console.log(row.price)
                 return (
                     <>
                         <strong>
@@ -209,17 +210,17 @@ function Table({data,title,allowRoute,connected,userAddress,voteCoin,voteMap,adm
         },
         {
             name: 'PROMOTE',
-            selector: row => row.promoted,
+            selector: row => row.promote,
             sortable: true,
             omit: !admin,
             cell: row => { 
-                const {address,promoted} = row
+                const {address,promote} = row
                 return (
                     <>
                         <div className="form-check form-switch">
-                            <input className="form-check-input" type="checkbox" role="switch" id={address} checked={promoted} 
+                            <input className="form-check-input" type="checkbox" role="switch" id={address} checked={promote} 
                                 onChange={ () => patchCoin( {...row, 
-                                    promoted: promoted ?  false : true
+                                    promote: promote ?  false : true
                                 } ) }
                             />
                             <label className="form-check-label" htmlFor={address}>

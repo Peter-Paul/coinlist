@@ -4,16 +4,21 @@ export default class VoteService{
     route = "votes"
 
     constructor(baseUrl){
-        this.url = `${baseUrl}${this.route}`
+        this.url = baseUrl ? `${baseUrl}${this.route}` : undefined
     }
 
     async getVotes(address){
         try{
 
-            const votes = await axios.get(`${this.url}/${address}`)
-    
-            if (votes.status === 200) return votes
-            else return undefined
+            if(this.url){
+
+                const votes = await axios.get(`${this.url}/${address}`)
+        
+                if (votes.status === 200) return votes.data
+                else return undefined
+            }else{
+                return {}
+            }
 
         }catch(err){
             console.log(`Error getting votes: ${err}`)

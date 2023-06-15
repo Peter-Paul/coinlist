@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 import "./nav.css"
 import NavContent from "./navContent";
 import PriceDisplay from "./priceDisplay";
+import Logo from "./logo";
 
 function Nav({connectWallet,disconnectWallet,name,priceDisplay}) {
     const {userAddress,connected} = useSelector((state) => state.app)
@@ -61,12 +62,16 @@ function Nav({connectWallet,disconnectWallet,name,priceDisplay}) {
                             </div>
                     }
                 </div>
-                <h1 className="d-block d-custom-none" style={styles.logo}>{name}</h1>
+                <div className="d-block d-custom-none">
+                    <Logo name={name} />
+                </div>
+                {/* <h1  style={styles.logo}>{name}</h1> */}
             </div>
 
             <div className="offcanvas offcanvas-start bg-dark" style={{width:"350px"}} data-bs-scroll="true" tabIndex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
                 <div className="offcanvas-header">
-                    <h5 style={styles.logo} className="offcanvas-title" id="offcanvasWithBothOptionsLabel">{name}</h5>
+                    <Logo name={name} />
+                    {/* <h5 style={styles.logo} className="offcanvas-title" id="offcanvasWithBothOptionsLabel">{name}</h5> */}
                     <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div className="offcanvas-body" >

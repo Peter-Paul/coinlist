@@ -8,6 +8,7 @@ const table = "coins"
 const validPayload = (req,res,next) => { // middleware checking payload
     const {error} = coinSchema.validate(req.body)
     if(error){
+        console.log(error)
         res.status(400).json({error})
         return
     }
@@ -31,6 +32,7 @@ router.post('/coins/', validPayload, async (req,res) => {
         let response = await database.addRow(table, data)
         res.status(200).json(response)
     }catch(err){
+        console.log(err)
         res.status(500).json({err})
     }
 })
