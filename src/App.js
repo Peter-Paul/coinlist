@@ -40,6 +40,7 @@ function App() {
   
   const onInit = useCallback( async () => {
     const baseUrl = process.env.REACT_APP_BACKEND_BASE_URL
+    console.log(baseUrl)
     // const key = process.env.REACT_APP_CLOUDINARY_API_KEY
     const coinMap = {}
     const bannerMap = {}
