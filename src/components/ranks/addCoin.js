@@ -19,6 +19,8 @@ function AddCoin({changeView,baseUrl}) {
         twitter:"",
         facebook:"",
         linkedin:"",
+        audit:"",
+        pinksale:"",
         promote:false,
         show:false,
         votes:"0",
