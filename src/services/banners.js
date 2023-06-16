@@ -50,7 +50,7 @@ export default class BannerService{
 
                 const banners = await axios.get(this.url)
         
-                if (banners.status === 200) return banners.data.map( b => { return {name:b.Name, url:b.Url} })
+                if (banners.status === 200) return banners.data.map( b => { return {name:b.Name, url:b.Url, link:b.Link} })
                 else return undefined
             }else{
                 return this.default

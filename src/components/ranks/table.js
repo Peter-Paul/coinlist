@@ -257,6 +257,34 @@ function Table({data,title,allowRoute,connected,userAddress,voteCoin,voteMap,adm
             }
         },
         {
+            name: 'TRENDING',
+            selector: row => row.show,
+            sortable: true,
+            omit: !admin,
+            cell: row => { 
+                const {address,tags} = row
+                const tag = "trending"
+                return (
+                    <>
+                        <div className="form-check form-switch">
+                            <input className="form-check-input" type="checkbox" role="switch" id={address} checked={tags.includes(tag)} 
+                                onChange={ () => patchCoin( {...row, 
+                                    tags: tags.includes(tag) ?  
+                                    tags.filter( t => t !== tag)
+                                    : 
+                                    [...tags,tag]
+                                } ) }
+                            />
+                            <label className="form-check-label" htmlFor={address}>
+                                {/* Checked switch checkbox input */}
+                            </label>
+                        </div>
+                    
+                    </>
+                )
+            }
+        },
+        {
             name: 'KYC',
             selector: row => row.show,
             sortable: true,
