@@ -4,7 +4,7 @@ import Subscribe from "./subscribe";
 import Media from "./media";
 
 function NavContent({smallView=false}) {
-    const {bannerMap,doctoreTwitter,doctoreTelegram} = useSelector((state) => state.app)
+    const {bannerMap,doctoreTwitter,doctoreTelegram,admin,userAddress} = useSelector((state) => state.app)
 
     const styles = {
         navBar:{
@@ -42,10 +42,15 @@ function NavContent({smallView=false}) {
                         </li>
 
                         <hr />
-                        <li data-bs-dismiss={smallView?"offcanvas":""}>
-                            <Link style={styles.link} to="/admin" onClick={ () => window.scrollTo({top: 0})}><i className="fa fa-lock me-2"></i>Admin</Link>
-                        </li>
-                        <hr />
+                        {
+                            admin && userAddress && (admin === userAddress) &&
+                            <>
+                                <li data-bs-dismiss={smallView?"offcanvas":""}>
+                                    <Link style={styles.link} to="/admin" onClick={ () => window.scrollTo({top: 0})}><i className="fa fa-lock me-2"></i>Admin</Link>
+                                </li>
+                                <hr />
+                            </>
+                        }
                         <img
                             alt="not found"
                             style={styles.banner}

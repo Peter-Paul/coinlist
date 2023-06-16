@@ -40,6 +40,7 @@ function App() {
   
   const onInit = useCallback( async () => {
     const baseUrl = process.env.REACT_APP_BACKEND_BASE_URL
+    const admin = process.env.REACT_APP_ADMIN
     console.log(baseUrl)
     // const key = process.env.REACT_APP_CLOUDINARY_API_KEY
     const coinMap = {}
@@ -89,7 +90,7 @@ function App() {
     const telegram = new Telegram()
     setTelegramPosts(await telegram.getPosts())
 
-    dispatch( loadState({coins:coinList,coinMap,voteMap,baseUrl,bannerMap,}) )
+    dispatch( loadState({coins:coinList,coinMap,voteMap,baseUrl,bannerMap,admin}) )
     
     
   }, [dispatch])
