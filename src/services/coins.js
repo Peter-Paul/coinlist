@@ -163,6 +163,7 @@ export default class CoinService{
     async postCoin(coin){
         try{
             const {price, ...payload} = coin
+            console.log(payload)
             const response = await axios.post(this.url, {...payload,tags:payload.tags.join(",")})
     
             if (response.status === 200) return true

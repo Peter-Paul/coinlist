@@ -12,7 +12,7 @@ code {
     monospace;
 }
 
-li,p,.btn,strong,h1,h2,h3,h4,h5,small,.nav-link{
+li,p,.btn,strong,h1,h2,h3,h4,h5,small,mark,.nav-link{
   font-family: "Vazirmatn";
 }
 

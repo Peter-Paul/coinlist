@@ -38,7 +38,7 @@ function Table({data,title,allowRoute,connected,userAddress,voteCoin,voteMap,adm
         const year =  365
         const now = Math.floor( new Date().getTime() / 1000 )
         let days = Math.floor((launch - now) / daySecs )
-        if(days < 0 ){
+        if(days <= 0 ){
             days = Math.abs(days)
             if( days < month){
                 return `${days} days ago`
