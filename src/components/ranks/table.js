@@ -84,10 +84,8 @@ function Table({data,title,allowRoute,connected,userAddress,voteCoin,voteMap,adm
                     <>
                         { !allowRoute &&
                                 <div className='d-flex justify-content-between my-2'>
-                                    <div  className="logo-holder">
-                                        <div style={{backgroundImage:`url(${(!row.icon || row.icon === "") ?
-                                        "https://res.cloudinary.com/dwf6iuvbh/image/upload/v1686828800/photo_2023-06-15_14-13-47_mlqd76.jpg":
-                                        row.icon})`}} 
+                                    <div  className={`logo-holder ${ (!row.icon || row.icon === "") && "d-none" }`}>
+                                        <div style={{backgroundImage:`url(${row.icon})`}} 
                                         className="logo-img" alt=""></div>
                                     </div>
                                     <div className='d-flex flex-column ms-1'>
@@ -103,10 +101,8 @@ function Table({data,title,allowRoute,connected,userAddress,voteCoin,voteMap,adm
                             allowRoute &&
                             <Link style={styles.coinName} to={`/${row.address}`}>
                                     <div className='d-flex justify-content-between my-2'>
-                                        <div  className="logo-holder">
-                                            <div style={{backgroundImage:`url(${(!row.icon || row.icon === "") ?
-                                            "https://res.cloudinary.com/dwf6iuvbh/image/upload/v1686828800/photo_2023-06-15_14-13-47_mlqd76.jpg":
-                                            row.icon})`}} 
+                                        <div  className={`logo-holder ${ (!row.icon || row.icon === "") && "d-none" }`}>
+                                            <div style={{backgroundImage:`url(${row.icon})`}} 
                                             className="logo-img" alt=""></div>
                                         </div>
                                         <div className='d-flex flex-column ms-1'>
