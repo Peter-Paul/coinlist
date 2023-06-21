@@ -78,28 +78,45 @@ function Table({data,title,allowRoute,connected,userAddress,voteCoin,voteMap,adm
         {
             name: title,
             selector: row => row.name,
+            style: row => ({width:"700px"}),
             cell: row => {
                 return (
                     <>
                         { !allowRoute &&
-                            <div className='d-flex flex-column my-2'>
-                                <strong className='mb-1' style={{fontSize:"15px"}}>{row.name}</strong>
-                                <h6>{row.tags.map( t => (tags2show.includes(t)) && <span key={t} className="badge text-bg-success me-1 mb-1">
-                                <i className='fa fa-shield me-1'></i>{t}</span> 
-                                    )}
-                                </h6>
-                            </div>
+                                <div className='d-flex justify-content-between my-2'>
+                                    <div  className="logo-holder">
+                                        <div style={{backgroundImage:`url(${(!row.icon || row.icon === "") ?
+                                        "https://res.cloudinary.com/dwf6iuvbh/image/upload/v1686828800/photo_2023-06-15_14-13-47_mlqd76.jpg":
+                                        row.icon})`}} 
+                                        className="logo-img" alt=""></div>
+                                    </div>
+                                    <div className='d-flex flex-column ms-1'>
+                                        <strong className='mb-1' style={{fontSize:"15px"}}>{row.name}</strong>
+                                        <h6>{row.tags.map( t => (tags2show.includes(t)) && <span key={t} className="badge text-bg-success me-1 mb-1">
+                                        <i className='fa fa-shield me-1'></i>{t}</span> 
+                                            )}
+                                        </h6>
+                                    </div>
+                                </div>
                         }
                         {
                             allowRoute &&
                             <Link style={styles.coinName} to={`/${row.address}`}>
-                                <div className="d-flex flex-column my-2">
-                                    <strong className='mb-1' style={{fontSize:"15px"}}>{row.name}</strong>
-                                    <h6>{row.tags.map( t => (tags2show.includes(t)) && <span key={t} className="badge text-bg-success me-1 mb-1">
-                                        <i className='fa fa-shield me-1'></i>{t}</span> 
-                                        )}
-                                    </h6>
-                                </div>
+                                    <div className='d-flex justify-content-between my-2'>
+                                        <div  className="logo-holder">
+                                            <div style={{backgroundImage:`url(${(!row.icon || row.icon === "") ?
+                                            "https://res.cloudinary.com/dwf6iuvbh/image/upload/v1686828800/photo_2023-06-15_14-13-47_mlqd76.jpg":
+                                            row.icon})`}} 
+                                            className="logo-img" alt=""></div>
+                                        </div>
+                                        <div className='d-flex flex-column ms-1'>
+                                            <strong className='mb-1' style={{fontSize:"15px"}}>{row.name}</strong>
+                                            <h6>{row.tags.map( t => (tags2show.includes(t)) && <span key={t} className="badge text-bg-success me-1 mb-1">
+                                            <i className='fa fa-shield me-1'></i>{t}</span> 
+                                                )}
+                                            </h6>
+                                        </div>
+                                    </div>
                             </Link>
                         }
                     </>

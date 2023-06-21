@@ -18,6 +18,7 @@ const coinSchema = Joi.object({
     linkedin: Joi.string().optional().allow(""),
     audit: Joi.string().optional().allow(""),
     pinksale: Joi.string().optional().allow(""),
+    icon: Joi.string().optional().allow(""),
     promote: Joi.boolean().required(),
     show: Joi.boolean().required(),
 })

@@ -2,9 +2,11 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { uploadCoin } from "../../state/app.reducers";
 import CoinService from "../../services/coins";
+import axios from "axios";
 
 function AddCoin({changeView,baseUrl}) {
     const defaultCoin = {
+        icon:"",
         address:"",
         name:"",
         symbol:"",
@@ -39,6 +41,16 @@ function AddCoin({changeView,baseUrl}) {
         input:{
             color:"white"
         }
+    }
+
+    const uploadIcon = async (image) => {
+        const formData = new FormData()
+        formData.append("file",image, "icon")
+        formData.append("upload_preset",`ml_default`)
+        // const api = `https://api.cloudinary.com/v1_1/${cloudinaryKey}/image/upload`
+        const api = `https://api.cloudinary.com/v1_1/dwf6iuvbh/image/upload`
+        const res = await axios.post(api, formData)
+        addCoin({...coin, icon:res.data.secure_url}) 
     }
 
     const handleCoinChange = (e) => addCoin( { ...coin, [e.target.name] : e.target.value } )
@@ -91,6 +103,34 @@ function AddCoin({changeView,baseUrl}) {
             <form onSubmit={(e) => addToken(e) }>
                 <div className="row">
                     <div className="col-md-6 col-12">
+                        <h4>Coin Logo</h4>
+                        <div className="d-flex justify-content-center">
+                            <div className="d-flex flex-column col-7 col-md-4">
+                                <div>
+                                    <div  className="icon-holder">
+                                        <div style={{backgroundImage:`url(${coin.icon === "" ?
+                                        "https://res.cloudinary.com/dwf6iuvbh/image/upload/v1686828800/photo_2023-06-15_14-13-47_mlqd76.jpg":
+                                        coin.icon})`}} 
+                                        className="icon-img" alt=""></div>
+                                    </div>
+                                </div>
+                                <label htmlFor="icon" className="btn btn-light my-2" style={styles.label}>
+                                    Upload Coin Icon
+                                    {/* {position} */}
+                                </label>
+                                <input
+                                    type="file"
+                                    id="icon"
+                                    name="myImage"
+                                    onChange={(event) => {
+                                        console.log(event.target.files[0]);
+                                        uploadIcon(event.target.files[0]);
+                                    }}
+                                    hidden
+                                />
+                            </div>
+                        </div>
+
                         <h4>Coin Info</h4>
                         <label className="form-label">Name <span className="text-danger" style={{fontSize:"10px"}} > *Required</span> </label>
                         <input name="name" style={styles.input} className="form-control mb-3 form-control-md bg-dark shadow" 
@@ -121,12 +161,13 @@ function AddCoin({changeView,baseUrl}) {
                             <option value="arbitrum-one">Arbitrum</option>
                         </select>
 
+                        
+                    </div>
+                    <div className="col-md-6 col-12">
                         <h4 className="mt-4">Contact</h4>
                         <label className="form-label">Contact Email <span className="text-danger" style={{fontSize:"10px"}} > *Required</span> </label>
                         <input type="email" name="contact" style={styles.input} className="form-control mb-3 form-control-md bg-dark shadow" 
                         placeholder="Enter email" value={coin.contact} onChange={ e => handleCoinChange(e) }/> 
-                    </div>
-                    <div className="col-md-6 col-12">
                         <h4>Links</h4>
                         <label className="form-label">Website</label>
                         <input name="website" style={styles.input} className="form-control mb-3 form-control-md bg-dark shadow" 
