@@ -5,11 +5,12 @@ import AddCoin from "../components/ranks/addCoin";
 import { useSelector } from "react-redux";
 import TelegramPosts from "../components/ranks/telegramPosts";
 import PriceDisplay from "../shared/priceDisplay";
+import TopBanner from "../shared/topBanners";
 
 function Ranks({priceDisplay,validTimestamp,voteCoin,telegramPosts}) {
     const [tag, setTag] = useState("trending")
     const [tableView, showTables] = useState(true)
-    const {coins:data,voteMap,userAddress,connected,bannerMap,baseUrl} = useSelector((state) => state.app)
+    const {coins:data,voteMap,userAddress,connected,baseUrl} = useSelector((state) => state.app)
     const styles = {
         card:{
             width:"140px"
@@ -49,57 +50,8 @@ function Ranks({priceDisplay,validTimestamp,voteCoin,telegramPosts}) {
                         <PriceDisplay priceDisplay={priceDisplay} />
                     </div>
 
-                    <div className="d-flex justify-content-evenly my-3">
-                        <img
-                            alt="not found"
-                            style={styles.wideBannerImage}
-                            src={bannerMap['banner1'].url}
-                            className="rounded d-none d-md-block"
-                            onClick={() => { window.open(bannerMap['banner1'].link,"_blank") }}
-                        />
-                        <img
-                            alt="not found"
-                            style={styles.wideBannerImageMobile}
-                            src={bannerMap['banner1'].url}
-                            className="rounded responsive d-block d-md-none"
-                            onClick={() => { window.open(bannerMap['banner1'].link,"_blank") }}
-                        />
-                    </div>
 
-                    <div className="d-none d-md-block">
-                        <div className="d-flex justify-content-center mt-2 row ">
-                            <img
-                                alt="not found"
-                                style={styles.gifBanner}
-                                src={bannerMap['banner4'].url}
-                                onClick={() => { window.open(bannerMap['banner4'].link,"_blank") }}
-                            />
-                            <img
-                                alt="not found"
-                                style={styles.gifBanner}
-                                src={bannerMap['banner4'].url}
-                                onClick={() => { window.open(bannerMap['banner4'].link,"_blank") }}
-                            />
-                        </div>
-                    </div>
-
-
-                    <div className="d-flex justify-content-evenly mt-3 mb-4">
-                        <img
-                            alt="not found"
-                            style={styles.wideBannerImage}
-                            src={bannerMap['banner2'].url}
-                            className="rounded responsive d-none d-md-block"
-                            onClick={() => { window.open(bannerMap['banner2'].link,"_blank") }}
-                        />
-                        <img
-                            alt="not found"
-                            style={styles.wideBannerImageMobile}
-                            src={bannerMap['banner2'].url}
-                            className="rounded responsive d-block d-md-none"
-                            onClick={() => { window.open(bannerMap['banner2'].link,"_blank") }}
-                        />
-                    </div>
+                    <TopBanner/>
 
 
                     <Search changeView={ () => { showTables(false) } } />

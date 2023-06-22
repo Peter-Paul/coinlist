@@ -149,6 +149,21 @@ transform-origin: 0 0; /* see note above */
   border-radius: 100%;
 }
 
+.icon-display-holder {
+  width: 60px;
+  height: 60px;
+  min-height: 60px;
+  position: relative;
+  border-radius: 200px;
+}
+.icon-display-img{
+  height: 100%;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  border-radius: 100%;
+}
+
 .logo-holder {
   width: 40px;
   height: 40px;

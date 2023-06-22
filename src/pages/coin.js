@@ -4,6 +4,7 @@ import Media from "../shared/media";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Table from "../components/ranks/table";
+import TopBanner from "../shared/topBanners";
 function Coin({voteCoin}) {
     const {address} = useParams()
     const {coins,coinMap,connected,voteMap,userAddress} = useSelector((state) => state.app)
@@ -80,6 +81,13 @@ function Coin({voteCoin}) {
         },
         address:{
             fontSize: "14px",
+        },
+        cardBlue:{
+            backgroundColor:"#003153",
+            borderColor:"#0076CE"
+        },
+        infoBadge:{
+            fontSize:"13px"
         }
     }
 
@@ -91,95 +99,132 @@ function Coin({voteCoin}) {
                         Rankings 
                 </Link>
             </div>
+            
+            <TopBanner />
+            
             { coin &&
-
+               
                 <div className="row">
-                    <div className="col-12 col-md-8" >
-                        <div className="d-flex flex-column">
-                            <div className="mb-4 d-flex justify-content-between">
-                                <h1 > <strong> {coin.name}<span className="badge text-bg-light ms-5">{coin.symbol}</span></strong></h1>
-                                <button className='btn btn-lg btn-outline-light d-none d-md-block' onClick={addCoinToWallet}>
-                                    {/* <div className="col-4">
-                                        <img className="img-fluid me-2" src={process.env.PUBLIC_URL + '/metamask.9eeb7e72.svg'} alt="test" />
-                                    </div> */}
-                                    Add to Wallet
-                                </button>
-                            </div>
-                            {/* <p className="col-md-6 col-12 p-3 rounded bg-dark" style={styles.address}>
-                                {coin.address} <mark className="ms-2">{coin.chain}</mark>
-                            </p> */}
-                            
-                            <div className="d-flex justify-content-start mb-4">
-                                <div className="d-flex flex-column me-2">
-                                    { connected && 
-                                        <>
-                                            {
+                     <div className="col-12 col-md-8" >
+                        <div className="card shadow" style={styles.cardBlue}>
+                            <div className="card-body" >
+                                <div className="d-flex flex-column">
+                                    <div className="mb-4 d-flex justify-content-between">
+                                        <div className="d-flex justify-content-start">
+                                            <div  className={`icon-display-holder me-2 ${ (!coin.icon || coin.icon === "") && "d-none" }`}>
+                                                <div style={{backgroundImage:`url(${coin.icon})`}} 
+                                                className="icon-display-img" alt=""></div>
+                                            </div>
+                                            <h2> <strong> {coin.name}
+                                                <span className="badge text-bg-light ms-2" style={styles.infoBadge}>{coin.symbol}</span>
+                                                <span className="badge text-bg-light ms-1" style={styles.infoBadge}>{customSymbol(coin.chain).name}</span>
+                                            </strong></h2>
+                                        </div>
+                                        <div>
+                                            <button className='btn btn-outline-light d-none d-md-block' onClick={addCoinToWallet}>
+                                                <i className="fa fa-star me-2"></i>
+                                                {/* <div className="col-4">
+                                                    <img className="img-fluid me-2" src={process.env.PUBLIC_URL + '/metamask.9eeb7e72.svg'} alt="test" />
+                                                </div> */}
+                                                Add to Wallet
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <p>
+                                        <span className="text-warning">Contract address:</span> {coin.address}
+                                    </p>
+                                    
+                                    <div className="col-6 col-md-3 mb-3">
+                                        <Media 
+                                            facebook={coin.facebook} 
+                                            telegram={coin.telegram} 
+                                            twitter={coin.twitter} 
+                                            github={coin.github} 
+                                            linkedin={coin.linkedin}/>
+                                    </div>
 
-                                            userAddress===undefined || !voteMap[address] ?  
-                                            <button className='btn btn-lg btn-outline-light' onClick={() => voteCoin(address)}>VOTE</button>
-                                            :  
-                                            <button className='btn btn-lg btn-outline-success'> 
-                                                <i className="fa fa-check me-2"></i>
-                                                VOTED</button>
-                                            }
-                                        </>
-                                    }
-                                    { !connected &&
-                                        <button className='btn btn-lg btn-outline-light' disabled>Connect wallet to VOTE</button>
-                                    }
-                                    <small>You can vote once every 24 hours</small>
+                                    
                                 </div>
+                            </div>
+                        </div>
+
+                        <div className="card shadow mt-2" style={styles.cardBlue}>
+                            <div className="card-body">
                                 <div>
-
-                                    <h2 className="mb-4"><span className="badge text-bg-warning">{customFigure(parseFloat(coin.votes),0)}</span></h2>
+                                    <h3>Description</h3>
+                                    <p>{coin.description}</p>
                                 </div>
-                            </div>
-
-                            <div className="col-3 mb-3">
-                                <Media 
-                                    facebook={coin.facebook} 
-                                    telegram={coin.telegram} 
-                                    twitter={coin.twitter} 
-                                    github={coin.github} 
-                                    linkedin={coin.linkedin}/>
-                            </div>
-
-                            <div>
-                                <h3>Description</h3>
-                                <p>{coin.description}</p>
                             </div>
                         </div>
                     </div>
+
                     <div className="col-12 col-md-4">
-                        <div className="card shadow-lg bg-dark bg-body-tertiary rounded">
+                        <div className="card shadow rounded"  style={styles.cardBlue}>
                             <div className="card-body">
                                 
-                                <h3 className="card-title">
-                                    Token Info
-                                </h3>
                                 <div className="my-2">
-                              
-                                    <mark > {customSymbol(coin.chain).name} =  {coin.chain}</mark>
-                                    <p className="mt-2" style={styles.address}> <strong>{coin.address}</strong> </p>
-
                                     { coin.tags.filter( t => t==="kyc" || t ==="audited" ).length > 0 && 
-                                        <div className="my-1 d-flex justify-content-between">
-                                            <div>
-                                                <p><strong>Safety :</strong></p>
+                                        <>
+                                            <h4 className="card-title">
+                                                Safety
+                                            </h4>
+                                            <div className="my-1 d-flex justify-content-between">
+                                                <div>
+                                                    <p><strong>Safety :</strong></p>
+                                                </div>
+                                                <div className="d-flex flex-column">
+                                                    {coin.tags.includes("kyc") && 
+                                                        <p>
+                                                            <span className="me-1 text-success">
+                                                                <i className="fa fa-check"></i><small><strong>VERIFIED</strong></small> 
+                                                            </span>
+                                                        KYC</p>
+                                                    }
+                                                    {coin.tags.includes("audited") && 
+                                                        <button className="btn btn-sm btn-warning " onClick={ () => window.open(coin.audit,"_blank")}> <strong><i className="fa fa-shield me-1 text-success"></i> AUDITED</strong></button>
+                                                    }
+                                                    {coin.tags.includes("pinksale") && 
+                                                        <button className="btn btn-sm btn-warning mt-1" onClick={ () => window.open(coin.pinksale,"_blank")}> <strong><i className="fa fa-rocket me-1 text-success"></i> PINKSALE</strong> </button>
+                                                    }
+                                                </div>
                                             </div>
-                                            <div className="d-flex flex-column">
-                                                {coin.tags.includes("kyc") && 
-                                                    <p><i className="fa fa-check me-1 text-success"></i> KYC</p>
-                                                }
-                                                {coin.tags.includes("audited") && 
-                                                    <button className="btn btn-sm btn-warning " onClick={ () => window.open(coin.audit,"_blank")}> <strong><i className="fa fa-shield me-1 text-success"></i> AUDITED</strong></button>
-                                                }
-                                                {coin.tags.includes("pinksale") && 
-                                                    <button className="btn btn-sm btn-warning mt-1" onClick={ () => window.open(coin.pinksale,"_blank")}> <strong><i className="fa fa-rocket me-1 text-success"></i> PINKSALE</strong> </button>
-                                                }
-                                            </div>
-                                        </div>
+                                            <hr />
+                                        </>
                                     }
+                                
+                                    <h3 className="card-title">
+                                        Vote
+                                    </h3>
+
+                                    <div className="mt-2 d-flex justify-content-between">
+                                        <div>
+                                            <p><strong>Votes :</strong></p>
+                                        </div>
+                                        <div>
+                                            <h4 className="mb-4"><span className="badge text-bg-warning">{customFigure(parseFloat(coin.votes),0)}</span></h4>
+                                        </div>
+                                    </div>
+
+                                    <div className="d-flex flex-column me-2">
+                                        { connected && 
+                                            <>
+                                                {
+
+                                                userAddress===undefined || !voteMap[address] ?  
+                                                <button className='btn btn-outline-light' onClick={() => voteCoin(address)}>VOTE</button>
+                                                :  
+                                                <button className='btn btn-outline-success'> 
+                                                    <i className="fa fa-check me-2"></i>
+                                                    VOTED</button>
+                                                }
+                                            </>
+                                        }
+                                        { !connected &&
+                                            <button className='btn btn-outline-light' disabled>Connect wallet to VOTE</button>
+                                        }
+                                        <small className="text-center">You can vote once every 24 hours</small>
+                                    </div>
+
                                 </div>
                                 <hr />
                                 

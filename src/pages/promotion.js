@@ -3,6 +3,7 @@ import Promote from "../components/promotion/promote";
 import Verify from "../components/promotion/verify";
 import Audit from "../components/promotion/audit";
 import { Link, useParams } from "react-router-dom";
+import TopBanner from "../shared/topBanners";
 
 function Promotion({voteCoin}) {
     const {service:activeState} = useParams()
@@ -45,7 +46,8 @@ function Promotion({voteCoin}) {
 
     return ( 
         <>
-            {console.log(activeState)}
+            <TopBanner />
+            
             <div>
                 <nav className="nav nav-pills nav-justified mb-4">
                     <Link className="nav-link mx-2" 
