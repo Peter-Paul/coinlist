@@ -21,7 +21,6 @@ export default class Telegram {
         let data
         const res = await axios.get(url)
         if(res.data.ok) data = res.data.result
-        console.log(res.data.result)
         data = data.filter( ({message}) => message && message.date && message.caption && message.photo && this.linkCheck(message.caption) )
         .map( ({message}) => {
             const {date,caption,photo} = message
@@ -34,7 +33,6 @@ export default class Telegram {
         })
         .reverse()
         .slice(0,4)
-        console.log(data)
 
         for (let d of data){
             let image
@@ -42,7 +40,6 @@ export default class Telegram {
             if( photoFile.data.ok ) image = `${fileUrl}${photoFile.data.result.file_path}`
             data[data.indexOf(d)].imageUrl = image 
         }
-        console.log(data)
         return data
     }
 }

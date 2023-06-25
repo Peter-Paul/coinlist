@@ -18,16 +18,30 @@ function TopBanner() {
             width: "370px",
         },
         gifBanner:{
-            width:"500px",
             height:"200px", 
+            width:"500px",
             borderRadius:"15px"
         },
+        gifBannerMobile:{
+            height:"100px", 
+            width:"250px",
+            borderRadius:"15px"
+        }
+        ,
         tweetCard:{
             backgroundColor:"#003153",
             borderColor:"#0076CE"
         },
         tweetCardUser:{
             color:"#0076CE"
+        },
+        rotateBannerImage:{
+            height: "260px",
+            width: "700px",
+        },
+        rotateBannerImageMobile:{
+            height: "140px",
+            width: "350px",
         }
     }
     return ( 
@@ -49,22 +63,37 @@ function TopBanner() {
                         />
                     </div>
 
-                    <div className="d-none d-md-block">
                         <div className="d-flex justify-content-center mt-2 row ">
                             <img
                                 alt="not found"
                                 style={styles.gifBanner}
                                 src={bannerMap['banner4'].url}
+                                className="rounded d-none d-md-block"
                                 onClick={() => { window.open(bannerMap['banner4'].link,"_blank") }}
                             />
                             <img
                                 alt="not found"
                                 style={styles.gifBanner}
                                 src={bannerMap['banner4'].url}
+                                className="rounded d-none d-md-block"
+                                onClick={() => { window.open(bannerMap['banner4'].link,"_blank") }}
+                            />
+
+                            <img
+                                alt="not found"
+                                style={styles.gifBannerMobile}
+                                src={bannerMap['banner4'].url}
+                                className="rounded d-block d-md-none"
+                                onClick={() => { window.open(bannerMap['banner4'].link,"_blank") }}
+                            />
+                            <img
+                                alt="not found"
+                                style={styles.gifBannerMobile}
+                                src={bannerMap['banner4'].url}
+                                className="rounded d-block d-md-none mt-2"
                                 onClick={() => { window.open(bannerMap['banner4'].link,"_blank") }}
                             />
                         </div>
-                    </div>
 
 
                     <div className="d-flex justify-content-evenly mt-3 mb-4">

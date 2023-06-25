@@ -17,12 +17,17 @@ import BottomBanners from './shared/bottomBanner';
 import Telegram from './services/telegram';
 import Sidebar from './shared/sidebar';
 import VoteService from './services/votes';
+import Partners from './pages/partners';
+import AddCoin from './components/ranks/addCoin';
 
 
 const partners = [
-  {id:1,url:"https://res.cloudinary.com/dwf6iuvbh/image/upload/v1685827951/doctoreclub_x4xdkc.png", name:"DOCTORECLUB",link:"http://T.me/DoctoreClub"},
-  {id:2,url:"https://res.cloudinary.com/dwf6iuvbh/image/upload/v1685827950/ninja_jv7ecc.png", name:"CFG NINJA",link:"https://t.me/Bladepool"},
-  {id:3,url:"https://res.cloudinary.com/dwf6iuvbh/image/upload/v1685827950/pinksale_p8zpwo.png", name:"PINKSALE",link:"http://www.pinksale.finance"},
+  {id:1,url:"https://res.cloudinary.com/dwf6iuvbh/image/upload/v1685827951/doctoreclub_x4xdkc.png", description:"The crypto community in Spanish that you have always wanted. Calls channel where you can anticipate the best opportunities.", name:"DOCTORECLUB",link:"http://T.me/DoctoreClub"},
+  {id:3,url:"https://res.cloudinary.com/dwf6iuvbh/image/upload/v1685827950/pinksale_p8zpwo.png", description:"PinkSale offers a suite of tools to help create your own tokens and pitch decks in a 100% decentralized manner", name:"PINKSALE",link:"http://www.pinksale.finance"},
+  {id:2,url:"https://res.cloudinary.com/dwf6iuvbh/image/upload/v1687695057/coingeck0_ptdyov.png", description:"Offers fundamental analysis of the cryptocurrency market. In addition to tracking price, volume, and market capitalization, it monitors community growth.", name:"COINGECKO",link:"https://t.me/Bladepool"},
+  {id:4,url:"https://res.cloudinary.com/dwf6iuvbh/image/upload/v1687695057/dexview_qzmhnk.png", description:"Dexview allows you to track your favorite cryptocurrencies in real time, from established market currencies like BNB, to new tokens being released every day.", name:"DEXVIEW",link:"http://www.pinksale.finance"},
+  {id:5,url:"https://res.cloudinary.com/dwf6iuvbh/image/upload/v1687695057/binance_g0oytk.png", description:"The main blockchain ecosystem in the world that has a wide range of products, including the largest exchange of digital assets.", name:"BINANCE",link:"http://www.pinksale.finance"},
+  {id:6,url:"https://res.cloudinary.com/dwf6iuvbh/image/upload/v1687695057/coinmarket_yhmlha.png", description:"Updated information on the cryptocurrency market and very useful tools for users who want to know more details about the crypto world", name:"COINMARKETCAP",link:"http://www.pinksale.finance"},
 ]
 
 
@@ -41,7 +46,6 @@ function App() {
   const onInit = useCallback( async () => {
     const baseUrl = process.env.REACT_APP_BACKEND_BASE_URL
     const admin = process.env.REACT_APP_ADMIN
-    console.log(baseUrl)
     // const key = process.env.REACT_APP_CLOUDINARY_API_KEY
     const coinMap = {}
     const bannerMap = {}
@@ -61,7 +65,6 @@ function App() {
       bannerMap[name] = {url,link}
     }
     
-    console.log(bannerMap)
 
     try{
       const displayPrices = await axios.get("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=5&page=1")
@@ -75,11 +78,9 @@ function App() {
         let price
         try{
           const res = await axios.get(`https://api.coingecko.com/api/v3/simple/token_price/${c.chain}?contract_addresses=${c.address}&vs_currencies=usd`)
-          console.log(res)
           price = Object.keys(res.data).length > 0 ? res.data[(c.address).toLowerCase()]["usd"] : 0
   
         }catch(err){
-          console.log(err)
           price = 0
         }
         coinMap[c.address] = {...c,price}
@@ -90,7 +91,7 @@ function App() {
     const telegram = new Telegram()
     setTelegramPosts(await telegram.getPosts())
 
-    dispatch( loadState({coins:coinList,coinMap,voteMap,baseUrl,bannerMap,admin}) )
+    dispatch( loadState({coins:coinList,coinMap,voteMap,baseUrl,bannerMap,admin,partners}) )
     
     
   }, [dispatch])
@@ -122,7 +123,6 @@ function App() {
     const res = await axios.post(api, formData)
     service.updateBanner(name,res.data.secure_url,link) 
     dispatch( updateBanner({name,url:res.data.secure_url,link}) )
-    console.log(res.data.secure_url)
   }
 
   const disconnectWallet = () =>  dispatch( connectUser( {userAddress:undefined,connected:false} ) )
@@ -187,8 +187,15 @@ function App() {
                                     element={ <Ranks priceDisplay={priceDisplay}
                                     voteCoin={voteCoin} telegramPosts={telegramPosts} /> }
                             />
+                            <Route  exact path='/addCoin'
+                                    element={<AddCoin baseUrl={baseUrl} />}
+                            />
                             <Route  exact path="/:address" 
                                     element={ <Coin 
+                                    voteCoin={voteCoin} /> }
+                            />
+                            <Route  exact path="/partners" 
+                                    element={ <Partners 
                                     voteCoin={voteCoin} /> }
                             />
                             <Route  exact path="/services/:service" 

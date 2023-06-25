@@ -12,7 +12,8 @@ const initialState = {
     voteMap:undefined,
     baseUrl:undefined,
     bannerMap:undefined,
-    admin:undefined
+    admin:undefined,
+    partners:undefined
 }
 
 export const appSlice = createSlice({
@@ -26,6 +27,7 @@ export const appSlice = createSlice({
             state.baseUrl = action.payload.baseUrl
             state.bannerMap = action.payload.bannerMap
             state.admin = action.payload.admin
+            state.partners = action.payload.partners
         },
 
         connectUser: (state,action) => {

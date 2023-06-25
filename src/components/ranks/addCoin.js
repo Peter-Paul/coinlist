@@ -3,8 +3,9 @@ import { useDispatch } from "react-redux";
 import { uploadCoin } from "../../state/app.reducers";
 import CoinService from "../../services/coins";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
-function AddCoin({changeView,baseUrl}) {
+function AddCoin({baseUrl}) {
     const defaultCoin = {
         icon:"",
         address:"",
@@ -98,7 +99,8 @@ function AddCoin({changeView,baseUrl}) {
     return ( 
         <>
             <div className="mb-5">
-                <button className="btn btn-outline-dell-blue ms-3" onClick={changeView}><i className="me-2 fa fa-angle-left"></i> Rankings </button>
+                <Link className="btn btn-outline-dell-blue" to={"/"}> <i className="fa fa-angle-left"></i> Add Coin</Link>
+                {/* <button className="btn btn-outline-dell-blue ms-3" onClick={changeView}><i className="me-2 fa fa-angle-left"></i> Rankings </button> */}
             </div>
             <form onSubmit={(e) => addToken(e) }>
                 <div className="row">

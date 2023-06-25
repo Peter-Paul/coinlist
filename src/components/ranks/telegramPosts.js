@@ -36,7 +36,7 @@ function TelegramPosts({telegramPosts,styles}) {
                         {
                             telegramPosts.map( ({caption,date,imageUrl,link}) => {
                                 return (                                                   
-                                    <div className="col-12 col-md-3 my-3" key={caption}>
+                                    <div className="col-10 col-md-3 my-3" key={caption}>
                                         <div className="card shadow " style={styles.tweetCard}>
                                             <div  className="photo-holder">
                                                 <div style={{backgroundImage:`url(${imageUrl})`}} className="photo-img" alt=""></div>

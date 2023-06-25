@@ -154,7 +154,6 @@ function Table({data,title,allowRoute,connected,userAddress,voteCoin,voteMap,adm
             selector: row => row.price,
             sortable: true,
             cell: row => {
-                console.log(row.price)
                 return (
                     <>
                         <strong>

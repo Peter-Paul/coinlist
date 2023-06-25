@@ -3,6 +3,7 @@ import Media from "./media";
 import Subscribe from "./subscribe";
 import { Link } from "react-router-dom";
 import Logo from "./logo";
+import PartnerList from "../components/partners/partnerList";
 
 function Footer({partners,name}) {
     const {bannerMap,doctoreTwitter,doctoreTelegram} = useSelector((state) => state.app)
@@ -31,7 +32,11 @@ function Footer({partners,name}) {
         wideBannerImageMobile:{
             height: "140px",
             width: "350px",
-        }
+        },
+        cardBlue:{
+            backgroundColor:"#003153",
+            borderColor:"#0076CE"
+        },
     }
 
 
@@ -59,44 +64,40 @@ function Footer({partners,name}) {
                 partners && 
                 <>
                     <h2 className="text-center mb-3"> <i className="fa fa-users"></i> Partners</h2>
-                    <div className="d-flex justify-content-evenly row rounded" >
-                            {    partners.map( ({id,url,name,link}) => {
-                                    return (
-                                        <div className="col-12 col-md-2" key={id}>    
-                                            <div className="card shadow mb-3" style={{backgroundColor:"#003153",borderColor:"#0076CE"}}>
-                                                <div  className="partner-holder ">
-                                                    <div style={{backgroundImage:`url(${url})`}} className="partner-img" alt=""></div>
-                                                </div>
-                                                <div className="card-body">
-                                                    <p className="text-center text-warning">
-                                                        <strong style={{cursor:"pointer"}} onClick={() => { window.open(link,"_blank") }}>{name}</strong>
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                  
-                                    )
-                            } )}
-                    </div>
+                    <PartnerList />
                 </>
             }
             
             <hr className="mt-5 mb-3" />
 
             <div className="d-flex justify-content-between mt-2 mb-3">
-                <Logo name={name} />
-                <div>
+                <div className="d-flex flex-column">
+                    <Logo name={name} />
+                    <div className="mt-2 d-block d-md-none">
+                        <Media twitter={doctoreTwitter} telegram={doctoreTelegram} />
+                    </div>    
+                </div>
+                <div className="col-1 d-none d-md-block">
                     <Media twitter={doctoreTwitter} telegram={doctoreTelegram} />
                 </div>
             </div>
 
             <div className="d-flex justify-content-evenly mb-5 row">
-                <div className="col-md-4 col-12">
-                    <h4>Coin rankings</h4>
+                <div className="col-md-3 col-10">
+                    <h4>Coin Rankings</h4>
                     <ul style={styles.links}>
                         <li className="mb-1">
                             <Link style={styles.link} to="/"  onClick={ () => window.scrollTo({top: 0})}><span className="text-light">List of Coins</span></Link>
                         </li>
+                        <li className="mb-1">
+                            <Link style={styles.link} to="/addCoin"  onClick={ () => window.scrollTo({top: 0})}><span className="text-light">Add Coins</span></Link>
+                        </li>
+                        
+                    </ul>
+                </div>
+                <div className="col-md-3 col-10">
+                    <h4>Services</h4>
+                    <ul style={styles.links}>
                         <li className="mb-1">
                             <Link style={styles.link} to="/services/promote" onClick={ () => window.scrollTo({top: 0})}><span className="text-light">Promote Coins</span></Link>
                         </li>
@@ -108,9 +109,22 @@ function Footer({partners,name}) {
                         </li>
                     </ul>
                 </div>
+
+                <div className="col-md-3 col-10">
+                    <h4>About Us</h4>
+                    <ul style={styles.links}>
+                        <li className="mb-1">
+                            <Link style={styles.link} to="/partners"  onClick={ () => window.scrollTo({top: 0})}><span className="text-light">Our Partners</span></Link>
+                        </li>
+                    </ul>
+                </div>
   
-                <div className="col-md-4 col-12">
-                    <Subscribe />
+                <div className="col-md-3 col-10">
+                    <div className="card" style={styles.cardBlue}>
+                        <div className="card-body">
+                            <Subscribe />
+                        </div>
+                    </div>
                 </div>
             </div>
         </>
