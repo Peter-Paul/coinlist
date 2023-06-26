@@ -39,7 +39,11 @@ function Promotion({voteCoin}) {
             borderColor:"#2a52be",
             borderWidth:"1px",
             borderStyle:"solid",
-        }
+        },
+        cardBlue:{
+            backgroundColor:"#003153",
+            borderColor:"#0076CE"
+        },
     }
 
  
@@ -47,45 +51,54 @@ function Promotion({voteCoin}) {
     return ( 
         <>
             <TopBanner />
-            
-            <div>
-                <nav className="nav nav-pills nav-justified mb-4">
-                    <Link className="nav-link mx-2" 
-                        style={ ( activeState==="promote"  ) ? styles.activePage : styles.inactivePage } 
-                        to={"/services/promote"}>
-                            <strong>
-                                Promote Coin
-                            </strong>
-                    </Link>
-                    <Link className="nav-link mx-2" 
-                        style={ ( activeState==="audit" ) ? styles.activePage : styles.inactivePage }  
-                        to={"/services/audit"}>
-                            <strong>
-                                Audit Coin
-                            </strong>
-                    </Link>
-                    <Link className="nav-link mx-2" style={ ( activeState==="kyc" ) ? styles.activePage : styles.inactivePage }  
-                    to={"/services/kyc"}>
-                        <strong>
-                                KYC
-                        </strong>
-                    </Link>
-                </nav>
+            <div className="card shadow" style={styles.cardBlue}>
+                <div className="card-body">
+
+                    <div className="row">
+                        <div className="col-3">
+                            <h2><strong>Services</strong></h2>
+                        </div>
+                        <div className="col-9">
+                            <nav className="nav nav-pills nav-justified mb-4">
+                                <Link className="nav-link mx-2" 
+                                    style={ ( activeState==="promote"  ) ? styles.activePage : styles.inactivePage } 
+                                    to={"/services/promote"}>
+                                        <strong>
+                                            Promote Coin
+                                        </strong>
+                                </Link>
+                                <Link className="nav-link mx-2" 
+                                    style={ ( activeState==="audit" ) ? styles.activePage : styles.inactivePage }  
+                                    to={"/services/audit"}>
+                                        <strong>
+                                            Audit Coin
+                                        </strong>
+                                </Link>
+                                <Link className="nav-link mx-2" style={ ( activeState==="kyc" ) ? styles.activePage : styles.inactivePage }  
+                                to={"/services/kyc"}>
+                                    <strong>
+                                            KYC
+                                    </strong>
+                                </Link>
+                            </nav>
+                        </div>
+                    </div>
+
+                    { activeState==="promote" &&
+                        <Promote voteCoin={voteCoin} />
+                    }
+                    
+
+                    { activeState==="audit" &&
+                        <Audit styles={styles} voteCoin={voteCoin}/>
+                    }
+                    
+                    { activeState==="kyc" &&
+                        <Verify styles={styles} voteCoin={voteCoin}/>
+                    }
+                
+                </div>
             </div>
-
-            { activeState==="promote" &&
-                <Promote voteCoin={voteCoin} />
-            }
-            
-
-            { activeState==="audit" &&
-                <Audit styles={styles} voteCoin={voteCoin}/>
-            }
-            
-            { activeState==="kyc" &&
-                <Verify styles={styles} voteCoin={voteCoin}/>
-            }
-         
         </>
      );
 }

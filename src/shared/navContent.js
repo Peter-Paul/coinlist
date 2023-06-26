@@ -8,6 +8,7 @@ function NavContent({smallView=false}) {
     const {bannerMap,doctoreTwitter,doctoreTelegram,admin,userAddress} = useSelector((state) => state.app)
     const [promoteOption,changePromoteOptionView] = useState(false)
     const [rankOption,changeRankOptionView] = useState(false)
+    const [gameOption,changeGameOptionView] = useState(false)
 
     const styles = {
         navBar:{
@@ -73,6 +74,24 @@ function NavContent({smallView=false}) {
                                 </div>
                             </div>
                         </li>
+
+                        <hr className="mb-4" />
+                        <li data-bs-dismiss={smallView?"offcanvas":""} >
+                            <div className="d-flex justify-content-between">
+                                <Link  style={styles.link} to="/games" onClick={ () => window.scrollTo({top: 0})}> <i className="fa fa-gamepad me-2"></i>Games</Link>
+                                <span onClick={ () => changeGameOptionView(!gameOption)} className="mt-2 me-5" style={{fontSize:"15px"}}>
+                                    <i className={`fa fa-chevron-${gameOption?"down":"right"}`}></i>
+                                </span>
+                            </div> 
+
+                            <div className={`d-flex ${gameOption?"":"d-none"}`}>
+                                <div className="d-flex flex-column ms-2">
+                                    <Link className="mt-2"  style={styles.subLink} to="/games" onClick={ () => window.scrollTo({top: 0})}> <i className="fa fa-circle me-2" style={{fontSize:"5px"}}></i>Game List</Link>
+                                    <Link className="mt-2"  style={styles.subLink} to="/addGame" onClick={ () => window.scrollTo({top: 0})}> <i className="fa fa-circle me-2" style={{fontSize:"5px"}}></i>Add Game</Link>
+                                </div>
+                            </div>
+                        </li>
+
 
                         <hr className="mb-4" />
                         <li data-bs-dismiss={smallView?"offcanvas":""}>

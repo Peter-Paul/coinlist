@@ -6,6 +6,8 @@ const initialState = {
     doctoreTelegram:"https://t.me/doctoreclub",
     coins:undefined,
     coinMap:undefined,
+    games:undefined,
+    gameMap:undefined,
     userAddress:undefined,
     connected:false,
     votes:undefined,
@@ -23,6 +25,8 @@ export const appSlice = createSlice({
         loadState: (state,action) => {
             state.coins = [...action.payload.coins]
             state.coinMap = {...action.payload.coinMap}
+            state.games = [...action.payload.games]
+            state.gameMap = {...action.payload.gameMap}
             state.voteMap = {...action.payload.voteMap}
             state.baseUrl = action.payload.baseUrl
             state.bannerMap = action.payload.bannerMap
@@ -61,6 +65,13 @@ export const appSlice = createSlice({
             state.coinMap = {...state.coinMap, [address]:coin }
         },
 
+        uploadGame: (state,action) => {
+            const game = action.payload
+            const {address} = game
+            state.games = [...state.games,game]
+            state.gameMap = {...state.gameMap, [address]:game }
+        },
+
         updateCoin: (state,action) => {
             const coin = action.payload
             const {address} = coin
@@ -68,16 +79,41 @@ export const appSlice = createSlice({
             state.coinMap = {...state.coinMap, [address]:coin }
         },
 
+        updateGame: (state,action) => {
+            const game = action.payload
+            const {address} = game
+            state.games = state.games.map( c => (c.address === address) ? game : c )
+            state.gameMap = {...state.gameMap, [address]:game }
+        },
+
         deleteCoin: (state,action) => {
             const address = action.payload
             const { [address]:remove , ...rest } = state.coinMap
             state.coins = state.coins.filter( c => c.address !== address )
             state.coinMap = rest
+        },
+
+        deleteGame: (state,action) => {
+            const address = action.payload
+            const { [address]:remove , ...rest } = state.gameMap
+            state.games = state.games.filter( c => c.address !== address )
+            state.gameMap = rest
         }
 
     }
 })
 
-export const { connectUser, loadState, updateVotes, updateBanner, updateCoin, deleteCoin, uploadCoin } = appSlice.actions
+export const { 
+                connectUser, 
+                loadState, 
+                updateVotes, 
+                updateBanner, 
+                uploadCoin, 
+                updateCoin, 
+                deleteCoin,
+                uploadGame,
+                updateGame,
+                deleteGame 
+            } = appSlice.actions
 
 export default appSlice.reducer

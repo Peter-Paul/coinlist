@@ -13,6 +13,12 @@ CREATE TABLE public."coins" (
 	CONSTRAINT "PK_coins" PRIMARY KEY ("Address")
 );
 
+CREATE TABLE public."games" (
+	"Address" varchar(225) NOT NULL,
+	"GameData" text NOT NULL,
+	CONSTRAINT "PK_games" PRIMARY KEY ("Address")
+);
+
 CREATE TABLE public."banners" (
 	"Name" varchar(225) NOT NULL,
 	"Url" text NOT NULL,

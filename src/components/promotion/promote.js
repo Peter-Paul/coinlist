@@ -50,13 +50,13 @@ function Promote({voteCoin}) {
 
     return ( 
         <>
-            <Table data={data.filter( d => d.promote )} title={"PROMOTED"} allowRoute={false}
+            <Table data={data.filter( d => d.show && d.promote )} title={"PROMOTED"} allowRoute={false}
             userAddress={userAddress} 
             voteMap={voteMap} connected={connected} voteCoin={voteCoin}/>
 
 
             <div className="row mt-4">
-                <h1>Coin Promotion</h1>
+                <h3>Coin Promotion</h3>
                 <div className="col-12 col-md-8 mt-3">
                     <p> In the past, project rankings were based on votes, but we found that some projects were able to obtain massive amounts of votes to secure a higher ranking, resulting in an unfair advantage. With our new Boost system, we've created a more transparent and fair method for all our community members and project owners.</p>
                     <p>We've partnered with the biggest Telegram influencers who can help you boost your marketing and fill presale in seconds! These are influencers in big communities who have lots of followers worldwide. We've worked with all of them and thus they helped our presale to end within 15 seconds</p>

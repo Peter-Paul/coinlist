@@ -5,6 +5,7 @@ export default class CoinService{
     default = [
             {
                 address:"0xf68df6df642e8387afc9d03214b78f3087ef8a99",
+                icon:"",
                 name: "Doge Reloaded",
                 symbol: "RELOADED",
                 chain: "ethereum",
@@ -25,6 +26,7 @@ export default class CoinService{
             {
                 name: "QUAI",
                 address: "0x40821cd074dfecb1524286923bc69315075b5c89",
+                icon:"",
                 symbol: "QUAI",
                 chain: "ethereum",
                 votes: "10000",
@@ -44,6 +46,7 @@ export default class CoinService{
             {
                 name: "Inverted Pepe",
                 address:"0xFE60FbA03048EfFB4aCf3f0088Ec2f53d779D3BB",
+                icon:"",
                 symbol: "$3D3D",
                 chain: "ethereum",
                 votes: "10000",
@@ -63,6 +66,7 @@ export default class CoinService{
             {
                 name: "EthShares",
                 address: "0x5f12D4012185e044B5FEd1B3dBD9B8B1e7Ffb27f",
+                icon:"",
                 symbol: "ETS",
                 chain: "binance-smart-chain",
                 votes: "86000",
@@ -82,6 +86,7 @@ export default class CoinService{
             {
                 name: "PepeCola",
                 address: "0x55fB228730ED971269EBF284C7500d5fF572A141",
+                icon:"",
                 symbol: "PEPECOLA",
                 chain: "ethereum",
                 votes: "20000",
@@ -101,6 +106,7 @@ export default class CoinService{
             {
             name: "Royall Coin",
             address: "0xa175299524F372f9Bd4eE50F8FADc12b4f871492",
+            icon:"",
             symbol: "$RC",
             chain: "arbitrum-one",
             votes: "100",
@@ -120,6 +126,7 @@ export default class CoinService{
         {
             name: "yPredict",
             address: "0xdFaF2680239d678d9551669727b93b62Ad0D18Cc",
+            icon:"",
             symbol: "YPRED",
             chain: "polygon-pos",
             votes: "10",

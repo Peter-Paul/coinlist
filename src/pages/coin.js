@@ -255,7 +255,7 @@ function Coin({voteCoin}) {
                 </div>
             }
             <div className="mt-4">
-                <Table data={coins.filter( d => d.promote )} title={"PROMOTED"} 
+                <Table data={coins.filter( d => d.show && d.promote )} title={"PROMOTED"} 
                     allowRoute={false} userAddress={userAddress} 
                     voteMap={voteMap} connected={connected} voteCoin={voteCoin} />
             </div>

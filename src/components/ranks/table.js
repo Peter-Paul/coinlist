@@ -1,8 +1,9 @@
 import DataTable from 'react-data-table-component';
 import { Link } from 'react-router-dom';
+import GameDetails from '../games/gameDetails';
 
 
-function Table({data,title,allowRoute,connected,userAddress,voteCoin,voteMap,admin=false,removeCoin,patchCoin}) {
+function Table({data,title,allowRoute,connected,userAddress,voteCoin,voteMap,admin=false,removeCoin,patchCoin,games=false,removeGame,patchGame}) {
     
     const styles = {
         coinName:{
@@ -77,12 +78,13 @@ function Table({data,title,allowRoute,connected,userAddress,voteCoin,voteMap,adm
     const columns = [
         {
             name: title,
+            omit:games,
             selector: row => row.name,
             style: row => ({width:"700px"}),
             cell: row => {
                 return (
                     <>
-                        { !allowRoute &&
+                        { !games && !allowRoute &&
                                 <div className='d-flex justify-content-between my-2'>
                                     <div  className={`logo-holder ${ (!row.icon || row.icon === "") && "d-none" }`}>
                                         <div style={{backgroundImage:`url(${row.icon})`}} 
@@ -98,7 +100,7 @@ function Table({data,title,allowRoute,connected,userAddress,voteCoin,voteMap,adm
                                 </div>
                         }
                         {
-                            allowRoute &&
+                           !games && allowRoute &&
                             <Link style={styles.coinName} to={`/${row.address}`}>
                                     <div className='d-flex justify-content-between my-2'>
                                         <div  className={`logo-holder ${ (!row.icon || row.icon === "") && "d-none" }`}>
@@ -120,59 +122,122 @@ function Table({data,title,allowRoute,connected,userAddress,voteCoin,voteMap,adm
             }
         },
         {
-            name: 'SYMBOL',
-            selector: row => row.symbol,
-            sortable: true,
+            name: "GAMES",
+            omit:!games,
+            selector: row => row.name,
+            grow:1,
+            // style: row => ({maxWidth:"700px"}),
             cell: row => {
                 return (
                     <>
-                        <strong>
-                            {row.symbol}
-                        </strong>
+                        { games &&
+                                <div className='d-flex justify-content-between my-2'>
+                                    <div  className={`logo-holder ${ (!row.icon || row.icon === "") && "d-none" }`}>
+                                        <div style={{backgroundImage:`url(${row.icon})`}} 
+                                        className="logo-img" alt=""></div>
+                                    </div>
+                                    <div className='d-flex flex-column ms-1'>
+                                        <strong className='mb-1' style={{fontSize:"15px"}}>{row.name}</strong>
+                                    </div>
+                                </div>
+                        }
                     </>
                 )
             }
         },
         {
+            name: 'GAME DESCRIPTION',
+            omit:!games,
+            selector: row => row.description,
+            grow:5,
+            cell: row => {
+                const {description} = row
+                return (
+                    <>
+                        { games &&
+                            <>
+                                <div className='d-flex flex-column my-2'>
+                                    <p> <span className='me-1'>{`${description.slice(0,100)}...`}</span>
+                                    </p>
+                                    <div>
+                                        <GameDetails game={row}/>
+                                    </div>
+                                </div>
+                            </>
+                        }
+                    </>
+                )
+            }
+        },
+        {
+            name: 'SYMBOL',
+            omit:games,
+            selector: row => row.symbol,
+            sortable: true,
+            cell: row => {
+                return (
+                    <>
+                    { !games &&
+                        <strong>
+                            {row.symbol}
+                        </strong>
+
+                    }
+                    </>
+                )
+            }
+        },
+        
+        {
             name: 'CHAIN',
+            omit:games,
             selector: row => row.chain,
             cell: row => {
                 const {name,color,text} = customSymbol(row.chain)
                 return (
                     <>
-                        <div className="p-2" style={{backgroundColor:color,color:text}}>
-                            <strong>
-                                {name}
-                            </strong>
-                        </div>
+                        { !games &&
+
+                            <div className="p-2" style={{backgroundColor:color,color:text}}>
+                                <strong>
+                                    {name}
+                                </strong>
+                            </div>
+                        }
                     </>
                 )
             }
         },
         {
             name: 'PRICE',
+            omit:games,
             selector: row => row.price,
             sortable: true,
             cell: row => {
                 return (
                     <>
-                        <strong>
-                            {customFigure(row.price,4)}
-                        </strong>
+                        { !games &&
+                            <strong>
+                                {customFigure(row.price,4)}
+                            </strong>
+                        }
                     </>
                 )
             }
         },
         {
             name: 'LAUNCH',
+            omit:games,
             selector: row => row.launch,
             cell: row => {
                 const {launch} = row
                 return(
                     <>
-                        <strong>
-                            { customLaunch(parseInt(launch)) }
-                        </strong>
+                        { !games &&
+                            <strong>
+                                { customLaunch(parseInt(launch)) }
+                            </strong>
+                        }
                     </>
                 )
             },
@@ -180,11 +245,12 @@ function Table({data,title,allowRoute,connected,userAddress,voteCoin,voteMap,adm
         },
         {
             name: 'VOTES',
+            omit:games,
             selector: row => row.votes,
             cell: row => { 
                 return ( 
                         <>
-                            { connected &&
+                            { !games && connected &&
                                 <>
                                     {
                                         userAddress===undefined || !voteMap[row.address] ? 
@@ -207,7 +273,7 @@ function Table({data,title,allowRoute,connected,userAddress,voteCoin,voteMap,adm
                                 
                             }
 
-                            { !connected &&
+                            { !games && !connected &&
                                 <button className='btn btn-sm btn-outline-light' disabled>
                                     <i className='fa fa-check me-1'></i>
                                     <strong>
@@ -224,11 +290,12 @@ function Table({data,title,allowRoute,connected,userAddress,voteCoin,voteMap,adm
             name: 'PROMOTE',
             selector: row => row.promote,
             sortable: true,
-            omit: !admin,
+            omit: !admin || games,
             cell: row => { 
                 const {address,promote} = row
                 return (
                     <>
+                    {!games &&
                         <div className="form-check form-switch">
                             <input className="form-check-input" type="checkbox" role="switch" id={address} checked={promote} 
                                 onChange={ () => patchCoin( {...row, 
@@ -239,7 +306,7 @@ function Table({data,title,allowRoute,connected,userAddress,voteCoin,voteMap,adm
                                 {/* Checked switch checkbox input */}
                             </label>
                         </div>
-                    
+                    }
                     </>
                 )
             }
@@ -255,15 +322,15 @@ function Table({data,title,allowRoute,connected,userAddress,voteCoin,voteMap,adm
                     <>
                         <div className="form-check form-switch">
                             <input className="form-check-input" type="checkbox" role="switch" id={address} checked={show} 
-                                onChange={ () => patchCoin( {...row, 
-                                    show: show ?  false : true
-                                } ) }
+                                onChange={ () => games ?
+                                    patchGame( {...row, show: show ?  false : true} ) :
+                                    patchCoin( {...row, show: show ?  false : true} ) 
+                            }
                             />
                             <label className="form-check-label" htmlFor={address}>
                                 {/* Checked switch checkbox input */}
                             </label>
                         </div>
-                    
                     </>
                 )
             }
@@ -272,12 +339,13 @@ function Table({data,title,allowRoute,connected,userAddress,voteCoin,voteMap,adm
             name: 'TRENDING',
             selector: row => row.show,
             sortable: true,
-            omit: !admin,
+            omit: !admin || games,
             cell: row => { 
                 const {address,tags} = row
                 const tag = "trending"
                 return (
                     <>
+                    {!games &&
                         <div className="form-check form-switch">
                             <input className="form-check-input" type="checkbox" role="switch" id={address} checked={tags.includes(tag)} 
                                 onChange={ () => patchCoin( {...row, 
@@ -291,7 +359,7 @@ function Table({data,title,allowRoute,connected,userAddress,voteCoin,voteMap,adm
                                 {/* Checked switch checkbox input */}
                             </label>
                         </div>
-                    
+                    }
                     </>
                 )
             }
@@ -300,12 +368,13 @@ function Table({data,title,allowRoute,connected,userAddress,voteCoin,voteMap,adm
             name: 'KYC',
             selector: row => row.show,
             sortable: true,
-            omit: !admin,
+            omit: !admin || games,
             cell: row => { 
                 const {address,tags} = row
                 const tag = "kyc"
                 return (
                     <>
+                    {!games &&
                         <div className="form-check form-switch">
                             <input className="form-check-input" type="checkbox" role="switch" id={address} checked={tags.includes(tag)} 
                                 onChange={ () => patchCoin( {...row, 
@@ -319,7 +388,7 @@ function Table({data,title,allowRoute,connected,userAddress,voteCoin,voteMap,adm
                                 {/* Checked switch checkbox input */}
                             </label>
                         </div>
-                    
+                    }
                     </>
                 )
             }
@@ -328,12 +397,13 @@ function Table({data,title,allowRoute,connected,userAddress,voteCoin,voteMap,adm
             name: 'AUDITED',
             selector: row => row.show,
             sortable: true,
-            omit: !admin,
+            omit: !admin || games,
             cell: row => { 
                 const {address,tags} = row
                 const tag = "audited"
                 return (
                     <>
+                    {!games &&
                         <div className="form-check form-switch">
                             <input className="form-check-input" type="checkbox" role="switch" id={address} checked={tags.includes(tag)} 
                                 onChange={ () => patchCoin( {...row, 
@@ -347,7 +417,7 @@ function Table({data,title,allowRoute,connected,userAddress,voteCoin,voteMap,adm
                                 {/* Checked switch checkbox input */}
                             </label>
                         </div>
-                    
+                    }
                     </>
                 )
             }
@@ -356,12 +426,13 @@ function Table({data,title,allowRoute,connected,userAddress,voteCoin,voteMap,adm
             name: 'NEW',
             selector: row => row.show,
             sortable: true,
-            omit: !admin,
+            omit: !admin || games,
             cell: row => { 
                 const {address,tags} = row
                 const tag = "new"
                 return (
                     <>
+                    { !games &&
                         <div className="form-check form-switch">
                             <input className="form-check-input" type="checkbox" role="switch" id={address} checked={tags.includes(tag)}
                                 onChange={ () => patchCoin( {...row, 
@@ -375,7 +446,7 @@ function Table({data,title,allowRoute,connected,userAddress,voteCoin,voteMap,adm
                                 {/* Checked switch checkbox input */}
                             </label>
                         </div>
-                    
+                    }
                     </>
                 )
             }
@@ -384,12 +455,13 @@ function Table({data,title,allowRoute,connected,userAddress,voteCoin,voteMap,adm
             name: 'PINKSALE',
             selector: row => row.show,
             sortable: true,
-            omit: !admin,
+            omit: !admin || games,
             cell: row => { 
                 const {address,tags} = row
                 const tag = "pinksale"
                 return (
                     <>
+                    { !games &&
                         <div className="form-check form-switch">
                             <input className="form-check-input" type="checkbox" role="switch" id={address} checked={tags.includes(tag)}
                                 onChange={ () => patchCoin( {...row, 
@@ -403,7 +475,7 @@ function Table({data,title,allowRoute,connected,userAddress,voteCoin,voteMap,adm
                                 {/* Checked switch checkbox input */}
                             </label>
                         </div>
-                    
+                    }
                     </>
                 )
             }
@@ -417,7 +489,7 @@ function Table({data,title,allowRoute,connected,userAddress,voteCoin,voteMap,adm
                 const {address} = row
                 return (
                     <>
-                        <button className='btn btn-sm btn-danger' onClick={() => removeCoin(address) }>
+                        <button className='btn btn-sm btn-danger' onClick={() => games ? removeGame(address) : removeCoin(address) }>
                             <i className='fa fa-trash'></i>
                         </button>
                     

@@ -84,20 +84,28 @@ function Footer({partners,name}) {
 
             <div className="d-flex justify-content-evenly mb-5 row">
                 <div className="col-md-3 col-10">
-                    <h4>Coin Rankings</h4>
                     <ul style={styles.links}>
+                        <h4>Coin Rankings</h4>
                         <li className="mb-1">
                             <Link style={styles.link} to="/"  onClick={ () => window.scrollTo({top: 0})}><span className="text-light">List of Coins</span></Link>
                         </li>
                         <li className="mb-1">
-                            <Link style={styles.link} to="/addCoin"  onClick={ () => window.scrollTo({top: 0})}><span className="text-light">Add Coins</span></Link>
+                            <Link style={styles.link} to="/addCoin"  onClick={ () => window.scrollTo({top: 0})}><span className="text-light">Add Coin</span></Link>
+                        </li>
+
+                        <h4 className="mt-2">GameFi</h4>
+                        <li className="mb-1">
+                            <Link style={styles.link} to="/games"  onClick={ () => window.scrollTo({top: 0})}><span className="text-light">List of Games</span></Link>
+                        </li>
+                        <li className="mb-1">
+                            <Link style={styles.link} to="/addGame"  onClick={ () => window.scrollTo({top: 0})}><span className="text-light">Add Game</span></Link>
                         </li>
                         
                     </ul>
                 </div>
                 <div className="col-md-3 col-10">
-                    <h4>Services</h4>
                     <ul style={styles.links}>
+                        <h4>Services</h4>
                         <li className="mb-1">
                             <Link style={styles.link} to="/services/promote" onClick={ () => window.scrollTo({top: 0})}><span className="text-light">Promote Coins</span></Link>
                         </li>
@@ -111,8 +119,8 @@ function Footer({partners,name}) {
                 </div>
 
                 <div className="col-md-3 col-10">
-                    <h4>About Us</h4>
                     <ul style={styles.links}>
+                        <h4>About Us</h4>
                         <li className="mb-1">
                             <Link style={styles.link} to="/partners"  onClick={ () => window.scrollTo({top: 0})}><span className="text-light">Our Partners</span></Link>
                         </li>

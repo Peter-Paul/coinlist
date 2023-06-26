@@ -8,7 +8,7 @@ function PartnerList({page=false}) {
             <div className="d-flex justify-content-center row rounded" >
                 {    partners.map( ({id,url,name,link,description}) => {
                         return (
-                            <div className={`${page?"col-10 col-md-3":"col-6 col-md-2"}`} key={id}>    
+                            <div className={`${page?"col-10 col-md-3":"col-6 col-md-3"}`} key={id}>    
                                 <div className="card shadow mb-3" style={{backgroundColor:"#003153",borderColor:"#0076CE"}}>
                                     <div  className="partner-holder ">
                                         <div style={{backgroundImage:`url(${url})`}} className="partner-img" alt=""></div>

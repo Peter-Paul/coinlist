@@ -1,10 +1,10 @@
-import { useSelector } from "react-redux";
-import PartnerList from "../components/partners/partnerList";
+import { Link } from "react-router-dom";
 import Table from "../components/ranks/table";
+import { useSelector } from "react-redux";
 import TopBanner from "../shared/topBanners";
 
-function Partners({voteCoin}) {
-    const {coins,connected,voteMap,userAddress} = useSelector((state) => state.app)
+function Games({voteCoin}) {
+    const {coins,voteMap,games,gameMap,userAddress,connected,} = useSelector((state) => state.app)
     const styles = {
         cardBlue:{
             backgroundColor:"#003153",
@@ -12,16 +12,20 @@ function Partners({voteCoin}) {
         },
     }
     return ( 
-        <>  
+        <>
             <TopBanner />
 
             <div className="card shadow" style={styles.cardBlue}>
                 <div className="card-body">
-                    <h2 className="mb-2"><strong>Our Partners</strong></h2>
-                    <PartnerList page={true}/>
+                    <div className="d-flex justify-content-between mb-3">
+                        <h2><strong>GameFi</strong></h2>
+                        <Link className="btn btn-outline-dell-blue" to={"/addGame"}> <i className="fa fa-plus me-1"></i> Add Game</Link>
+                    </div>
 
+                    <Table data={games.filter( g => g.show)} allowRoute={false} userAddress={userAddress} gameMap={gameMap} connected={connected} games={true} />
                 </div>
             </div>
+
             <div className="mt-4">
                 <Table data={coins.filter( d => d.show && d.promote )} title={"PROMOTED"} 
                     allowRoute={false} userAddress={userAddress} 
@@ -31,4 +35,4 @@ function Partners({voteCoin}) {
      );
 }
 
-export default Partners;
+export default Games;

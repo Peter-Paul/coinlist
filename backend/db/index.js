@@ -9,6 +9,7 @@ class Database{
     gettingAll = "SELECT * FROM"
     insert = "INSERT INTO"
     coinTable="coins"
+    gameTable="games"
     voteTable="votes"
     bannerTable="banners"
     subscriptionTable="subscription"
@@ -26,7 +27,7 @@ class Database{
     getAll(table,address=undefined){
         let sql = `SELECT * FROM ${table}`
         if (table === this.voteTable) sql = `SELECT * FROM ${table} WHERE "Address" = '${address}' ORDER BY "Time" DESC`
-        if (table === this.coinTable) sql = `SELECT * FROM ${table} ORDER BY "Address" DESC`
+        if (table === this.coinTable || table === this.gameTable) sql = `SELECT * FROM ${table} ORDER BY "Address" DESC`
         return new Promise( (resolve,reject) =>{
             this.pool.query(sql, (err,res) => {
                 if(err) reject(err)
@@ -40,6 +41,13 @@ class Database{
 
             if(table===this.coinTable){
                 const sql = `INSERT INTO ${table} ("Address","CoinData") VALUES ($1, $2)`
+                const {address} = data
+                this.pool.query(sql, [address,JSON.stringify(data)], (err, res)=>{
+                    if(err) reject(err)
+                    else resolve({...data})
+                })
+            }else if(table===this.gameTable){
+                const sql = `INSERT INTO ${table} ("Address","GameData") VALUES ($1, $2)`
                 const {address} = data
                 this.pool.query(sql, [address,JSON.stringify(data)], (err, res)=>{
                     if(err) reject(err)
@@ -78,6 +86,13 @@ class Database{
                     if(err) reject(err)
                     else resolve(res.rows)
                 })
+            }else if(table===this.gameTable){
+                const sql = `UPDATE ${table} SET "GameData" = $1 WHERE "Address" = $2`
+                const update = JSON.stringify(value)
+                this.pool.query(sql, [update,key], (err, res)=>{
+                    if(err) reject(err)
+                    else resolve(res.rows)
+                })
             }else if (table === this.bannerTable){
                 const sql = `UPDATE ${table} SET "Url" = $1, "Link" = $2 WHERE "Name" = $3`
                 const {url,link} = value
@@ -95,7 +110,7 @@ class Database{
     deleteRow(table,address){
         return new Promise( (resolve,reject) => {
 
-            if(table===this.coinTable){
+            if(table===this.coinTable || table===this.gameTable){
                 const sql = `DELETE FROM ${table} WHERE "Address" = $1`
                 this.pool.query(sql, [address], (err, res)=>{
                     if(err) reject(err)

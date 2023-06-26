@@ -19,15 +19,18 @@ import Sidebar from './shared/sidebar';
 import VoteService from './services/votes';
 import Partners from './pages/partners';
 import AddCoin from './components/ranks/addCoin';
+import Games from './pages/games';
+import AddGame from './components/games/addGame';
+import GameService from './services/games';
 
 
 const partners = [
-  {id:1,url:"https://res.cloudinary.com/dwf6iuvbh/image/upload/v1685827951/doctoreclub_x4xdkc.png", description:"The crypto community in Spanish that you have always wanted. Calls channel where you can anticipate the best opportunities.", name:"DOCTORECLUB",link:"http://T.me/DoctoreClub"},
-  {id:3,url:"https://res.cloudinary.com/dwf6iuvbh/image/upload/v1685827950/pinksale_p8zpwo.png", description:"PinkSale offers a suite of tools to help create your own tokens and pitch decks in a 100% decentralized manner", name:"PINKSALE",link:"http://www.pinksale.finance"},
-  {id:2,url:"https://res.cloudinary.com/dwf6iuvbh/image/upload/v1687695057/coingeck0_ptdyov.png", description:"Offers fundamental analysis of the cryptocurrency market. In addition to tracking price, volume, and market capitalization, it monitors community growth.", name:"COINGECKO",link:"https://t.me/Bladepool"},
-  {id:4,url:"https://res.cloudinary.com/dwf6iuvbh/image/upload/v1687695057/dexview_qzmhnk.png", description:"Dexview allows you to track your favorite cryptocurrencies in real time, from established market currencies like BNB, to new tokens being released every day.", name:"DEXVIEW",link:"http://www.pinksale.finance"},
-  {id:5,url:"https://res.cloudinary.com/dwf6iuvbh/image/upload/v1687695057/binance_g0oytk.png", description:"The main blockchain ecosystem in the world that has a wide range of products, including the largest exchange of digital assets.", name:"BINANCE",link:"http://www.pinksale.finance"},
-  {id:6,url:"https://res.cloudinary.com/dwf6iuvbh/image/upload/v1687695057/coinmarket_yhmlha.png", description:"Updated information on the cryptocurrency market and very useful tools for users who want to know more details about the crypto world", name:"COINMARKETCAP",link:"http://www.pinksale.finance"},
+  {id:1,url:"https://res.cloudinary.com/dwf6iuvbh/image/upload/v1687767227/dc_g8skza.jpg", description:"The crypto community in Spanish that you have always wanted. Calls channel where you can anticipate the best opportunities.", name:"DOCTORECLUB",link:"http://T.me/DoctoreClub"},
+  {id:3,url:"https://res.cloudinary.com/dwf6iuvbh/image/upload/v1687767227/ps_za42f2.jpg", description:"PinkSale offers a suite of tools to help create your own tokens and pitch decks in a 100% decentralized manner", name:"PINKSALE",link:"http://www.pinksale.finance"},
+  {id:2,url:"https://res.cloudinary.com/dwf6iuvbh/image/upload/v1687767227/cg_v9qum0.jpg", description:"Offers fundamental analysis of the cryptocurrency market. In addition to tracking price, volume, and market capitalization, it monitors community growth.", name:"COINGECKO",link:"https://www.coingecko.com/"},
+  {id:4,url:"https://res.cloudinary.com/dwf6iuvbh/image/upload/v1687767227/dv_smuthu.jpg", description:"Dexview allows you to track your favorite cryptocurrencies in real time, from established market currencies like BNB, to new tokens being released every day.", name:"DEXVIEW",link:"https://www.dexview.com/"},
+  {id:5,url:"https://res.cloudinary.com/dwf6iuvbh/image/upload/v1687767227/bn_cahvc7.jpg", description:"The main blockchain ecosystem in the world that has a wide range of products, including the largest exchange of digital assets.", name:"BINANCE",link:"https://www.binance.com"},
+  {id:6,url:"https://res.cloudinary.com/dwf6iuvbh/image/upload/v1687767227/cm_zxoyv5.jpg", description:"Updated information on the cryptocurrency market and very useful tools for users who want to know more details about the crypto world", name:"COINMARKETCAP",link:"https://coinmarketcap.com/"},
 ]
 
 
@@ -48,6 +51,7 @@ function App() {
     const admin = process.env.REACT_APP_ADMIN
     // const key = process.env.REACT_APP_CLOUDINARY_API_KEY
     const coinMap = {}
+    const gameMap = {}
     const bannerMap = {}
     const voteMap = {}
 
@@ -57,6 +61,9 @@ function App() {
 
     const coinService = new CoinService(baseUrl)
     const coinList = await coinService.getCoins()
+
+    const gameService = new GameService(baseUrl)
+    const gameList = await gameService.getGames()
 
     // console.log(bannersList)
     
@@ -72,6 +79,12 @@ function App() {
     }catch(err){
       console.log(err)
     }
+
+    if(gameList){
+      for(let g of gameList){
+        gameMap[g.address] = g
+      }
+    }else{console.log("Error getting games")}
     
     if(coinList){
       for(let c of coinList){
@@ -91,7 +104,7 @@ function App() {
     const telegram = new Telegram()
     setTelegramPosts(await telegram.getPosts())
 
-    dispatch( loadState({coins:coinList,coinMap,voteMap,baseUrl,bannerMap,admin,partners}) )
+    dispatch( loadState({coins:coinList,games:gameList,gameMap,coinMap,voteMap,baseUrl,bannerMap,admin,partners}) )
     
     
   }, [dispatch])
@@ -194,6 +207,15 @@ function App() {
                                     element={ <Coin 
                                     voteCoin={voteCoin} /> }
                             />
+
+                            <Route  exact path='/addGame'
+                                    element={<AddGame baseUrl={baseUrl} />}
+                            />
+
+                            <Route  exact path="/games" 
+                                    element={ <Games voteCoin={voteCoin} /> }
+                            />
+                            
                             <Route  exact path="/partners" 
                                     element={ <Partners 
                                     voteCoin={voteCoin} /> }

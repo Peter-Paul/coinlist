@@ -1,6 +1,7 @@
 import { useState } from "react";
 import CoinManagement from "../components/admin/coinManagement";
 import Banner from "../components/admin/banners";
+import GameManagement from "../components/admin/gameManagement";
 
 function Admin({voteCoin,uploadBanner}) {
     const [ activeState, setActive ] = useState("coins")
@@ -48,6 +49,11 @@ function Admin({voteCoin,uploadBanner}) {
                         Edit Coins
                     </button>
                     <button className="nav-link mx-2" 
+                        style={ ( activeState==="games"  ) ? styles.activePage : styles.inactivePage } 
+                        onClick={ () => setActive("games") }>
+                        Edit Games
+                    </button>
+                    <button className="nav-link mx-2" 
                         style={ ( activeState==="banners" ) ? styles.activePage : styles.inactivePage }  
                         onClick={ () => setActive("banners") }>
                         Edit Banners
@@ -62,6 +68,12 @@ function Admin({voteCoin,uploadBanner}) {
             { activeState==="banners" &&
                 <Banner uploadBanner={uploadBanner} />
             }
+
+            { activeState==="games" &&
+                <GameManagement />
+            }
+
+            
         </>
      );
 }

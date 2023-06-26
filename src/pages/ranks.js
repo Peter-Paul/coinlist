@@ -1,16 +1,14 @@
 import { useState } from "react";
 import Search from "../components/ranks/search";
 import Table from "../components/ranks/table";
-import AddCoin from "../components/ranks/addCoin";
 import { useSelector } from "react-redux";
 import TelegramPosts from "../components/ranks/telegramPosts";
 import PriceDisplay from "../shared/priceDisplay";
 import TopBanner from "../shared/topBanners";
 
-function Ranks({priceDisplay,validTimestamp,voteCoin,telegramPosts}) {
+function Ranks({priceDisplay,voteCoin,telegramPosts}) {
     const [tag, setTag] = useState("trending")
-    const [tableView, showTables] = useState(true)
-    const {coins:data,voteMap,userAddress,connected,baseUrl} = useSelector((state) => state.app)
+    const {coins:data,voteMap,userAddress,connected} = useSelector((state) => state.app)
     const styles = {
         card:{
             width:"140px"
@@ -37,33 +35,37 @@ function Ranks({priceDisplay,validTimestamp,voteCoin,telegramPosts}) {
         },
         tweetCardUser:{
             color:"#0076CE"
-        }
+        },
+        cardBlue:{
+            backgroundColor:"#003153",
+            borderColor:"#0076CE"
+        },
     }
 
 
     
     return (
        <>
-        { tableView &&
-                <>
-                    <div className="d-block d-md-block d-custom-none">
-                        <PriceDisplay priceDisplay={priceDisplay} />
-                    </div>
+                
+            <div className="d-block d-md-block d-custom-none">
+                <PriceDisplay priceDisplay={priceDisplay} />
+            </div>
 
 
-                    <TopBanner/>
+            <TopBanner/>
 
 
-                    <Search changeView={ () => { showTables(false) } } />
-
-                    <Table data={data.filter( d => d.promote )} title={"PROMOTED"} 
-                       allowRoute={true} userAddress={userAddress} 
-                       voteMap={voteMap} connected={connected} voteCoin={voteCoin} />
+            <div className="card shadow" style={styles.cardBlue}>
+                <div className="card-body">
+                    <Search />
+                    <Table data={data.filter( d => d.show && d.promote )} title={"PROMOTED"} 
+                        allowRoute={true} userAddress={userAddress} 
+                        voteMap={voteMap} connected={connected} voteCoin={voteCoin} />
 
 
                     <TelegramPosts telegramPosts={telegramPosts} styles={styles} />
 
-               
+                
                     <div className="mt-5 mb-3">
                         <button className="btn btn-dell-blue me-3 mb-2" onClick={ () => setTag('trending') }> <i className="fa fa-fire me-1"></i> Trending</button>
                         <button className="btn btn-outline-light me-3 mb-2" onClick={ () => setTag('new') }> <i className="fa fa-bell me-1"></i> New</button>
@@ -72,16 +74,14 @@ function Ranks({priceDisplay,validTimestamp,voteCoin,telegramPosts}) {
                         <button className="btn btn-outline-light me-3 mb-2" onClick={ () => setTag('pinksale') }> <i className="fa fa-rocket me-1"></i> Pinksale</button>
                     </div>
 
-                    <Table data={data.filter( d => d.tags.includes(tag) )} title={"ASSET"}
+                    <Table data={data.filter( d => d.show && d.tags.includes(tag) )} title={"ASSET"}
                         allowRoute={true} userAddress={userAddress} 
                         voteMap={voteMap} connected={connected} voteCoin={voteCoin} />
-                </>
-        }
+                </div>
+            </div>
 
-        {   !tableView &&
-            <AddCoin changeView={ () => { showTables(true) } } baseUrl={baseUrl} />
-        }
-        
+
+
        </>
     )
 }
