@@ -12,6 +12,8 @@ const initialState = {
     connected:false,
     votes:undefined,
     voteMap:undefined,
+    gameVotes:undefined,
+    gameVoteMap:undefined,
     baseUrl:undefined,
     bannerMap:undefined,
     admin:undefined,
@@ -28,6 +30,7 @@ export const appSlice = createSlice({
             state.games = [...action.payload.games]
             state.gameMap = {...action.payload.gameMap}
             state.voteMap = {...action.payload.voteMap}
+            state.gameVoteMap = {...action.payload.gameVoteMap}
             state.baseUrl = action.payload.baseUrl
             state.bannerMap = action.payload.bannerMap
             state.admin = action.payload.admin
@@ -38,6 +41,7 @@ export const appSlice = createSlice({
             state.userAddress = action.payload.userAddress
             state.connected = action.payload.connected
             state.voteMap = {...action.payload.voteMap}
+            state.gameVoteMap = {...action.payload.gameVoteMap}
         },
 
         updateVotes: (state,action) => {
@@ -51,6 +55,20 @@ export const appSlice = createSlice({
                 {...state.coinMap[address],votes}}
 
             state.voteMap = {...state.voteMap,[address]:true}
+        },
+
+
+        updateGameVotes: (state,action) => {
+            const game = action.payload.updatedGame
+            const {address,votes} = game
+            state.games = state.games.map( 
+                c => (c.address === address) ? 
+                {...c,votes} : c )
+            
+            state.gameMap = {...state.gameMap, [address]: 
+                {...state.gameMap[address],votes}}
+
+            state.gameVoteMap = {...state.gameVoteMap,[address]:true}
         },
 
         updateBanner: (state,action) => {
@@ -107,6 +125,7 @@ export const {
                 connectUser, 
                 loadState, 
                 updateVotes, 
+                updateGameVotes,
                 updateBanner, 
                 uploadCoin, 
                 updateCoin, 

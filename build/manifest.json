@@ -1,9 +1,9 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Doctorecoins",
+  "name": "At Doctorecoins, we increase your marketing and quickly fill the presale. By finishing the smart contract codebase and architecture, you can demonstrate to your community the dependability and accuracy of your smart contract. Finally, we confirm the members of the project team's identification.",
   "icons": [
     {
-      "src": "favicon.ico",
+      "src": "icon.jpg",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
     },
@@ -13,17 +13,17 @@
       "sizes": "192x192"
     },
     {
-      "src": "logo192.png",
+      "src": "icon.jpg",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "logo512.png",
+      "src": "icon.jpg",
       "type": "image/png",
       "sizes": "512x512"
     }
   ],
-  "start_url": ".",
+  "start_url": "https://doctorecoins.com",
   "display": "standalone",
   "theme_color": "#000000",
   "background_color": "#ffffff"

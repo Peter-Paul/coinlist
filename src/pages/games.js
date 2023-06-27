@@ -3,14 +3,15 @@ import Table from "../components/ranks/table";
 import { useSelector } from "react-redux";
 import TopBanner from "../shared/topBanners";
 
-function Games({voteCoin}) {
-    const {coins,voteMap,games,gameMap,userAddress,connected,} = useSelector((state) => state.app)
+function Games({voteCoin,voteGame}) {
+    const {coins,gameVoteMap,voteMap,games,gameMap,userAddress,connected,} = useSelector((state) => state.app)
     const styles = {
         cardBlue:{
             backgroundColor:"#003153",
             borderColor:"#0076CE"
         },
     }
+
     return ( 
         <>
             <TopBanner />
@@ -22,14 +23,15 @@ function Games({voteCoin}) {
                         <Link className="btn btn-outline-dell-blue" to={"/addGame"}> <i className="fa fa-plus me-1"></i> Add Game</Link>
                     </div>
 
-                    <Table data={games.filter( g => g.show)} allowRoute={false} userAddress={userAddress} gameMap={gameMap} connected={connected} games={true} />
+                    <Table data={games.filter( g => g.show)} allowRoute={false} userAddress={userAddress} gameVoteMap={gameVoteMap}
+                    voteGame={voteGame} gameMap={gameMap} connected={connected} games={true} />
                 </div>
             </div>
 
             <div className="mt-4">
                 <Table data={coins.filter( d => d.show && d.promote )} title={"PROMOTED"} 
                     allowRoute={false} userAddress={userAddress} 
-                    voteMap={voteMap} connected={connected} voteCoin={voteCoin} />
+                    voteMap={voteMap} connected={connected} voteCoin={voteCoin}  />
             </div>
         </>
      );

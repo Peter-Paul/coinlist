@@ -6,6 +6,7 @@ const gameSchema = Joi.object({
     chain: Joi.string().required(),
     description: Joi.string().required(),
     contact: Joi.string().required(),
+    votes: Joi.string().required(),
     youtube: Joi.string().optional().allow(""),
     website: Joi.string().optional().allow(""),
     github: Joi.string().optional().allow(""),

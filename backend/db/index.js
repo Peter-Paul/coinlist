@@ -11,6 +11,7 @@ class Database{
     coinTable="coins"
     gameTable="games"
     voteTable="votes"
+    gameVoteTable="gamevotes"
     bannerTable="banners"
     subscriptionTable="subscription"
 
@@ -26,7 +27,7 @@ class Database{
 
     getAll(table,address=undefined){
         let sql = `SELECT * FROM ${table}`
-        if (table === this.voteTable) sql = `SELECT * FROM ${table} WHERE "Address" = '${address}' ORDER BY "Time" DESC`
+        if (table === this.voteTable || table === this.gameVoteTable) sql = `SELECT * FROM ${table} WHERE "Address" = '${address}' ORDER BY "Time" DESC`
         if (table === this.coinTable || table === this.gameTable) sql = `SELECT * FROM ${table} ORDER BY "Address" DESC`
         return new Promise( (resolve,reject) =>{
             this.pool.query(sql, (err,res) => {
@@ -53,7 +54,7 @@ class Database{
                     if(err) reject(err)
                     else resolve({...data})
                 })
-            }else if(table===this.voteTable){
+            }else if(table===this.voteTable || table === this.gameVoteTable){
                 const sql = `INSERT INTO ${table} ("VoteID","Address","Coin","Time") VALUES ($1, $2, $3, $4)`
                 const {address,coin,time} = data
                 const id=uuidv4()

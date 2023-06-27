@@ -143,7 +143,7 @@ function AddGame({baseUrl}) {
                                 placeholder="Enter email" value={game.contact} onChange={ e => handleGameChange(e) }/> 
                                 <h4>Links</h4>
                                 <label className="form-label">Youtube Video</label>
-                                <input name="website" style={styles.input} className="form-control mb-3 form-control-md bg-dark shadow" 
+                                <input name="youtube" style={styles.input} className="form-control mb-3 form-control-md bg-dark shadow" 
                                 placeholder="e.g www.example.com" value={game.youtube} onChange={ e => handleGameChange(e) }/>
                                 
                                 <label className="form-label">Website</label>

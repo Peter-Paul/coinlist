@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import GameDetails from '../games/gameDetails';
 
 
-function Table({data,title,allowRoute,connected,userAddress,voteCoin,voteMap,admin=false,removeCoin,patchCoin,games=false,removeGame,patchGame}) {
+function Table({data,title,allowRoute,connected,userAddress,voteCoin,voteGame,voteMap,gameVoteMap,admin=false,removeCoin,patchCoin,games=false,removeGame,patchGame}) {
     
     const styles = {
         coinName:{
@@ -152,6 +152,12 @@ function Table({data,title,allowRoute,connected,userAddress,voteCoin,voteMap,adm
             grow:5,
             cell: row => {
                 const {description} = row
+                // const setGame = (data) => {
+                //     return (
+                        
+                //     )
+                // }
+
                 return (
                     <>
                         { games &&
@@ -160,7 +166,11 @@ function Table({data,title,allowRoute,connected,userAddress,voteCoin,voteMap,adm
                                     <p> <span className='me-1'>{`${description.slice(0,100)}...`}</span>
                                     </p>
                                     <div>
-                                        <GameDetails game={row}/>
+                                        <GameDetails game={row} />
+                                        {/* <button type="button" className="btn btn-sm btn-outline-warning py-1"
+                                            onClick={() => setGame(row)}>
+                                            Read More
+                                        </button> */}
                                     </div>
                                 </div>
                             </>
@@ -245,16 +255,17 @@ function Table({data,title,allowRoute,connected,userAddress,voteCoin,voteMap,adm
         },
         {
             name: 'VOTES',
-            omit:games,
+            // omit:games,
             selector: row => row.votes,
             cell: row => { 
+                const mapping = games?{...gameVoteMap}:{...voteMap}
                 return ( 
                         <>
-                            { !games && connected &&
+                            { connected &&
                                 <>
                                     {
-                                        userAddress===undefined || !voteMap[row.address] ? 
-                                        <button className='btn btn-light' onClick={()=>voteCoin(row.address)}>
+                                        userAddress===undefined || !mapping[row.address] ? 
+                                        <button className='btn btn-light' onClick={()=> {games? voteGame(row.address) : voteCoin(row.address)} }>
                                             <i className='fa fa-check me-1'></i>
                                             <strong>
                                                 {customFigure(parseFloat(row.votes),0)}
@@ -273,7 +284,7 @@ function Table({data,title,allowRoute,connected,userAddress,voteCoin,voteMap,adm
                                 
                             }
 
-                            { !games && !connected &&
+                            { !connected &&
                                 <button className='btn btn-sm btn-outline-light' disabled>
                                     <i className='fa fa-check me-1'></i>
                                     <strong>
@@ -548,7 +559,11 @@ function Table({data,title,allowRoute,connected,userAddress,voteCoin,voteMap,adm
                 backgroundColor: "#2a52be",
                 fontSize:"15px"
             }
-        }
+        },
+        cardBlue:{
+            backgroundColor:"#003153",
+            borderColor:"#0076CE"
+        },
         
     }
  

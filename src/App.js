@@ -4,7 +4,7 @@ import Nav from './shared/nav';
 import Ranks from './pages/ranks';
 import Footer from './shared/footer';
 import { useDispatch, useSelector } from 'react-redux';
-import { connectUser, loadState, updateVotes, updateBanner } from './state/app.reducers';
+import { connectUser, loadState, updateVotes, updateBanner, updateGameVotes } from './state/app.reducers';
 import { useCallback, useEffect, useState } from 'react';
 import Coin from './pages/coin';
 import Promotion from './pages/promotion';
@@ -36,7 +36,7 @@ const partners = [
 
 function App() {
   // console.log(process.env.REACT_APP_ENV)
-  const {coinMap,coins,voteMap,userAddress,connected,bannerMap,baseUrl} = useSelector((state) => state.app)
+  const {coinMap,gameMap,coins,games,gameVoteMap,voteMap,userAddress,connected,bannerMap,baseUrl} = useSelector((state) => state.app)
   const dispatch = useDispatch()
   const [showLowerLeft,setshowLowerLeft] = useState(true)
   const [showLowerRight,setshowLowerRight] = useState(true)
@@ -54,6 +54,7 @@ function App() {
     const gameMap = {}
     const bannerMap = {}
     const voteMap = {}
+    const gameVoteMap = {}
 
     // setCloudinaryKey( key )
     const bannerService = new BannerService(baseUrl)
@@ -104,7 +105,7 @@ function App() {
     const telegram = new Telegram()
     setTelegramPosts(await telegram.getPosts())
 
-    dispatch( loadState({coins:coinList,games:gameList,gameMap,coinMap,voteMap,baseUrl,bannerMap,admin,partners}) )
+    dispatch( loadState({coins:coinList,games:gameList,gameMap,coinMap,voteMap,gameVoteMap,baseUrl,bannerMap,admin,partners}) )
     
     
   }, [dispatch])
@@ -117,8 +118,8 @@ function App() {
           const userAddress = await signer.getAddress()
           const voteService = new VoteService(baseUrl)
           const voteMap = await voteService.getVotes(userAddress)
-          console.log(voteMap)
-          dispatch( connectUser({userAddress,connected:true,voteMap}) )
+          const gameVoteMap = await voteService.getGameVotes(userAddress)
+          dispatch( connectUser({userAddress,connected:true,voteMap,gameVoteMap}) )
         })
     } else {
         console.log("Please Install Metamask!!!");
@@ -158,10 +159,29 @@ function App() {
     }catch(err){
       console.log(`Error posting votes -> ${err}`)
     }
+  }
 
 
+  const voteGame = async address => {
+    console.log(address)
+    const game = gameMap[address]
+    const updatedGame = {...game,votes:(parseInt(game.votes) + 1).toString()}
+    const { price, ...gameData } = updatedGame
+    const payload = {
+        game:address,
+        address:userAddress,
+        time: Math.floor( new Date().getTime() / 1000 ).toString(),
+        gameData
+    }
+    const voteService = new VoteService(baseUrl)
+    try{
+      await voteService.postGameVote(payload)
+      dispatch( updateGameVotes({updatedGame}) )
 
-}
+    }catch(err){
+      console.log(`Error posting game votes -> ${err}`)
+    }
+  }
 
   const styles = {
     navigation:{
@@ -182,7 +202,7 @@ function App() {
 
   return (
     <>
-      { (coins && coinMap && voteMap  && bannerMap) &&
+      { (coins && coinMap && voteMap &&  bannerMap && games && gameVoteMap) &&
           <Router>
             <div className='d-flex justify-content-between'>
               <div className='sidebar col-2 d-none d-custom-block bg-dark '>
@@ -213,7 +233,7 @@ function App() {
                             />
 
                             <Route  exact path="/games" 
-                                    element={ <Games voteCoin={voteCoin} /> }
+                                    element={ <Games voteCoin={voteCoin} voteGame={voteGame} /> }
                             />
                             
                             <Route  exact path="/partners" 

@@ -17,7 +17,7 @@ function Search({changeView}) {
                     <Link className="btn btn-outline-dell-blue ms-3" to={"/services/promote"}> <i className="fa fa-bolt me-1"></i> Promotion</Link>
                 </div>
                 <div className="col-12 col-md-6 d-flex justify-content-end mb-2">
-                    <input style={styles.input} className="form-control form-control-md bg-light shadow" placeholder="Try CoinList or address (0x...)" />
+                    <input style={styles.input} className="form-control form-control-md bg-light shadow" placeholder="Try Shiba or Address (0x…)" />
                 </div>
             </div>
     

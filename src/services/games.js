@@ -32,7 +32,7 @@ export default class GameService{
         try{
             if(this.url){
                 const games = await axios.get(this.url)
-                if (games.status === 200) return games.data
+                if (games.status === 200) return games.data.map( (g) => !g.votes ? {...g,votes:"0"} : {...g} )
                 else return undefined
             }else{
                 return this.default

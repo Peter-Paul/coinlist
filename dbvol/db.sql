@@ -6,12 +6,21 @@ CREATE TABLE public."votes" (
 	CONSTRAINT "PK_votes" PRIMARY KEY ("VoteID")
 );
 
+CREATE TABLE public."gameVotes" (
+	"VoteID" varchar(225) NOT NULL,
+	"Address" varchar(225) NOT NULL,
+	"Coin" varchar(225) NULL,
+	"Time" varchar(225) NOT NULL,
+	CONSTRAINT "PK_gameVotes" PRIMARY KEY ("VoteID")
+);
+
 
 CREATE TABLE public."coins" (
 	"Address" varchar(225) NOT NULL,
 	"CoinData" text NOT NULL,
 	CONSTRAINT "PK_coins" PRIMARY KEY ("Address")
 );
+
 
 CREATE TABLE public."games" (
 	"Address" varchar(225) NOT NULL,

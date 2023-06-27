@@ -1,5 +1,6 @@
 const Joi = require('joi')
 const {coinSchema} =  require("./coinType.js")
+const {gameSchema} =  require("./gameType.js")
 
 const voteSchema = Joi.object({
     address: Joi.string().required(),
@@ -8,4 +9,12 @@ const voteSchema = Joi.object({
     coinData: coinSchema
 })
 
-module.exports = {voteSchema}
+const gameVoteSchema = Joi.object({
+    address: Joi.string().required(),
+    game: Joi.string().required(),
+    time: Joi.string().required(),
+    gameData: gameSchema
+})
+
+
+module.exports = {voteSchema,gameVoteSchema}
