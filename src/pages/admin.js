@@ -2,9 +2,12 @@ import { useState } from "react";
 import CoinManagement from "../components/admin/coinManagement";
 import Banner from "../components/admin/banners";
 import GameManagement from "../components/admin/gameManagement";
+import { useSelector } from "react-redux";
+import { Navigate } from "react-router-dom";
 
 function Admin({voteCoin,uploadBanner}) {
     const [ activeState, setActive ] = useState("coins")
+    const {userAddress,connected,admin} = useSelector((state) => state.app)
 
     const styles = {
         promotion:{
@@ -37,6 +40,10 @@ function Admin({voteCoin,uploadBanner}) {
             borderWidth:"1px",
             borderStyle:"solid",
         }
+    }
+
+    if( !userAddress || !connected || (userAddress!==admin) ){
+        return <Navigate to="/" />
     }
 
     return ( 
