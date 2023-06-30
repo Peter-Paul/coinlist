@@ -248,6 +248,11 @@ function App() {
                                     element={ <Admin 
                                     voteCoin={voteCoin} uploadBanner={uploadBanner}/> }
                             />
+
+                            <Route  exact path="/admin/:address" 
+                                    element={ <Coin 
+                                    voteCoin={voteCoin} /> }
+                            />
                           </Routes>
                           <Footer partners={partners} name={name} />
                 </div>

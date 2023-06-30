@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import "./coin.css"
 import Media from "../shared/media";
 import { useEffect, useState } from "react";
@@ -7,14 +7,15 @@ import Table from "../components/ranks/table";
 import TopBanner from "../shared/topBanners";
 function Coin({voteCoin}) {
     const {address} = useParams()
+    const {pathname} = useLocation()
     const {coins,coinMap,connected,voteMap,userAddress} = useSelector((state) => state.app)
     const [coin, setCoin] = useState(undefined)
     const floozBaseUrl = "https://flooz.trade/trade/"
     const mobulaBaseUrl = "http://mobula.fi/dex?outputCurrency="
     
     // const {name,symbol} = coin
-    useEffect( ()=> { setCoin(coinMap[address]) }, 
-        [address,coinMap,userAddress,voteMap] )
+    useEffect( ()=> { setCoin(coinMap[address])}, 
+        [address,coinMap,userAddress,voteMap,pathname] )
 
 
     const addCoinToWallet = async () => {
@@ -94,9 +95,9 @@ function Coin({voteCoin}) {
     return (  
         <>
             <div className="mb-4">
-                <Link className="btn btn-outline-light ms-3" to="/"> 
+                <Link className="btn btn-outline-light ms-3" to={pathname.split("/").length>2?"/admin":"/"}> 
                     <i className="me-2 fa fa-angle-left"></i>
-                        Rankings 
+                        Back 
                 </Link>
             </div>
             

@@ -101,7 +101,7 @@ function Table({data,title,allowRoute,connected,userAddress,voteCoin,voteGame,vo
                         }
                         {
                            !games && allowRoute &&
-                            <Link style={styles.coinName} to={`/${row.address}`}>
+                            <Link style={styles.coinName} to={admin?`/admin/${row.address}`:`/${row.address}`}>
                                     <div className='d-flex justify-content-between my-2'>
                                         <div  className={`logo-holder ${ (!row.icon || row.icon === "") && "d-none" }`}>
                                             <div style={{backgroundImage:`url(${row.icon})`}} 
@@ -152,11 +152,6 @@ function Table({data,title,allowRoute,connected,userAddress,voteCoin,voteGame,vo
             grow:5,
             cell: row => {
                 const {description} = row
-                // const setGame = (data) => {
-                //     return (
-                        
-                //     )
-                // }
 
                 return (
                     <>
@@ -167,10 +162,7 @@ function Table({data,title,allowRoute,connected,userAddress,voteCoin,voteGame,vo
                                     </p>
                                     <div>
                                         <GameDetails game={row} />
-                                        {/* <button type="button" className="btn btn-sm btn-outline-warning py-1"
-                                            onClick={() => setGame(row)}>
-                                            Read More
-                                        </button> */}
+
                                     </div>
                                 </div>
                             </>

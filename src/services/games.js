@@ -18,6 +18,7 @@ export default class GameService{
                 facebook:"https://facebook.com",
                 linkedin:"https://linkedin.com",
                 show:true,
+                created:"1685164374"
             }
       ]
 
@@ -32,7 +33,8 @@ export default class GameService{
         try{
             if(this.url){
                 const games = await axios.get(this.url)
-                if (games.status === 200) return games.data.map( (g) => !g.votes ? {...g,votes:"0"} : {...g} )
+                if (games.status === 200) return games.data.map( (g) =>{ return {...g,votes:!g.votes ?"0":g.votes, created:!g.created?1688105293:g.created} } )
+                                                            .sort((a,b) => b.created-a.created)
                 else return undefined
             }else{
                 return this.default
@@ -46,7 +48,7 @@ export default class GameService{
 
     async postGame(game){
         try{
-            const response = await axios.post(this.url, game)
+            const response = await axios.post(this.url, {...game,created:Math.floor( new Date().getTime() / 1000  )})
     
             if (response.status === 200) return true
             else return undefined

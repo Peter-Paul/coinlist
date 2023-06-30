@@ -4,7 +4,7 @@ function Search({changeView}) {
 
     const styles = {
         input:{
-            color:"white",
+            // color:"white",
             width:"390px"
         }
     }

@@ -21,6 +21,7 @@ const coinSchema = Joi.object({
     icon: Joi.string().optional().allow(""),
     promote: Joi.boolean().required(),
     show: Joi.boolean().required(),
+    created:Joi.number().required()
 })
 
 module.exports = {coinSchema}

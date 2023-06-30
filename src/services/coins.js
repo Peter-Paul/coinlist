@@ -22,6 +22,7 @@ export default class CoinService{
                 linkedin:"https://linkedin.com",
                 promote: false,
                 show:true,
+                created:"1685164374"
             },
             {
                 name: "QUAI",
@@ -42,6 +43,7 @@ export default class CoinService{
                 linkedin:"https://linkedin.com",
                 promote: false,
                 show:true,
+                created:"1685164374"
             },
             {
                 name: "Inverted Pepe",
@@ -62,6 +64,7 @@ export default class CoinService{
                 linkedin:"https://linkedin.com",
                 promote: true,
                 show:true,
+                created:"1685164374"
             },
             {
                 name: "EthShares",
@@ -82,6 +85,7 @@ export default class CoinService{
                 linkedin:"https://linkedin.com",
                 promote: false,
                 show:true,
+                created:"1685164374"
             },
             {
                 name: "PepeCola",
@@ -102,6 +106,7 @@ export default class CoinService{
                 linkedin:"https://linkedin.com",
                 promote: true,
                 show:true,
+                created:"1685164374"
             },
             {
             name: "Royall Coin",
@@ -122,6 +127,7 @@ export default class CoinService{
             linkedin:"https://linkedin.com",
             promote: false,
             show:true,
+            created:"1685164374"
         },
         {
             name: "yPredict",
@@ -142,6 +148,7 @@ export default class CoinService{
             linkedin:"https://linkedin.com",
             promote: true,
             show:true,
+            created:"1685164374"
         }
       ]
 
@@ -155,7 +162,8 @@ export default class CoinService{
         try{
             if(this.url){
                 const coins = await axios.get(this.url)
-                if (coins.status === 200) return coins.data.map( c => { return {...c, tags:c.tags.split(",")} })
+                if (coins.status === 200) return coins.data.map( c => { return {...c, tags:c.tags.split(","),created:!c.created?1688105293:c.created} })
+                                                            .sort((a,b) => b.created-a.created)
                 else return undefined
             }else{
                 return this.default
@@ -171,7 +179,7 @@ export default class CoinService{
         try{
             const {price, ...payload} = coin
             console.log(payload)
-            const response = await axios.post(this.url, {...payload,tags:payload.tags.join(",")})
+            const response = await axios.post(this.url, {...payload,tags:payload.tags.join(","),created:Math.floor( new Date().getTime() / 1000  )})
     
             if (response.status === 200) return true
             else return undefined

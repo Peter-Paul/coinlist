@@ -16,6 +16,7 @@ const gameSchema = Joi.object({
     linkedin: Joi.string().optional().allow(""),
     icon: Joi.string().optional().allow(""),
     show: Joi.boolean().required(),
+    created:Joi.number().required()
 })
 
 module.exports = {gameSchema}
