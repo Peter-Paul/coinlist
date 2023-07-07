@@ -39,23 +39,28 @@ function Table({data,title,allowRoute,connected,userAddress,voteCoin,voteGame,vo
         const year =  365
         const now = Math.floor( new Date().getTime() / 1000 )
         let days = Math.floor((launch - now) / daySecs )
-        if(days <= 0 ){
+        if(days === 0){
+                return "TODAY"
+        }else if(days < 0 ){
             days = Math.abs(days)
             if( days < month){
-                return `${days} days ago`
-            }else if (days < year && days > month){
-                return `${Math.floor(days/month)} month(s) ago`
+                return `${days} day${days>1?"s":""} to go`
+            }else if (days < year && days >= month){
+                const months = Math.floor(days/month)
+                return `${months} month${months>1?"s":""} to go`
             }else{
-                return `${Math.floor(days/year)} year(s) ago`
+                const years = Math.floor(days/year)
+                return `${years} year${years>1?"s":""} to go`
             }
         }else{
-            days = Math.abs(days)
             if( days < month){
-                return `${days} days to go`
-            }else if (days < year && days > month){
-                return `${Math.floor(days/month)} month(s) to go`
+                return `${days} day${days>1?"s":""} ago`
+            }else if (days < year && days >= month){
+                const months = Math.floor(days/month)
+                return `${months} month${months>1?"s":""} ago`
             }else{
-                return `${Math.floor(days/year)} year(s) to go`
+                const years = Math.floor(days/year)
+                return `${years} year${years>1?"s":""} ago`
             }
         }
     }

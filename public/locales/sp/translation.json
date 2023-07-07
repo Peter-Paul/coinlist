@@ -1,0 +1,48 @@
+{
+    "Rankings":"Clasificación",
+    "AboutUs":"Sobre Nosotros",
+    "Services":"Servicios",
+    "AddCoin":"Agregar Moneda",
+    "CoinList":"Lista de Monedas",
+    "Promotions":"Promociones",
+    "PromoteCoin":"Promover Moneda",
+    "AuditCoin":"Moneda de Auditoría",
+    "VerifyCoin":"Verificar Moneda",
+    "Games":"Juegos",
+    "GamesList":"Lista de Juegos",
+    "AddGame":"Agregar Juego",
+    "Partners":"Socios",
+    "Trending":"Tendencias",
+    "New":"Nuevo",
+    "Audit":"Auditoría",
+    "Subscribe":"Suscríbete a nuestro boletín",
+    "SubscribeMsg":"Obtenga las mejores monedas de alto potencial directamente en su bandeja de entrada",
+    "SubscribeInput":"Escriba el correo electrónico",
+    "SubscribeButton":"Suscribir",
+    "ConnectWallet":"Conectar Billetera",
+    "Disconnect":"Desconectar",
+    "promo":{
+        "h1":"Promoción de Monedas",
+        "p1":"En el pasado, las clasificaciones de los proyectos se basaban en los votos, pero descubrimos que algunos proyectos podían obtener cantidades masivas de votos para asegurar una clasificación más alta, lo que generaba una ventaja injusta. Con nuestro nuevo sistema Boost, hemos creado un método más transparente y justo para todos los miembros de nuestra comunidad y propietarios de proyectos.",
+        "p2":"¡Nos hemos asociado con las personas más influyentes de Telegram que pueden ayudarlo a impulsar su comercialización y completar la preventa en segundos! Estos son personas influyentes en grandes comunidades que tienen muchos seguidores en todo el mundo. Hemos trabajado con todos ellos y así ayudaron a que nuestra preventa finalizara en 15 segundos."
+    },
+    "audit":{
+        "h1":"Auditoría de Monedas",
+        "h2":"Haga que sus contratos inteligentes sean verificados por nuestro socio de confianza: un equipo de analistas especializados en tecnología blockchain",
+        "p1":"Demuestre la confiabilidad y corrección de su contrato inteligente a su comunidad completando el código base y la arquitectura del contrato inteligente.",
+        "p2":"Pruebas rigurosas del proyecto, análisis de patrones de diseño de código para garantizar que esté bien estructurado y que los contratos y bibliotecas de terceros se utilicen de forma segura."
+    },
+    "kyc":{
+        "h1":"Verificación de Monedas",
+        "h2":"Haga que su equipo sea verificado para mostrarle a su comunidad su transparencia.",
+        "h3":"¿Cómo es el proceso de verificación?",
+        "p1":"Conozca a su cliente (KYC): es el método esencial de verificación de la identidad de los equipos de proyecto. Doctoreclub emplea este procedimiento para verificar la identidad de los miembros del equipo del proyecto. ¡Hagamos que el espacio criptográfico sea más seguro!",
+        "p2":"Debes participar en una videollamada que será grabada. En el caso de un plan alfombra o trampa, la grabación se publicará en sus grupos de redes sociales en beneficio de las víctimas de la estafa. Su proyecto se marcará como validado por el equipo de Doctoreclub, lo que mejorará su credibilidad ante los inversores y toda la comunidad criptográfica."
+    },
+    "apply":{
+        "h1":"Cómo aplicar",
+        "price":"Precio",
+        "telegram":"Envíanos un mensaje directo en Telegram",
+        "email":"O envíenos un correo electrónico a"
+    }
+}

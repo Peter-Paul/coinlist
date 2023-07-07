@@ -4,10 +4,11 @@ import Subscribe from "./subscribe";
 import { Link } from "react-router-dom";
 import Logo from "./logo";
 import PartnerList from "../components/partners/partnerList";
+import { useTranslation } from "react-i18next";
 
 function Footer({partners,name}) {
     const {bannerMap,doctoreTwitter,doctoreTelegram} = useSelector((state) => state.app)
-
+    const {t:content} = useTranslation()
     const styles = {
         links:{
             listStyleType:"none",
@@ -63,7 +64,7 @@ function Footer({partners,name}) {
             {
                 partners && 
                 <>
-                    <h2 className="text-center mb-3"> <i className="fa fa-users"></i> Partners</h2>
+                    <h2 className="text-center mb-3"> <i className="fa fa-users"></i> {content("Partners")}</h2>
                     <PartnerList />
                 </>
             }
@@ -85,44 +86,44 @@ function Footer({partners,name}) {
             <div className="d-flex justify-content-evenly mb-5 row">
                 <div className="col-md-3 col-10">
                     <ul style={styles.links}>
-                        <h4>Coin Rankings</h4>
+                        <h4>{content("Rankings")}</h4>
                         <li className="mb-1">
-                            <Link style={styles.link} to="/"  onClick={ () => window.scrollTo({top: 0})}><span className="text-light">List of Coins</span></Link>
+                            <Link style={styles.link} to="/"  onClick={ () => window.scrollTo({top: 0})}><span className="text-light">{content("CoinList")}</span></Link>
                         </li>
                         <li className="mb-1">
-                            <Link style={styles.link} to="/addCoin"  onClick={ () => window.scrollTo({top: 0})}><span className="text-light">Add Coin</span></Link>
+                            <Link style={styles.link} to="/addCoin"  onClick={ () => window.scrollTo({top: 0})}><span className="text-light">{content("AddCoin")}</span></Link>
                         </li>
 
                         <h4 className="mt-2">GameFi</h4>
                         <li className="mb-1">
-                            <Link style={styles.link} to="/games"  onClick={ () => window.scrollTo({top: 0})}><span className="text-light">List of Games</span></Link>
+                            <Link style={styles.link} to="/games"  onClick={ () => window.scrollTo({top: 0})}><span className="text-light">{content("GamesList")}</span></Link>
                         </li>
                         <li className="mb-1">
-                            <Link style={styles.link} to="/addGame"  onClick={ () => window.scrollTo({top: 0})}><span className="text-light">Add Game</span></Link>
+                            <Link style={styles.link} to="/addGame"  onClick={ () => window.scrollTo({top: 0})}><span className="text-light">{content("AddGame")}</span></Link>
                         </li>
                         
                     </ul>
                 </div>
                 <div className="col-md-3 col-10">
                     <ul style={styles.links}>
-                        <h4>Services</h4>
+                        <h4>{content("Services")}</h4>
                         <li className="mb-1">
-                            <Link style={styles.link} to="/services/promote" onClick={ () => window.scrollTo({top: 0})}><span className="text-light">Promote Coins</span></Link>
+                            <Link style={styles.link} to="/services/promote" onClick={ () => window.scrollTo({top: 0})}><span className="text-light">{content("PromoteCoin")}</span></Link>
                         </li>
                         <li className="mb-1">
-                            <Link style={styles.link} to="/services/audit" onClick={ () => window.scrollTo({top: 0})}><span className="text-light">Audit Coins</span></Link>
+                            <Link style={styles.link} to="/services/audit" onClick={ () => window.scrollTo({top: 0})}><span className="text-light">{content("AuditCoin")}</span></Link>
                         </li>
                         <li className="mb-1">
-                            <Link style={styles.link} to="/services/kyc" onClick={ () => window.scrollTo({top: 0})}><span className="text-light">Verify Coins</span></Link>
+                            <Link style={styles.link} to="/services/kyc" onClick={ () => window.scrollTo({top: 0})}><span className="text-light">{content("VerifyCoin")}</span></Link>
                         </li>
                     </ul>
                 </div>
 
                 <div className="col-md-3 col-10">
                     <ul style={styles.links}>
-                        <h4>About Us</h4>
+                        <h4>{content("AboutUs")}</h4>
                         <li className="mb-1">
-                            <Link style={styles.link} to="/partners"  onClick={ () => window.scrollTo({top: 0})}><span className="text-light">Our Partners</span></Link>
+                            <Link style={styles.link} to="/partners"  onClick={ () => window.scrollTo({top: 0})}><span className="text-light">{content("Partners")}</span></Link>
                         </li>
                     </ul>
                 </div>

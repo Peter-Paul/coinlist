@@ -1,18 +1,20 @@
 import { useSelector } from "react-redux";
 import Table from "../ranks/table";
 import Apply from "./apply";
+import { useTranslation } from "react-i18next";
 
 function Audit({voteCoin}) {
 
     const {coins:data,voteMap,userAddress,connected} = useSelector((state) => state.app)
-    
+    const {t:content} = useTranslation()
+
     return ( 
         <>
-            <h3>Coin Audit</h3>
-            <h4>Get your smart contracts verified by our trusted partner - a team of analysts specialized in blockchain technology</h4>
+            <h3>{content("audit.h1")}</h3>
+            <h4>{content("audit.h2")}</h4>
             <div className="col-md-5 col-12">
-                <p className="mt-4">Prove the reliability and correctness of your smart contract to your community by complete of the smart contract codebase and architecture.</p>
-                <p>Rigorous testing of the project, code design pattern analytics to ensure it is well-structured and third-party contracts and libraries are used in a safe way.</p>
+                <p className="mt-4">{content("audit.p1")}</p>
+                <p>{content("audit.p2")}</p>
 
                 <Apply price={250}/>
 

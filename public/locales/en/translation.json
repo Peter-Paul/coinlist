@@ -1,0 +1,48 @@
+{
+    "Rankings":"Rankings",
+    "AboutUs":"About Us",
+    "Services":"Services",
+    "AddCoin":"Add Coin",
+    "CoinList":"Coins List",
+    "Promotions":"Promotions",
+    "PromoteCoin":"Promote Coin",
+    "VerifyCoin":"Verify Coin",
+    "AuditCoin":"Audit Coin",
+    "Games":"Games",
+    "GamesList":"Games List",
+    "AddGame":"Add Game",
+    "Partners":"Partners",
+    "Trending":"Trending",
+    "New":"New",
+    "Audit":"Audit",
+    "Subscribe":"Subscribe to our newsletter",
+    "SubscribeMsg":"Get the best high potential coins right into your inbox",
+    "SubscribeInput":"Type Email",
+    "SubscribeButton":"Subscribe",
+    "ConnectWallet":"Connect Wallet",
+    "Disconnect":"Disconnect",
+    "promo":{
+        "h1":"Coin Promotion",
+        "p1":"In the past, project rankings were based on votes, but we found that some projects were able to obtain massive amounts of votes to secure a higher ranking, resulting in an unfair advantage. With our new Boost system, we've created a more transparent and fair method for all our community members and project owners.",
+        "p2":"We've partnered with the biggest Telegram influencers who can help you boost your marketing and fill presale in seconds! These are influencers in big communities who have lots of followers worldwide. We've worked with all of them and thus they helped our presale to end within 15 seconds."
+    },
+    "audit":{
+        "h1":"Coin Audit",
+        "h2":"Prove the reliability and correctness of your smart contract to your community by complete of the smart contract codebase and architecture.",
+        "p1":"Prove the reliability and correctness of your smart contract to your community by complete of the smart contract codebase and architecture.",
+        "p2":"Rigorous testing of the project, code design pattern analytics to ensure it is well-structured and third-party contracts and libraries are used in a safe way."
+    },
+    "kyc":{
+        "h1":"Coin Verification",
+        "h2":"Get your team verified to show your community your transparency.",
+        "h3":"How is verification processed?",
+        "p1":"Know Your Customer (KYC) – is the essential method of verification the identity of the project teams. Doctoreclub employs this procedure to verify the identity of the project team members. Let's make crypto space safer!",
+        "p2":"You must participate in a video call that will be recorded. In the event of a rug or honeypot plan, the recording will be posted to your social media groups for the benefit of the scam victims. Your project will be marked as having been validated by the Doctoreclub team, enhancing your credibility with investors and the whole crypto community."
+    },
+    "apply":{
+        "h1":"How to apply",
+        "price":"Price",
+        "telegram":"Send us direct message on Telegram",
+        "email":"Or e-mail us at"
+    }
+}

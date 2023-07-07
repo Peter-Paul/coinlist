@@ -6,9 +6,30 @@ import TelegramPosts from "../components/ranks/telegramPosts";
 import PriceDisplay from "../shared/priceDisplay";
 import TopBanner from "../shared/topBanners";
 
-function Ranks({priceDisplay,voteCoin,telegramPosts}) {
+function Ranks({priceDisplay,voteCoin,telegramPosts,content}) {
     const [tag, setTag] = useState("trending")
-    const {coins:data,voteMap,userAddress,connected} = useSelector((state) => state.app)
+    const {coins,voteMap,userAddress,connected} = useSelector((state) => state.app)
+    const [searchData, setSearchData] = useState("");
+
+    const data = coins.filter(
+        coin => {
+          return (
+            coin
+            .address
+            .toLowerCase()
+            .includes(searchData.toLowerCase()) ||
+            coin
+            .name
+            .toLowerCase()
+            .includes(searchData.toLowerCase())
+          );
+        }
+    );
+
+    const handleChangeSearch = e => {
+        setSearchData(e.target.value);
+    };
+
     const styles = {
         card:{
             width:"140px"
@@ -57,7 +78,7 @@ function Ranks({priceDisplay,voteCoin,telegramPosts}) {
 
             <div className="card shadow" style={styles.cardBlue}>
                 <div className="card-body">
-                    <Search />
+                    <Search content={content} handleChangeSearch={handleChangeSearch} />
                     <Table data={data.filter( d => d.show && d.promote )} title={"PROMOTED"} 
                         allowRoute={true} userAddress={userAddress} 
                         voteMap={voteMap} connected={connected} voteCoin={voteCoin} />
@@ -67,9 +88,9 @@ function Ranks({priceDisplay,voteCoin,telegramPosts}) {
 
                 
                     <div className="mt-5 mb-3">
-                        <button className="btn btn-dell-blue me-3 mb-2" onClick={ () => setTag('trending') }> <i className="fa fa-fire me-1"></i> Trending</button>
-                        <button className="btn btn-outline-light me-3 mb-2" onClick={ () => setTag('new') }> <i className="fa fa-bell me-1"></i> New</button>
-                        <button className="btn btn-outline-light me-3 mb-2" onClick={ () => setTag('audited') }> <i className="fa fa-shield me-1"></i> Audit</button>
+                        <button className="btn btn-dell-blue me-3 mb-2" onClick={ () => setTag('trending') }> <i className="fa fa-fire me-1"></i> {content("Trending")}</button>
+                        <button className="btn btn-outline-light me-3 mb-2" onClick={ () => setTag('new') }> <i className="fa fa-bell me-1"></i> {content("New")}</button>
+                        <button className="btn btn-outline-light me-3 mb-2" onClick={ () => setTag('audited') }> <i className="fa fa-shield me-1"></i> {content("Audit")}</button>
                         <button className="btn btn-outline-light me-3 mb-2" onClick={ () => setTag('kyc') }> <i className="fa fa-key me-1"></i> KYC</button>
                         <button className="btn btn-outline-light me-3 mb-2" onClick={ () => setTag('pinksale') }> <i className="fa fa-rocket me-1"></i> Pinksale</button>
                     </div>

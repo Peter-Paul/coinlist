@@ -1,9 +1,11 @@
 import { useSelector } from "react-redux";
 import Table from "../ranks/table";
 import Apply from "./apply";
+import { useTranslation } from "react-i18next";
 
 function Promote({voteCoin}) {
     const {coins:data,voteMap,userAddress,connected} = useSelector((state) => state.app)
+    const {t:content} = useTranslation()
     const styles = {
         promotion:{
             borderRadius:"50px",
@@ -56,10 +58,10 @@ function Promote({voteCoin}) {
 
 
             <div className="row mt-4">
-                <h3>Coin Promotion</h3>
+                <h3>{content("promo.h1")}</h3>
                 <div className="col-12 col-md-8 mt-3">
-                    <p> In the past, project rankings were based on votes, but we found that some projects were able to obtain massive amounts of votes to secure a higher ranking, resulting in an unfair advantage. With our new Boost system, we've created a more transparent and fair method for all our community members and project owners.</p>
-                    <p>We've partnered with the biggest Telegram influencers who can help you boost your marketing and fill presale in seconds! These are influencers in big communities who have lots of followers worldwide. We've worked with all of them and thus they helped our presale to end within 15 seconds</p>
+                    <p>{content("promo.p1")}</p>
+                    <p>{content("promo.p2")}</p>
                     
                     <Apply/>
                 </div>

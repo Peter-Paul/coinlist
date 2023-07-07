@@ -4,7 +4,7 @@ import NavContent from "./navContent";
 import PriceDisplay from "./priceDisplay";
 import Logo from "./logo";
 
-function Nav({connectWallet,disconnectWallet,name,priceDisplay}) {
+function Nav({handleLanguageChange,content,connectWallet,disconnectWallet,name,priceDisplay}) {
     const {userAddress,connected} = useSelector((state) => state.app)
     const styles = {
         navBar:{
@@ -53,12 +53,12 @@ function Nav({connectWallet,disconnectWallet,name,priceDisplay}) {
                                     <span className="me-1">
                                         {`${userAddress.substr(0,10)}...`}
                                     </span>
-                                    Disconnect
+                                    {content("Disconnect")}
                                 </button>
                             </div>
                         :
                             <div>
-                                <button className="btn btn-lg btn-outline-dell-blue" onClick={()=>connectWallet()}> <i className="fa fa-plug me-1"></i> Connect Wallet</button>
+                                <button className="btn btn-lg btn-outline-dell-blue" onClick={()=>connectWallet()}> <i className="fa fa-plug me-1"></i>{content("ConnectWallet")}</button>
                             </div>
                     }
                 </div>
@@ -75,7 +75,7 @@ function Nav({connectWallet,disconnectWallet,name,priceDisplay}) {
                     <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div className="offcanvas-body" >
-                        <NavContent smallView={true} />
+                        <NavContent handleLanguageChange={handleLanguageChange} content={content} smallView={true} />
                 </div>
             </div>
         </>

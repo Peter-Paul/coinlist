@@ -5,7 +5,7 @@ import Ranks from './pages/ranks';
 import Footer from './shared/footer';
 import { useDispatch, useSelector } from 'react-redux';
 import { connectUser, loadState, updateVotes, updateBanner, updateGameVotes } from './state/app.reducers';
-import { useCallback, useEffect, useState } from 'react';
+import { Suspense, useCallback, useEffect, useState } from 'react';
 import Coin from './pages/coin';
 import Promotion from './pages/promotion';
 import { BrowserProvider } from 'ethers';
@@ -22,6 +22,8 @@ import AddCoin from './components/ranks/addCoin';
 import Games from './pages/games';
 import AddGame from './components/games/addGame';
 import GameService from './services/games';
+import { useTranslation } from 'react-i18next';
+import Loading from './shared/loading';
 
 
 const partners = [
@@ -37,6 +39,7 @@ const partners = [
 function App() {
   // console.log(process.env.REACT_APP_ENV)
   const {coinMap,gameMap,coins,games,gameVoteMap,voteMap,userAddress,connected,bannerMap,baseUrl} = useSelector((state) => state.app)
+  const {t, i18n} = useTranslation()
   const dispatch = useDispatch()
   const [showLowerLeft,setshowLowerLeft] = useState(true)
   const [showLowerRight,setshowLowerRight] = useState(true)
@@ -182,6 +185,10 @@ function App() {
       console.log(`Error posting game votes -> ${err}`)
     }
   }
+  
+  const handleLanguageChange = (e) => {
+    i18n.changeLanguage(e.target.value)
+  }
 
   const styles = {
     navigation:{
@@ -201,99 +208,94 @@ function App() {
   }, [onInit] )
 
   return (
-    <>
-      { (coins && coinMap && voteMap &&  bannerMap && games && gameVoteMap) &&
-          <Router>
-            <div className='d-flex justify-content-between'>
-              <div className='sidebar col-2 d-none d-custom-block bg-dark '>
-                <Sidebar name={name} />
-              </div>
-              <div className='content justify-content-center col-12 col-custom-10'>
-                <div className="mb-3 sticky-top " style={styles.navigation}>
-                    <div className='container my-5'>
-                      <Nav connectWallet={connectWallet} disconnectWallet={disconnectWallet} userConnection={{userAddress,connected}} name={name} priceDisplay={priceDisplay}/>
-                    </div>
+    <Suspense fallback={<Loading />}>
+      <>
+        { (coins && coinMap && voteMap &&  bannerMap && games && gameVoteMap) &&
+            <Router>
+              <div className='d-flex justify-content-between'>
+                <div className='sidebar col-2 d-none d-custom-block bg-dark '>
+                  <Sidebar name={name} handleLanguageChange={handleLanguageChange} content={t} />
                 </div>
-                <div className="container mt-5">
-                          <Routes>
-                            <Route  exact path="/" 
-                                    element={ <Ranks priceDisplay={priceDisplay}
-                                    voteCoin={voteCoin} telegramPosts={telegramPosts} /> }
-                            />
-                            <Route  exact path='/addCoin'
-                                    element={<AddCoin baseUrl={baseUrl} />}
-                            />
-                            <Route  exact path="/:address" 
-                                    element={ <Coin 
-                                    voteCoin={voteCoin} /> }
-                            />
-
-                            <Route  exact path='/addGame'
-                                    element={<AddGame baseUrl={baseUrl} />}
-                            />
-
-                            <Route  exact path="/games" 
-                                    element={ <Games voteCoin={voteCoin} voteGame={voteGame} /> }
-                            />
-                            
-                            <Route  exact path="/partners" 
-                                    element={ <Partners 
-                                    voteCoin={voteCoin} /> }
-                            />
-                            <Route  exact path="/services/:service" 
-                                    element={ <Promotion 
-                                    voteCoin={voteCoin} name={name} /> }
-                            />
-                            <Route  exact path="/admin" 
-                                    element={ <Admin 
-                                    voteCoin={voteCoin} uploadBanner={uploadBanner}/> }
-                            />
-
-                            <Route  exact path="/admin/:address" 
-                                    element={ <Coin 
-                                    voteCoin={voteCoin} /> }
-                            />
-                          </Routes>
-                          <Footer partners={partners} name={name} />
-                </div>
-              </div>
-            </div>
-              <div className='position-relative' >
-                {
-                  showLowerLeft && 
-                  <>
-                    <div className="position-fixed bottom-0 start-0 d-none d-md-block">
-                      <div className='d-flex justify-content-end'>
-                        <button type="button" className="btn-close" onClick={() => setshowLowerLeft(false)}></button>
+                <div className='content justify-content-center col-12 col-custom-10'>
+                  <div className="mb-3 sticky-top " style={styles.navigation}>
+                      <div className='container my-5'>
+                        <Nav handleLanguageChange={handleLanguageChange} content={t} connectWallet={connectWallet} disconnectWallet={disconnectWallet} userConnection={{userAddress,connected}} name={name} priceDisplay={priceDisplay}/>
                       </div>
-                        <BottomBanners banner={bannerMap['banner6']}/>
-                    </div>
-                  </>
-                }
-                {
-                  showLowerRight && 
-                  <div className="position-fixed bottom-0 end-0 d-none d-md-block">
-                      <div className='d-flex justify-content-end'>
-                        <button type="button" className="btn-close" onClick={() => setshowLowerRight(false)}></button>
-                      </div>
-                      <BottomBanners banner={bannerMap['banner5']}/>
                   </div>
-                }
+                  <div className="container mt-5">
+                            <Routes>
+                              <Route  exact path="/" 
+                                      element={ <Ranks priceDisplay={priceDisplay} content={t}
+                                      voteCoin={voteCoin} telegramPosts={telegramPosts} /> }
+                              />
+                              <Route  exact path='/addCoin'
+                                      element={<AddCoin baseUrl={baseUrl} />}
+                              />
+                              <Route  exact path="/:address" 
+                                      element={ <Coin 
+                                      voteCoin={voteCoin} /> }
+                              />
+
+                              <Route  exact path='/addGame'
+                                      element={<AddGame baseUrl={baseUrl} />}
+                              />
+
+                              <Route  exact path="/games" 
+                                      element={ <Games voteCoin={voteCoin} voteGame={voteGame} /> }
+                              />
+                              
+                              <Route  exact path="/partners" 
+                                      element={ <Partners 
+                                      voteCoin={voteCoin} /> }
+                              />
+                              <Route  exact path="/services/:service" 
+                                      element={ <Promotion 
+                                      voteCoin={voteCoin} name={name} /> }
+                              />
+                              <Route  exact path="/admin" 
+                                      element={ <Admin 
+                                      voteCoin={voteCoin} uploadBanner={uploadBanner}/> }
+                              />
+
+                              <Route  exact path="/admin/:address" 
+                                      element={ <Coin 
+                                      voteCoin={voteCoin} /> }
+                              />
+                            </Routes>
+                            <Footer partners={partners} name={name} />
+                  </div>
+                </div>
               </div>
-          </Router>
-      }
+                <div className='position-relative' >
+                  {
+                    showLowerLeft && 
+                    <>
+                      <div className="position-fixed bottom-0 start-0 d-none d-md-block">
+                        <div className='d-flex justify-content-end'>
+                          <button type="button" className="btn-close" onClick={() => setshowLowerLeft(false)}></button>
+                        </div>
+                          <BottomBanners banner={bannerMap['banner6']}/>
+                      </div>
+                    </>
+                  }
+                  {
+                    showLowerRight && 
+                    <div className="position-fixed bottom-0 end-0 d-none d-md-block">
+                        <div className='d-flex justify-content-end'>
+                          <button type="button" className="btn-close" onClick={() => setshowLowerRight(false)}></button>
+                        </div>
+                        <BottomBanners banner={bannerMap['banner5']}/>
+                    </div>
+                  }
+                </div>
+            </Router>
+        }
 
-      { !(coins && coinMap) &&
-        <div style={styles.loading}>
-            <div>
-              <div className="loadingio-spinner-gear-kf6jkp8svg"><div className="ldio-lw2jfx443j">
-              <div><div></div><div></div><div></div><div></div><div></div><div></div></div>
-              </div></div>
-
-            </div>
-        </div>
-      }
-    </>
+        { !(coins && coinMap) &&
+          <Loading />
+        }
+      </>
+    </Suspense>
   );
 }
 

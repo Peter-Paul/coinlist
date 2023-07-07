@@ -1,5 +1,8 @@
+import { useTranslation } from "react-i18next";
+
 function Apply({price=undefined}) {
     const link = "http://T.me/eduardotradinglist"
+    const {t:content} = useTranslation()
     const styles = {
         apply:{
             borderLeftColor:"white",
@@ -11,13 +14,13 @@ function Apply({price=undefined}) {
         <>
             <div  style={styles.apply}>
                     <div className="ms-3">
-                        <h3>How to apply:</h3>
+                        <h3>{content("apply.h1")}:</h3>
                         {
                             price &&
-                            <h5 className="text-light">Price - ${price}</h5>
+                            <h5 className="text-light">{content("apply.price")} - ${price}</h5>
                         }
-                        <p>Send us direct message on Telegram: <span className="text-warning" style={{cursor:"pointer"}} onClick={() => { window.open(link,"_blank") }}>@doctoreclub</span></p>
-                        <p>Or e-mail us at: <span className="text-warning">DoctoreClub@gmail.com</span></p>
+                        <p>{content("apply.telegram")}: <span className="text-warning" style={{cursor:"pointer"}} onClick={() => { window.open(link,"_blank") }}>@doctoreclub</span></p>
+                        <p>{content("apply.email")}: <span className="text-warning">DoctoreClub@gmail.com</span></p>
                     </div>
                 </div>
         </>

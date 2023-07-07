@@ -4,9 +4,11 @@ import Verify from "../components/promotion/verify";
 import Audit from "../components/promotion/audit";
 import { Link, useParams } from "react-router-dom";
 import TopBanner from "../shared/topBanners";
+import { useTranslation } from "react-i18next";
 
 function Promotion({voteCoin}) {
     const {service:activeState} = useParams()
+    const {t:content} = useTranslation()
     // const [ activeState, setActive ] = useState("promote")
  
     const styles = {
@@ -56,7 +58,7 @@ function Promotion({voteCoin}) {
 
                     <div className="row">
                         <div className="col-3">
-                            <h2><strong>Services</strong></h2>
+                            <h2><strong>{content("Services")}</strong></h2>
                         </div>
                         <div className="col-9">
                             <nav className="nav nav-pills nav-justified mb-4">
@@ -64,14 +66,14 @@ function Promotion({voteCoin}) {
                                     style={ ( activeState==="promote"  ) ? styles.activePage : styles.inactivePage } 
                                     to={"/services/promote"}>
                                         <strong>
-                                            Promote Coin
+                                            {content("PromoteCoin")}
                                         </strong>
                                 </Link>
                                 <Link className="nav-link mx-2" 
                                     style={ ( activeState==="audit" ) ? styles.activePage : styles.inactivePage }  
                                     to={"/services/audit"}>
                                         <strong>
-                                            Audit Coin
+                                            {content("AuditCoin")}
                                         </strong>
                                 </Link>
                                 <Link className="nav-link mx-2" style={ ( activeState==="kyc" ) ? styles.activePage : styles.inactivePage }  
