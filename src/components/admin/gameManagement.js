@@ -30,7 +30,7 @@ function GameManagement() {
     return ( 
         <>
             <div className="mt-4">
-                <Table data={games} allowRoute={false} admin={true}
+                <Table data={games && games} allowRoute={false} admin={true}
                 userAddress={userAddress} gameMap={gameMap} connected={connected} games={true} 
                 removeGame={removeGame} patchGame={patchGame}/>
             </div>

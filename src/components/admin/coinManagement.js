@@ -31,7 +31,7 @@ function CoinManagement({voteCoin}) {
     return ( 
         <>
             <div className="mt-4">
-              <Table data={data} title={"COINS"} allowRoute={true}
+              <Table data={data && data} title={"COINS"} allowRoute={true}
               userAddress={userAddress} 
               voteMap={voteMap} connected={connected} voteCoin={voteCoin} 
               admin={true} updateCoin={updateCoin} removeCoin={removeCoin}
