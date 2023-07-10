@@ -38,7 +38,7 @@ const partners = [
 
 function App() {
   // console.log(process.env.REACT_APP_ENV)
-  const {coinMap,gameMap,coins,games,gameVoteMap,voteMap,userAddress,connected,bannerMap,baseUrl} = useSelector((state) => state.app)
+  const {coinMap,gameMap,userAddress,connected,bannerMap,baseUrl} = useSelector((state) => state.app)
   const {t, i18n} = useTranslation()
   const dispatch = useDispatch()
   const [showLowerLeft,setshowLowerLeft] = useState(true)
@@ -52,7 +52,6 @@ function App() {
   const onInit = useCallback( async () => {
     const baseUrl = process.env.REACT_APP_BACKEND_BASE_URL
     const admin = process.env.REACT_APP_ADMIN
-    // const key = process.env.REACT_APP_CLOUDINARY_API_KEY
     const coinMap = {}
     const gameMap = {}
     const bannerMap = {}
@@ -63,19 +62,22 @@ function App() {
     const bannerService = new BannerService(baseUrl)
     const bannersList = await bannerService.getBanners()
 
+    for (let {name,url,link} of bannersList){
+      bannerMap[name] = {url,link}
+    }
+    dispatch( loadState({coins:undefined,games:undefined,gameMap:undefined,coinMap:undefined,
+                        voteMap:undefined,gameVoteMap:undefined,baseUrl,bannerMap,admin,partners}) )
+
+
+    const telegram = new Telegram()
+    setTelegramPosts(await telegram.getPosts())
+
     const coinService = new CoinService(baseUrl)
     const coinList = await coinService.getCoins()
 
     const gameService = new GameService(baseUrl)
     const gameList = await gameService.getGames()
 
-    // console.log(bannersList)
-    
-
-    for (let {name,url,link} of bannersList){
-      bannerMap[name] = {url,link}
-    }
-    
 
     try{
       const displayPrices = await axios.get("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=5&page=1")
@@ -105,10 +107,9 @@ function App() {
       }
     }else{console.log("Error getting coins")}
     
-    const telegram = new Telegram()
-    setTelegramPosts(await telegram.getPosts())
-
+    
     dispatch( loadState({coins:coinList,games:gameList,gameMap,coinMap,voteMap,gameVoteMap,baseUrl,bannerMap,admin,partners}) )
+    
     
     
   }, [dispatch])
@@ -210,7 +211,8 @@ function App() {
   return (
     <Suspense fallback={<Loading />}>
       <>
-        { (coins && coinMap && voteMap &&  bannerMap && games && gameVoteMap) &&
+        {/* { (coins && coinMap && voteMap &&  bannerMap && games && gameVoteMap) && */}
+        {  bannerMap &&
             <Router>
               <div className='d-flex justify-content-between'>
                 <div className='sidebar col-2 d-none d-custom-block bg-dark '>
@@ -291,7 +293,7 @@ function App() {
             </Router>
         }
 
-        { !(coins && coinMap) &&
+        { !(bannerMap) &&
           <Loading />
         }
       </>

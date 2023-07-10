@@ -44,5 +44,21 @@
         "price":"Precio",
         "telegram":"Envíanos un mensaje directo en Telegram",
         "email":"O envíenos un correo electrónico a"
+    },
+    "coin":{
+        "address": "Dirección del Contrato",
+        "addToWallet": "Agregar a la Billetera",
+        "description": "Descripción",
+        "audited": "Auditado",
+        "verified": "Verificado",
+        "safety": "Seguridad",
+        "votes": "Votos",
+        "vote":"VOTAR",
+        "voted":"VOTADO",
+        "vote24":"Puedes votar una vez cada 24 horas",
+        "connectWallet":"Conecte la billetera para VOTAR",
+        "charts": "Gráficos",
+        "buy": "Comprar en",
+        "tags": "Etiquetas"
     }
 }

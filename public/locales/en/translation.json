@@ -44,5 +44,21 @@
         "price":"Price",
         "telegram":"Send us direct message on Telegram",
         "email":"Or e-mail us at"
+    },
+    "coin":{
+        "address":"Contract address",
+        "addToWallet":"Add to Wallet",
+        "description":"Description",
+        "audited":"Audited",
+        "verified":"Verified",
+        "safety":"Safety",
+        "votes":"Votes",
+        "vote":"VOTE",
+        "voted":"VOTED",
+        "vote24":"You can vote once every 24 hours",
+        "connectWallet":"Connect wallet to VOTE",
+        "charts":"Charts",
+        "buy":"Buy on",
+        "tags":"Tags"
     }
 }

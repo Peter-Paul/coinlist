@@ -21,7 +21,7 @@ function Audit({voteCoin}) {
             </div>
 
             <div className="mt-4">
-              <Table data={data.filter( d => d.show && d.tags.includes("audited") )} title={"AUDITED COINS"} allowRoute={false}
+              <Table data={data && data.filter( d => d.show && d.tags.includes("audited") )} title={"AUDITED COINS"} allowRoute={false}
               userAddress={userAddress} 
               voteMap={voteMap} connected={connected} voteCoin={voteCoin}/>
             </div>

@@ -11,7 +11,7 @@ function Ranks({priceDisplay,voteCoin,telegramPosts,content}) {
     const {coins,voteMap,userAddress,connected} = useSelector((state) => state.app)
     const [searchData, setSearchData] = useState("");
 
-    const data = coins.filter(
+    const data = coins && coins.filter(
         coin => {
           return (
             coin
@@ -79,7 +79,7 @@ function Ranks({priceDisplay,voteCoin,telegramPosts,content}) {
             <div className="card shadow" style={styles.cardBlue}>
                 <div className="card-body">
                     <Search content={content} handleChangeSearch={handleChangeSearch} />
-                    <Table data={data.filter( d => d.show && d.promote )} title={"PROMOTED"} 
+                    <Table data={data && data.filter( d => d.show && d.promote )} title={"PROMOTED"} 
                         allowRoute={true} userAddress={userAddress} 
                         voteMap={voteMap} connected={connected} voteCoin={voteCoin} />
 
@@ -95,7 +95,7 @@ function Ranks({priceDisplay,voteCoin,telegramPosts,content}) {
                         <button className="btn btn-outline-light me-3 mb-2" onClick={ () => setTag('pinksale') }> <i className="fa fa-rocket me-1"></i> Pinksale</button>
                     </div>
 
-                    <Table data={data.filter( d => d.show && d.tags.includes(tag) )} title={"ASSET"}
+                    <Table data={data && data.filter( d => d.show && d.tags.includes(tag) )} title={"ASSET"}
                         allowRoute={true} userAddress={userAddress} 
                         voteMap={voteMap} connected={connected} voteCoin={voteCoin} />
                 </div>

@@ -571,6 +571,7 @@ function Table({data,title,allowRoute,connected,userAddress,voteCoin,voteGame,vo
                     data={data}
                     customStyles={customStyles}
                     theme="dark"
+                    progressPending={data===undefined}
                     pagination
                 />
         </>

@@ -1,5 +1,5 @@
 function TelegramPosts({telegramPosts,styles}) {
-
+    // const dummyPosts = [ {id:"1"},{id:"2"},{id:"3"},{id:"4"} ]
     const timePosted = time => {
         
         const now = Math.floor( new Date().getTime() / 1000 )

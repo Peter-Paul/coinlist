@@ -25,16 +25,16 @@ export const appSlice = createSlice({
     initialState,
     reducers:{
         loadState: (state,action) => {
-            state.coins = [...action.payload.coins]
-            state.coinMap = {...action.payload.coinMap}
-            state.games = [...action.payload.games]
-            state.gameMap = {...action.payload.gameMap}
-            state.voteMap = {...action.payload.voteMap}
-            state.gameVoteMap = {...action.payload.gameVoteMap}
-            state.baseUrl = action.payload.baseUrl
-            state.bannerMap = action.payload.bannerMap
-            state.admin = action.payload.admin
-            state.partners = action.payload.partners
+            state.coins = action.payload.coins && action.payload.coins
+            state.coinMap = action.payload.coinMap && action.payload.coinMap
+            state.games = action.payload.games && action.payload.games
+            state.gameMap = action.payload.gameMap && action.payload.gameMap
+            state.voteMap = action.payload.voteMap && action.payload.voteMap
+            state.gameVoteMap = action.payload.gameVoteMap && action.payload.gameVoteMap
+            state.baseUrl = action.payload.baseUrl && action.payload.baseUrl
+            state.bannerMap = action.payload.bannerMap && action.payload.bannerMap
+            state.admin = action.payload.admin && action.payload.admin
+            state.partners = action.payload.partners && action.payload.partners
         },
 
         connectUser: (state,action) => {

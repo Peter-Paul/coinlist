@@ -23,13 +23,13 @@ function Games({voteCoin,voteGame}) {
                         <Link className="btn btn-outline-dell-blue" to={"/addGame"}> <i className="fa fa-plus me-1"></i> Add Game</Link>
                     </div>
 
-                    <Table data={games.filter( g => g.show)} allowRoute={false} userAddress={userAddress} gameVoteMap={gameVoteMap}
+                    <Table data={games && games.filter( g => g.show)} allowRoute={false} userAddress={userAddress} gameVoteMap={gameVoteMap}
                     voteGame={voteGame} gameMap={gameMap} connected={connected} games={true} />
                 </div>
             </div>
 
             <div className="mt-4">
-                <Table data={coins.filter( d => d.show && d.promote )} title={"PROMOTED"} 
+                <Table data={coins && coins.filter( d => d.show && d.promote )} title={"PROMOTED"} 
                     allowRoute={false} userAddress={userAddress} 
                     voteMap={voteMap} connected={connected} voteCoin={voteCoin}  />
             </div>

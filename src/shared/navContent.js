@@ -53,12 +53,13 @@ function NavContent({handleLanguageChange,content,smallView=false}) {
                                 onChange={ (e) => {handleLanguageChange(e); setLang(e.target.value) } } value={currentLang}>
                                     <option value="en">English</option>
                                     <option value="sp">Español</option>
+                                    <option value="bz">Brasileiro</option>
                                 </select>
                             </div>
                         </li>
-                        <li data-bs-dismiss={smallView?"offcanvas":""}>
+                        <li >
                             <div className="d-flex justify-content-between">
-                                <Link style={styles.link} to="/" onClick={ () => window.scrollTo({top: 0})}><i className="fa fa-table me-2"></i>{content("Rankings")}</Link>
+                                <Link data-bs-dismiss={smallView?"offcanvas":""} style={styles.link} to="/" onClick={ () => window.scrollTo({top: 0})}><i className="fa fa-table me-2"></i>{content("Rankings")}</Link>
                                 <span onClick={ () => changeRankOptionView(!rankOption)} className="mt-2 me-5" style={{fontSize:"15px"}}>
                                     <i className={`fa fa-chevron-${rankOption?"down":"right"}`}></i>
                                 </span>
@@ -66,15 +67,15 @@ function NavContent({handleLanguageChange,content,smallView=false}) {
 
                             <div className={`d-flex ${rankOption?"":"d-none"}`}>
                                 <div className="d-flex flex-column ms-2">
-                                    <Link className="mt-2"  style={styles.subLink} to="/" onClick={ () => window.scrollTo({top: 0})}> <i className="fa fa-circle me-2" style={{fontSize:"5px"}}></i>{content("CoinList")}</Link>
-                                    <Link className="mt-2"  style={styles.subLink} to="/addCoin" onClick={ () => window.scrollTo({top: 0})}> <i className="fa fa-circle me-2" style={{fontSize:"5px"}}></i>{content("AddCoin")}</Link>
+                                    <Link data-bs-dismiss={smallView?"offcanvas":""} className="mt-2"  style={styles.subLink} to="/" onClick={ () => window.scrollTo({top: 0})}> <i className="fa fa-circle me-2" style={{fontSize:"5px"}}></i>{content("CoinList")}</Link>
+                                    <Link data-bs-dismiss={smallView?"offcanvas":""} className="mt-2"  style={styles.subLink} to="/addCoin" onClick={ () => window.scrollTo({top: 0})}> <i className="fa fa-circle me-2" style={{fontSize:"5px"}}></i>{content("AddCoin")}</Link>
                                 </div>
                             </div>
                         </li>
                         <hr className="mb-4" />
-                        <li data-bs-dismiss={smallView?"offcanvas":""} >
+                        <li >
                             <div className="d-flex justify-content-between">
-                                <Link  style={styles.link} to="/services/promote" onClick={ () => window.scrollTo({top: 0})}> <i className="fa fa-bolt me-2"></i>{content("Promotions")}</Link>
+                                <Link data-bs-dismiss={smallView?"offcanvas":""} style={styles.link} to="/services/promote" onClick={ () => window.scrollTo({top: 0})}> <i className="fa fa-bolt me-2"></i>{content("Promotions")}</Link>
                                 <span onClick={ () => changePromoteOptionView(!promoteOption)} className="mt-2 me-5" style={{fontSize:"15px"}}>
                                     <i className={`fa fa-chevron-${promoteOption?"down":"right"}`}></i>
                                 </span>
@@ -82,15 +83,15 @@ function NavContent({handleLanguageChange,content,smallView=false}) {
 
                             <div className={`d-flex ${promoteOption?"":"d-none"}`}>
                                 <div className="d-flex flex-column ms-2">
-                                    <Link className="mt-2"  style={styles.subLink} to="/services/promote" onClick={ () => window.scrollTo({top: 0})}> <i className="fa fa-circle me-2" style={{fontSize:"5px"}}></i>{content("PromoteCoin")}</Link>
-                                    <Link className="mt-2"  style={styles.subLink} to="/services/audit" onClick={ () => window.scrollTo({top: 0})}> <i className="fa fa-circle me-2" style={{fontSize:"5px"}}></i>{content("AuditCoin")}</Link>
-                                    <Link className="mt-2"  style={styles.subLink} to="/services/kyc" onClick={ () => window.scrollTo({top: 0})}> <i className="fa fa-circle me-2" style={{fontSize:"5px"}}></i>KYC</Link>
+                                    <Link data-bs-dismiss={smallView?"offcanvas":""} className="mt-2"  style={styles.subLink} to="/services/promote" onClick={ () => window.scrollTo({top: 0})}> <i className="fa fa-circle me-2" style={{fontSize:"5px"}}></i>{content("PromoteCoin")}</Link>
+                                    <Link data-bs-dismiss={smallView?"offcanvas":""} className="mt-2"  style={styles.subLink} to="/services/audit" onClick={ () => window.scrollTo({top: 0})}> <i className="fa fa-circle me-2" style={{fontSize:"5px"}}></i>{content("AuditCoin")}</Link>
+                                    <Link data-bs-dismiss={smallView?"offcanvas":""} className="mt-2"  style={styles.subLink} to="/services/kyc" onClick={ () => window.scrollTo({top: 0})}> <i className="fa fa-circle me-2" style={{fontSize:"5px"}}></i>KYC</Link>
                                 </div>
                             </div>
                         </li>
 
                         <hr className="mb-4" />
-                        <li data-bs-dismiss={smallView?"offcanvas":""} >
+                        <li >
                             <div className="d-flex justify-content-between">
                                 <Link  style={styles.link} to="/games" onClick={ () => window.scrollTo({top: 0})}> <i className="fa fa-gamepad me-2"></i>{content("Games")}</Link>
                                 <span onClick={ () => changeGameOptionView(!gameOption)} className="mt-2 me-5" style={{fontSize:"15px"}}>
@@ -100,8 +101,8 @@ function NavContent({handleLanguageChange,content,smallView=false}) {
 
                             <div className={`d-flex ${gameOption?"":"d-none"}`}>
                                 <div className="d-flex flex-column ms-2">
-                                    <Link className="mt-2"  style={styles.subLink} to="/games" onClick={ () => window.scrollTo({top: 0})}> <i className="fa fa-circle me-2" style={{fontSize:"5px"}}></i>{content("GamesList")}</Link>
-                                    <Link className="mt-2"  style={styles.subLink} to="/addGame" onClick={ () => window.scrollTo({top: 0})}> <i className="fa fa-circle me-2" style={{fontSize:"5px"}}></i>{content("AddGame")}</Link>
+                                    <Link data-bs-dismiss={smallView?"offcanvas":""} className="mt-2"  style={styles.subLink} to="/games" onClick={ () => window.scrollTo({top: 0})}> <i className="fa fa-circle me-2" style={{fontSize:"5px"}}></i>{content("GamesList")}</Link>
+                                    <Link data-bs-dismiss={smallView?"offcanvas":""} className="mt-2"  style={styles.subLink} to="/addGame" onClick={ () => window.scrollTo({top: 0})}> <i className="fa fa-circle me-2" style={{fontSize:"5px"}}></i>{content("AddGame")}</Link>
                                 </div>
                             </div>
                         </li>

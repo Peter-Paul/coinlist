@@ -52,7 +52,7 @@ function Promote({voteCoin}) {
 
     return ( 
         <>
-            <Table data={data.filter( d => d.show && d.promote )} title={"PROMOTED"} allowRoute={false}
+            <Table data={data && data.filter( d => d.show && d.promote )} title={"PROMOTED"} allowRoute={false}
             userAddress={userAddress} 
             voteMap={voteMap} connected={connected} voteCoin={voteCoin}/>
 

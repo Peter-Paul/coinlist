@@ -21,7 +21,7 @@ function Verify({voteCoin}) {
             </div>
 
             <div className="mt-4">
-              <Table data={data.filter( d => d.show && d.tags.includes("kyc") )} title={"KYC COINS"} allowRoute={false}
+              <Table data={data && data.filter( d => d.show && d.tags.includes("kyc") )} title={"KYC COINS"} allowRoute={false}
               userAddress={userAddress} 
               voteMap={voteMap} connected={connected} voteCoin={voteCoin}/>
             </div>

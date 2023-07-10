@@ -1,0 +1,64 @@
+{
+    "Rankings": "Classificações",
+    "AboutUs": "Sobre Nós",
+    "Services": "Serviços",
+    "AddCoin": "Adicionar Moeda",
+    "CoinList": "Lista de Moedas",
+    "Promotions": "Promoções",
+    "PromoteCoin": "Promover Moeda",
+    "VerifyCoin": "Verificar Moeda",
+    "AuditCoin": "Auditar Moeda",
+    "Games": "Jogos",
+    "GamesList": "Lista de Jogos",
+    "AddGame": "Adicionar Jogo",
+    "Partners": "Parceiros",
+    "Trending": "Tendências",
+    "New": "Novo",
+    "Audit": "Auditoria",
+    "Subscribe": "Inscreva-se em nossa newsletter",
+    "SubscribeMsg": "Receba as melhores moedas de alto potencial direto na sua caixa de entrada",
+    "SubscribeInput": "Digite seu e-mail",
+    "SubscribeButton": "Inscrever-se",
+    "ConnectWallet": "Conectar Carteira",
+    "Disconnect": "Desconectar",
+    "promo": {
+        "h1": "Promoção de Moeda",
+        "p1": "No passado, os rankings dos projetos eram baseados em votos, mas descobrimos que alguns projetos conseguiam obter grandes quantidades de votos para garantir uma classificação mais alta, resultando em uma vantagem injusta. Com nosso novo sistema Boost, criamos um método mais transparente e justo para todos os membros da nossa comunidade e proprietários de projetos.",
+        "p2": "Firmamos parceria com os maiores influenciadores do Telegram, que podem ajudar a impulsionar sua estratégia de marketing e preencher a pré-venda em segundos! São influenciadores em grandes comunidades com muitos seguidores em todo o mundo. Trabalhamos com todos eles e, assim, ajudaram nossa pré-venda a ser concluída em 15 segundos."
+    },
+    "audit": {
+        "h1": "Auditoria de Moeda",
+        "h2": "Comprove a confiabilidade e correção do seu contrato inteligente para a sua comunidade, com a análise completa do código-fonte e arquitetura do contrato inteligente.",
+        "p1": "Comprove a confiabilidade e correção do seu contrato inteligente para a sua comunidade, com a análise completa do código-fonte e arquitetura do contrato inteligente.",
+        "p2": "Testes rigorosos do projeto, análise de padrões de design de código para garantir que esteja bem estruturado, e garantir que contratos e bibliotecas de terceiros sejam usados de forma segura."
+    },
+    "kyc": {
+        "h1": "Verificação de Moeda",
+        "h2": "Faça a verificação da sua equipe para mostrar transparência à sua comunidade.",
+        "h3": "Como o processo de verificação funciona?",
+        "p1": "Know Your Customer (KYC) - é o método essencial de verificação da identidade dos membros da equipe do projeto. A Doctoreclub utiliza esse procedimento para verificar a identidade dos membros da equipe do projeto. Vamos tornar o espaço criptográfico mais seguro!",
+        "p2": "Você deve participar de uma chamada de vídeo que será gravada. Em caso de planos de fraude ou honeypot, a gravação será postada nos grupos de mídia social do seu projeto em benefício das vítimas de golpes. Seu projeto será marcado como validado pela equipe da Doctoreclub, aumentando sua credibilidade com investidores e toda a comunidade criptográfica."
+    },
+    "apply": {
+        "h1": "Como se candidatar",
+        "price": "Preço",
+        "telegram": "Envie-nos uma mensagem direta no Telegram",
+        "email": "Ou envie um e-mail para nós em"
+    },
+    "coin":{
+        "address": "Endereço do Contrato",
+        "addToWallet": "Adicionar à Carteira",
+        "description": "Descrição",
+        "audited": "Auditado",
+        "verified": "Verificado",
+        "safety": "Segurança",
+        "votes": "Votos",
+        "vote":"VOTO",
+        "voted":"VOTO",
+        "vote24": "Você pode votar uma vez a cada 24 horas",
+        "connectWallet":"Conecte a carteira ao VOTE",
+        "charts": "Gráficos",
+        "buy": "Comprar em",
+        "tags": "Tags"
+    }
+}
