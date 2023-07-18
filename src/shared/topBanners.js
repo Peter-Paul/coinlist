@@ -112,6 +112,10 @@ function TopBanner() {
                             onClick={() => { window.open(bannerMap['banner2'].link,"_blank") }}
                         />
                     </div>
+
+                    <div className="d-flex justify-content-center">
+                        <iframe title="largeAd" data-aa='2238676' src='//ad.a-ads.com/2238676?size=970x90' style={{width:'970px', height:'90px', border:'0px', padding:'0', overflow:'hidden', backgroundColor: 'transparent'}}></iframe>
+                    </div>
         </>
      );
 }
