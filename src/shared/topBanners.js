@@ -46,7 +46,7 @@ function TopBanner() {
     }
     return ( 
         <>
-            <div className="d-flex justify-content-evenly my-3">
+                    <div className="d-flex justify-content-evenly my-3">
                         <img
                             alt="not found"
                             style={styles.wideBannerImage}
@@ -63,37 +63,41 @@ function TopBanner() {
                         />
                     </div>
 
-                        <div className="d-flex justify-content-center mt-2 row ">
-                            <img
-                                alt="not found"
-                                style={styles.gifBanner}
-                                src={bannerMap['banner4'].url}
-                                className="rounded d-none d-md-block"
-                                onClick={() => { window.open(bannerMap['banner4'].link,"_blank") }}
-                            />
-                            <img
-                                alt="not found"
-                                style={styles.gifBanner}
-                                src={bannerMap['banner4'].url}
-                                className="rounded d-none d-md-block"
-                                onClick={() => { window.open(bannerMap['banner4'].link,"_blank") }}
-                            />
+                    <div className="d-flex justify-content-center mt-2 row ">
+                        <img
+                            alt="not found"
+                            style={styles.gifBanner}
+                            src={bannerMap['banner4'].url}
+                            className="rounded d-none d-md-block"
+                            onClick={() => { window.open(bannerMap['banner4'].link,"_blank") }}
+                        />
+                        <img
+                            alt="not found"
+                            style={styles.gifBanner}
+                            src={bannerMap['banner4'].url}
+                            className="rounded d-none d-md-block"
+                            onClick={() => { window.open(bannerMap['banner4'].link,"_blank") }}
+                        />
 
-                            <img
-                                alt="not found"
-                                style={styles.gifBannerMobile}
-                                src={bannerMap['banner4'].url}
-                                className="rounded d-block d-md-none"
-                                onClick={() => { window.open(bannerMap['banner4'].link,"_blank") }}
-                            />
-                            <img
-                                alt="not found"
-                                style={styles.gifBannerMobile}
-                                src={bannerMap['banner4'].url}
-                                className="rounded d-block d-md-none mt-2"
-                                onClick={() => { window.open(bannerMap['banner4'].link,"_blank") }}
-                            />
-                        </div>
+                        <img
+                            alt="not found"
+                            style={styles.gifBannerMobile}
+                            src={bannerMap['banner4'].url}
+                            className="rounded d-block d-md-none"
+                            onClick={() => { window.open(bannerMap['banner4'].link,"_blank") }}
+                        />
+                        <img
+                            alt="not found"
+                            style={styles.gifBannerMobile}
+                            src={bannerMap['banner4'].url}
+                            className="rounded d-block d-md-none mt-2"
+                            onClick={() => { window.open(bannerMap['banner4'].link,"_blank") }}
+                        />
+                    </div>
+
+                    <div className="d-flex justify-content-center mt-2 mb-4">
+                        <iframe title="largeAd" data-aa='2238676' src='//ad.a-ads.com/2238676?size=970x90' style={{width:'970px', height:'90px', border:'0px', padding:'0', overflow:'hidden', backgroundColor: 'transparent'}}></iframe>
+                    </div>
 
 
                     <div className="d-flex justify-content-evenly mt-3 mb-4">
@@ -113,9 +117,7 @@ function TopBanner() {
                         />
                     </div>
 
-                    <div className="d-flex justify-content-center">
-                        <iframe title="largeAd" data-aa='2238676' src='//ad.a-ads.com/2238676?size=970x90' style={{width:'970px', height:'90px', border:'0px', padding:'0', overflow:'hidden', backgroundColor: 'transparent'}}></iframe>
-                    </div>
+                    
         </>
      );
 }
