@@ -3,7 +3,7 @@ import BannerUpload from "./bannerUpload";
 
 function Banner({uploadBanner}) {
     const {bannerMap} = useSelector((state) => state.app)
-    
+    const defaultUrl = "https://res.cloudinary.com/dwf6iuvbh/image/upload/v1686828800/photo_2023-06-15_14-13-47_mlqd76.jpg"
     const styles = {
         wideBanner: {
             height: "115px",
@@ -60,12 +60,12 @@ function Banner({uploadBanner}) {
                             <img
                                 alt="not found"
                                 style={styles.smallBanner}
-                                src={bannerMap['banner5'].url}
+                                src={bannerMap['banner5'].url!==""?bannerMap['banner5'].url:defaultUrl}
                             />
                         </div>
                         <div className="d-flex justify-content-center my-3">
                             <BannerUpload position={"Upload Right Banner"} 
-                                uploadBanner={uploadBanner} banner={"banner5"} />
+                               bannerInfo={bannerMap['banner5']} uploadBanner={uploadBanner} banner={"banner5"} />
                         </div>
                     </div>
 
@@ -74,12 +74,12 @@ function Banner({uploadBanner}) {
                             <img
                                 alt="not found"
                                 style={styles.smallBanner}
-                                src={bannerMap['banner6'].url}
+                                src={bannerMap['banner6'].url!==""?bannerMap['banner6'].url:defaultUrl}
                             />
                         </div>
                         <div className="d-flex justify-content-center my-3">
                             <BannerUpload position={"Upload Left Banner"} 
-                                uploadBanner={uploadBanner} banner={"banner6"} />
+                               bannerInfo={bannerMap['banner6']} uploadBanner={uploadBanner} banner={"banner6"} />
                         </div>
                     </div>
 
@@ -88,12 +88,12 @@ function Banner({uploadBanner}) {
                             <img
                                 alt="not found"
                                 style={styles.smallBanner}
-                                src={bannerMap['banner7'].url}
+                                src={bannerMap['banner7'].url!==""?bannerMap['banner7'].url:defaultUrl}
                             />
                         </div>
                         <div className="d-flex justify-content-center my-3">
                             <BannerUpload position={"Upload Sidebar Banner"} 
-                                uploadBanner={uploadBanner} banner={"banner7"} />
+                                bannerInfo={bannerMap['banner7']} uploadBanner={uploadBanner} banner={"banner7"} />
                         </div>
                     </div>
 
@@ -109,12 +109,12 @@ function Banner({uploadBanner}) {
                             <img
                                 alt="not found"
                                 style={styles.rotatingBanner}
-                                src={bannerMap['banner3'].url}
+                                src={bannerMap['banner3'].url!==""?bannerMap['banner3'].url:defaultUrl}
                             />
                         </div>
                         <div className="d-flex justify-content-center my-3">
                             <BannerUpload position={"Upload Footer Banner"} 
-                                uploadBanner={uploadBanner} banner={"banner3"} />
+                                bannerInfo={bannerMap['banner3']} uploadBanner={uploadBanner} banner={"banner3"} />
                         </div>
 
                     </div>
@@ -124,12 +124,12 @@ function Banner({uploadBanner}) {
                             <img
                                 alt="not found"
                                 style={styles.rotatingBanner}
-                                src={bannerMap['banner4'].url}
+                                src={bannerMap['banner4'].url!==""?bannerMap['banner4'].url:defaultUrl}
                             />
                         </div>
                         <div className="d-flex justify-content-center my-3">
                             <BannerUpload position={"Upload Double Banner"} 
-                                uploadBanner={uploadBanner} banner={"banner4"} />
+                               bannerInfo={bannerMap['banner4']} uploadBanner={uploadBanner} banner={"banner4"} />
                         </div>
 
                     </div>
@@ -145,12 +145,12 @@ function Banner({uploadBanner}) {
                         <img
                             alt="not found"
                             style={styles.wideBanner}
-                            src={bannerMap['banner1'].url}
+                            src={bannerMap['banner1'].url!==""?bannerMap['banner1'].url:defaultUrl}
                         />
                     </div>
                     <div className="d-flex justify-content-center my-3">
                         <BannerUpload position={"Upload Wide Banner 1"} 
-                            uploadBanner={uploadBanner} banner={"banner1"} />
+                          bannerInfo={bannerMap['banner1']}  uploadBanner={uploadBanner} banner={"banner1"} />
                     </div>
                 </div>
             }
@@ -162,12 +162,12 @@ function Banner({uploadBanner}) {
                         <img
                             alt="not found"
                             style={styles.wideBanner}
-                            src={bannerMap['banner2'].url}
+                            src={bannerMap['banner2'].url!==""?bannerMap['banner2'].url:defaultUrl}
                         />
                     </div>
                     <div className="d-flex justify-content-center my-3">
                         <BannerUpload position={"Upload Wide Banner 2"} 
-                            uploadBanner={uploadBanner} banner={"banner2"} />
+                          bannerInfo={bannerMap['banner2']}  uploadBanner={uploadBanner} banner={"banner2"} />
                     </div>
 
                 </div>

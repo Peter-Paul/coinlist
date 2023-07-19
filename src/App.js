@@ -132,15 +132,21 @@ function App() {
 
   const uploadBanner = async (image,name,link) => {
     const service = new BannerService(baseUrl)
-    // console.log(cloudinaryKey)
-    const formData = new FormData()
-    formData.append("file",image, `${name}`)
-    formData.append("upload_preset",`ml_default`)
-    // const api = `https://api.cloudinary.com/v1_1/${cloudinaryKey}/image/upload`
-    const api = `https://api.cloudinary.com/v1_1/dwf6iuvbh/image/upload`
-    const res = await axios.post(api, formData)
-    service.updateBanner(name,res.data.secure_url,link) 
-    dispatch( updateBanner({name,url:res.data.secure_url,link}) )
+    if (image){
+      // console.log(cloudinaryKey)
+      const formData = new FormData()
+      formData.append("file",image, `${name}`)
+      formData.append("upload_preset",`ml_default`)
+      // const api = `https://api.cloudinary.com/v1_1/${cloudinaryKey}/image/upload`
+      const api = `https://api.cloudinary.com/v1_1/dwf6iuvbh/image/upload`
+      const res = await axios.post(api, formData)
+      service.updateBanner(name,res.data.secure_url,link) 
+      dispatch( updateBanner({name,url:res.data.secure_url,link}) )
+    }else{
+      const url = ""
+      service.updateBanner(name,url,link) 
+      dispatch( updateBanner({name,url,link}) )
+    }
   }
 
   const disconnectWallet = () =>  dispatch( connectUser( {userAddress:undefined,connected:false} ) )
@@ -276,7 +282,11 @@ function App() {
                         <div className='d-flex justify-content-end'>
                           <button type="button" className="btn-close" onClick={() => setshowLowerLeft(false)}></button>
                         </div>
-                          <BottomBanners banner={bannerMap['banner6']}/>
+                          {
+                            bannerMap['banner6'].url!==""?
+                            <BottomBanners banner={bannerMap['banner6']}/>:
+                            <iframe title="btmE" data-aa='2238707' src='//ad.a-ads.com/2238707?size=250x250' style={{width:'250px', height:'250px', border:'0px', padding:'0', overflow:'hidden', backgroundColor: 'transparent'}}></iframe>
+                          }
                       </div>
                     </>
                   }
@@ -286,7 +296,11 @@ function App() {
                         <div className='d-flex justify-content-end'>
                           <button type="button" className="btn-close" onClick={() => setshowLowerRight(false)}></button>
                         </div>
-                        <BottomBanners banner={bannerMap['banner5']}/>
+                        {
+                          bannerMap['banner5'].url!==""?
+                          <BottomBanners banner={bannerMap['banner5']}/>:
+                          <iframe  title="btmE" data-aa='2238705' src='//ad.a-ads.com/2238705?size=250x250' style={{width:'250px', height:'250px', border:'0px', padding:'0', overflow:'hidden', backgroundColor: 'transparent'}}></iframe>
+                        }
                     </div>
                   }
                 </div>

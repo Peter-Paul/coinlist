@@ -123,13 +123,22 @@ function NavContent({handleLanguageChange,content,smallView=false}) {
                                 <hr />
                             </>
                         }
-                        <img
-                            alt="not found"
-                            style={styles.banner}
-                            src={bannerMap['banner7'].url}
-                            className="my-5"
-                            onClick={() => { window.open(bannerMap['banner7'].link,"_blank") }}
-                        />  
+
+                        {
+                            bannerMap['banner7'].url!==""?
+                            <img
+                                alt="not found"
+                                style={styles.banner}
+                                src={bannerMap['banner7'].url}
+                                className="my-5"
+                                onClick={() => { window.open(bannerMap['banner7'].link,"_blank") }}
+                            />  :
+                            <div className="my-5">
+                                <iframe title="navB" data-aa='2238709' src='//ad.a-ads.com/2238709?size=250x250' style={{width:'250px', height:'250px', border:'0px', padding:'0', overflow:'hidden', backgroundColor: 'transparent'}}></iframe>
+                            </div>
+
+                        }
+                        
                         <li className="mt-auto" data-bs-dismiss={smallView?"offcanvas":""}>
                             <Subscribe/>
                         </li>

@@ -43,22 +43,34 @@ function Footer({partners,name}) {
 
     return (  
         <>
-            <div className="d-flex mt-5 justify-content-center">
-                <img
-                    alt="not found"
-                    style={styles.wideBannerImage}
-                    src={bannerMap['banner3'].url}
-                    className="rounded mt-2 d-none d-md-block"
-                    onClick={() => { window.open(bannerMap['banner3'].link,"_blank") }}
-                />
-                <img
-                    alt="not found"
-                    style={styles.wideBannerImageMobile}
-                    src={bannerMap['banner3'].url}
-                    className="rounded mt-2 d-block d-md-none"
-                    onClick={() => { window.open(bannerMap['banner3'].link,"_blank") }}
-                />
-            </div>
+                <div className="mt-5">
+                    { bannerMap['banner3'].url !== "" ?
+                        <>
+                            <div className="d-flex  justify-content-center">
+                                <img
+                                    alt="not found"
+                                    style={styles.wideBannerImage}
+                                    src={bannerMap['banner3'].url}
+                                    className="rounded mt-2 d-none d-md-block"
+                                    onClick={() => { window.open(bannerMap['banner3'].link,"_blank") }}
+                                />
+                                <img
+                                    alt="not found"
+                                    style={styles.wideBannerImageMobile}
+                                    src={bannerMap['banner3'].url}
+                                    className="rounded mt-2 d-block d-md-none"
+                                    onClick={() => { window.open(bannerMap['banner3'].link,"_blank") }}
+                                />
+                            </div>
+                        </>:
+                        <div className="d-flex justify-content-evenly">
+                                <iframe  title="FotB1" data-aa='2238757' src='//ad.a-ads.com/2238757?size=336x280' style={{width:'336px', height:'280px', border:'0px', padding:'0', overflow:'hidden', backgroundColor: 'transparent'}} ></iframe>
+                                <iframe  title="FotB2" data-aa='2238757' src='//ad.a-ads.com/2238757?size=336x280' style={{width:'336px', height:'280px', border:'0px', padding:'0', overflow:'hidden', backgroundColor: 'transparent'}} ></iframe>
+                                <iframe  title="FotB3" data-aa='2238757' src='//ad.a-ads.com/2238757?size=336x280' style={{width:'336px', height:'280px', border:'0px', padding:'0', overflow:'hidden', backgroundColor: 'transparent'}} ></iframe>
+                        </div>
+                    }
+                </div>
+
             <hr className="mt-5 mb-3" />
             
             {
