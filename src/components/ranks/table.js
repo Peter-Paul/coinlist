@@ -37,22 +37,16 @@ function Table({data,title,allowRoute,connected,userAddress,voteCoin,voteGame,vo
         const daySecs = 86400
         const month =  30
         const year =  365
-        const now = Math.floor( new Date().getTime() / 1000 )
+        const nowDate = new Date().getDate()
+        const nowMonth = new Date().getMonth() 
+        const nowYear = new Date().getFullYear()
+
+        const now = Math.floor( new Date( nowYear, nowMonth+1, nowDate ).getTime() / 1000 )
         let days = Math.floor((launch - now) / daySecs )
         if(days === 0){
                 return "TODAY"
         }else if(days < 0 ){
             days = Math.abs(days)
-            if( days < month){
-                return `${days} day${days>1?"s":""} to go`
-            }else if (days < year && days >= month){
-                const months = Math.floor(days/month)
-                return `${months} month${months>1?"s":""} to go`
-            }else{
-                const years = Math.floor(days/year)
-                return `${years} year${years>1?"s":""} to go`
-            }
-        }else{
             if( days < month){
                 return `${days} day${days>1?"s":""} ago`
             }else if (days < year && days >= month){
@@ -61,6 +55,16 @@ function Table({data,title,allowRoute,connected,userAddress,voteCoin,voteGame,vo
             }else{
                 const years = Math.floor(days/year)
                 return `${years} year${years>1?"s":""} ago`
+            }
+        }else{
+            if( days < month){
+                return `${days} day${days>1?"s":""} to go`
+            }else if (days < year && days >= month){
+                const months = Math.floor(days/month)
+                return `${months} month${months>1?"s":""} to go`
+            }else{
+                const years = Math.floor(days/year)
+                return `${years} year${years>1?"s":""} to go`
             }
         }
     }

@@ -106,9 +106,12 @@ function TopBanner() {
                             </div>:
 
                             <div className="d-flex justify-content-evenly">
-                                <iframe title="rot1" data-aa='2238758' src='//ad.a-ads.com/2238758?size=336x280' style={{width:'336px', height:'280px', border:'0px', padding:'0', overflow:'hidden', backgroundColor: 'transparent'}}></iframe>
-                                <iframe title="rot1" data-aa='2238758' src='//ad.a-ads.com/2238758?size=336x280' style={{width:'336px', height:'280px', border:'0px', padding:'0', overflow:'hidden', backgroundColor: 'transparent'}}></iframe>
-                                <iframe title="rot2" data-aa='2238758' src='//ad.a-ads.com/2238758?size=336x280' style={{width:'336px', height:'280px', border:'0px', padding:'0', overflow:'hidden', backgroundColor: 'transparent'}}></iframe>
+                                <div>
+                                    <iframe title="rot1" data-aa='2238758' src='//ad.a-ads.com/2238758?size=336x280' style={{width:'336px', height:'280px', border:'0px', padding:'0', overflow:'hidden', backgroundColor: 'transparent'}}></iframe>
+                                </div>
+                                <div>
+                                    <iframe title="rot2" data-aa='2238758' src='//ad.a-ads.com/2238758?size=336x280' style={{width:'336px', height:'280px', border:'0px', padding:'0', overflow:'hidden', backgroundColor: 'transparent'}}></iframe>
+                                </div>
                             </div>
 
                         }

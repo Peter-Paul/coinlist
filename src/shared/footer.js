@@ -66,7 +66,7 @@ function Footer({partners,name}) {
                         <div className="d-flex justify-content-evenly">
                                 <iframe  title="FotB1" data-aa='2238757' src='//ad.a-ads.com/2238757?size=336x280' style={{width:'336px', height:'280px', border:'0px', padding:'0', overflow:'hidden', backgroundColor: 'transparent'}} ></iframe>
                                 <iframe  title="FotB2" data-aa='2238757' src='//ad.a-ads.com/2238757?size=336x280' style={{width:'336px', height:'280px', border:'0px', padding:'0', overflow:'hidden', backgroundColor: 'transparent'}} ></iframe>
-                                <iframe  title="FotB3" data-aa='2238757' src='//ad.a-ads.com/2238757?size=336x280' style={{width:'336px', height:'280px', border:'0px', padding:'0', overflow:'hidden', backgroundColor: 'transparent'}} ></iframe>
+                                {/* <iframe  title="FotB3" data-aa='2238757' src='//ad.a-ads.com/2238757?size=336x280' style={{width:'336px', height:'280px', border:'0px', padding:'0', overflow:'hidden', backgroundColor: 'transparent'}} ></iframe> */}
                         </div>
                     }
                 </div>

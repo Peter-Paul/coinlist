@@ -80,8 +80,7 @@ function AddCoin({baseUrl}) {
         try{
 
             let [ year, month, day ] = launchInfo.map( x => parseInt(x) )
-            console.log(launchInfo.map( x => parseInt(x) ))
-            month = month--
+            
             const data = {...coin,
                     launch: Math.floor(new Date(year,month,day).getTime() / 1000).toString()
             }
