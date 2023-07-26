@@ -78,6 +78,9 @@ function App() {
     const gameService = new GameService(baseUrl)
     const gameList = await gameService.getGames()
 
+    console.log(coinList)
+    dispatch( loadState({coins:coinList,games:gameList,gameMap:undefined,coinMap:undefined,
+      voteMap:undefined,gameVoteMap:undefined,baseUrl,bannerMap,admin,partners}) )
 
     try{
       const displayPrices = await axios.get("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=5&page=1")
@@ -92,8 +95,9 @@ function App() {
       }
     }else{console.log("Error getting games")}
     
-    if(coinList){
-      for(let c of coinList){
+    const coinCopy = [...coinList]
+    if(coinCopy){
+      for(let c of coinCopy){
         let price
         try{
           const res = await axios.get(`https://api.coingecko.com/api/v3/simple/token_price/${c.chain}?contract_addresses=${c.address}&vs_currencies=usd`)
@@ -103,12 +107,12 @@ function App() {
           price = 0
         }
         coinMap[c.address] = {...c,price}
-        coinList[ coinList.indexOf(c) ] = {...c,price}
+        coinCopy[ coinCopy.indexOf(c) ] = {...c,price}
       }
     }else{console.log("Error getting coins")}
+    console.log(coinCopy)
     
-    
-    dispatch( loadState({coins:coinList,games:gameList,gameMap,coinMap,voteMap,gameVoteMap,baseUrl,bannerMap,admin,partners}) )
+    dispatch( loadState({coins:coinCopy,games:gameList,gameMap,coinMap,voteMap,gameVoteMap,baseUrl,bannerMap,admin,partners}) )
     
     
     
@@ -283,9 +287,8 @@ function App() {
                           <button type="button" className="btn-close" onClick={() => setshowLowerLeft(false)}></button>
                         </div>
                           {
-                            bannerMap['banner6'].url!==""?
-                            <BottomBanners banner={bannerMap['banner6']}/>:
-                            <iframe title="btmE" data-aa='2238707' src='//ad.a-ads.com/2238707?size=250x250' style={{width:'250px', height:'250px', border:'0px', padding:'0', overflow:'hidden', backgroundColor: 'transparent'}}></iframe>
+                            bannerMap['banner6'].url!=="" &&
+                            <BottomBanners banner={bannerMap['banner6']}/>
                           }
                       </div>
                     </>
@@ -297,9 +300,8 @@ function App() {
                           <button type="button" className="btn-close" onClick={() => setshowLowerRight(false)}></button>
                         </div>
                         {
-                          bannerMap['banner5'].url!==""?
-                          <BottomBanners banner={bannerMap['banner5']}/>:
-                          <iframe  title="btmE" data-aa='2238705' src='//ad.a-ads.com/2238705?size=250x250' style={{width:'250px', height:'250px', border:'0px', padding:'0', overflow:'hidden', backgroundColor: 'transparent'}}></iframe>
+                          bannerMap['banner5'].url!=="" &&
+                          <BottomBanners banner={bannerMap['banner5']}/>
                         }
                     </div>
                   }

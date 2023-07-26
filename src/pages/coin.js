@@ -1,24 +1,32 @@
 import { Link, useLocation, useParams } from "react-router-dom";
 import "./coin.css"
 import Media from "../shared/media";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Table from "../components/ranks/table";
 import TopBanner from "../shared/topBanners";
 import Loading from "../shared/loading";
 import { useTranslation } from "react-i18next";
+import CoinService from "../services/coins";
 function Coin({voteCoin}) {
     const {address} = useParams()
     const {pathname} = useLocation()
-    const {coins,coinMap,connected,voteMap,userAddress} = useSelector((state) => state.app)
+    const {coins,connected,voteMap,userAddress,baseUrl} = useSelector((state) => state.app)
     const {t:content} = useTranslation()
     const [coin, setCoin] = useState(undefined)
     const floozBaseUrl = "https://flooz.trade/trade/"
     const mobulaBaseUrl = "http://mobula.fi/dex?outputCurrency="
     
     // const {name,symbol} = coin
-    useEffect( ()=> { coinMap && setCoin(coinMap[address])}, 
-        [address,coinMap,userAddress,voteMap,pathname] )
+    const getCoin = useCallback(async () => {
+        const coinService = new CoinService(baseUrl)
+        const coin = await coinService.getCoin(address)
+        setCoin(coin)
+    },[address,baseUrl] )
+
+    useEffect( ()=> { 
+        getCoin()
+    },  [getCoin] )
 
 
     const addCoinToWallet = async () => {
@@ -111,7 +119,7 @@ function Coin({voteCoin}) {
                     { coin &&
                     
                         <div className="row">
-                            <div className="col-12 col-md-8" >
+                            <div className="col-12 col-md-8 mb-2" >
                                 <div className="card shadow" style={styles.cardBlue}>
                                     <div className="card-body" >
                                         <div className="d-flex flex-column">

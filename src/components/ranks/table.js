@@ -225,12 +225,15 @@ function Table({data,title,allowRoute,connected,userAddress,voteCoin,voteGame,vo
             selector: row => row.price,
             sortable: true,
             cell: row => {
+                console.log(row.price)
                 return (
                     <>
-                        { !games &&
+                        { (!games && row.price!==undefined) ?
                             <strong>
                                 {customFigure(row.price,4)}
                             </strong>
+                            :
+                            <p>...</p>
                         }
                     </>
                 )

@@ -175,6 +175,23 @@ export default class CoinService{
         }
     }
 
+    async getCoin(address){
+        try{
+            if(this.url){
+                const response = await axios.get(`${this.url}/${address}`)
+                const coin = response.data
+                if (response.status === 200) return {...coin, tags:coin.tags.split(","),created:!coin.created?1688105293:coin.created}
+                else return undefined
+            }else{
+                return this.default
+            }
+
+        }catch(err){
+            console.log(`Error getting coins: ${err}`)
+            return undefined
+        }
+    }
+
     async postCoin(coin){
         try{
             const {price, ...payload} = coin

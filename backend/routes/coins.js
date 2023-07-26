@@ -26,6 +26,18 @@ router.get('/coins/', async (req,res) => {
     }
 })
 
+router.get('/coins/:address', async (req,res) => {
+    try{
+        let address = req.params.address
+        let response = await database.getOne(table,address)
+        // const modResponse = response.map( ({ CoinData }) => { return { ...JSON.parse(CoinData) }} )
+        const modResponse = { ...JSON.parse(response[0].CoinData) }
+        res.status(200).json(modResponse)
+    }catch(err){
+        res.status(500).json({err})
+    }
+})
+
 router.post('/coins/', validPayload, async (req,res) => {
     try{
         const data = req.body

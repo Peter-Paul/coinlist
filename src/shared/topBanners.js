@@ -65,7 +65,7 @@ function TopBanner() {
                                     onClick={() => { window.open(bannerMap['banner1'].link,"_blank") }}
                                 />
                             </div>:
-                            <iframe title="largeAd1" data-aa='2238710' src='//ad.a-ads.com/2238710?size=970x90' style={{width:'970px', height:'90px', border:'0px', padding:'0', overflow:'hidden', backgroundColor: 'transparent'}}></iframe>
+                            <iframe className="d-none d-md-block" title="largeAd1" data-aa='2238710' src='//ad.a-ads.com/2238710?size=970x90' style={{width:'970px', height:'90px', border:'0px', padding:'0', overflow:'hidden', backgroundColor: 'transparent'}}></iframe>
                         }
                     </div>
                     
@@ -106,10 +106,10 @@ function TopBanner() {
                             </div>:
 
                             <div className="d-flex justify-content-evenly">
-                                <div>
+                                {/* <div>
                                     <iframe title="rot1" data-aa='2238758' src='//ad.a-ads.com/2238758?size=336x280' style={{width:'336px', height:'280px', border:'0px', padding:'0', overflow:'hidden', backgroundColor: 'transparent'}}></iframe>
-                                </div>
-                                <div>
+                                </div> */}
+                                <div className="d-block d-md-none">
                                     <iframe title="rot2" data-aa='2238758' src='//ad.a-ads.com/2238758?size=336x280' style={{width:'336px', height:'280px', border:'0px', padding:'0', overflow:'hidden', backgroundColor: 'transparent'}}></iframe>
                                 </div>
                             </div>
@@ -120,7 +120,7 @@ function TopBanner() {
 
                     <div className="d-flex justify-content-evenly mt-3 mb-4">
                         {
-                            bannerMap['banner2'].url!=="" ?
+                            bannerMap['banner2'].url!=="" &&
                             <>
                                 <img
                                     alt="not found"
@@ -136,8 +136,7 @@ function TopBanner() {
                                     className="rounded responsive d-block d-md-none"
                                     onClick={() => { window.open(bannerMap['banner2'].link,"_blank") }}
                                 />
-                            </>:
-                            <iframe title="largeAd2" data-aa='2238706' src='//ad.a-ads.com/2238706?size=970x90' style={{width:'970px', height:'90px', border:'0px', padding:'0', overflow:'hidden', backgroundColor: 'transparent'}}></iframe>
+                            </>
                         }
 
                         

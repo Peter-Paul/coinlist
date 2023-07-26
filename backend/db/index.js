@@ -37,6 +37,18 @@ class Database{
         } )
     }
 
+    getOne(table,address=undefined){
+        let sql = `SELECT * FROM ${table}`
+        if (table === this.coinTable) sql = `SELECT * FROM ${table} WHERE "Address" = '${address}'`
+
+        return new Promise( (resolve,reject) =>{
+            this.pool.query(sql, (err,res) => {
+                if(err) reject(err)
+                else resolve(res.rows)
+            })
+        } )
+    }
+
     addRow(table,data){
         return new Promise( (resolve,reject) => {
 
