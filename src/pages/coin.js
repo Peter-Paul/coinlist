@@ -8,6 +8,7 @@ import TopBanner from "../shared/topBanners";
 import Loading from "../shared/loading";
 import { useTranslation } from "react-i18next";
 import CoinService from "../services/coins";
+import CoinScan from "../components/coin/coinScan";
 function Coin({voteCoin}) {
     const {address} = useParams()
     const {pathname} = useLocation()
@@ -54,13 +55,13 @@ function Coin({voteCoin}) {
     const customSymbol = symbol => {
         switch (symbol) {
             case "ethereum":
-                return {name:"ETH",color:"black",text:"white"}
+                return {name:"ETH",color:"black",text:"white",scanUrl:"https://etherscan.io/token/address/"}
             case "binance-smart-chain":
-                return {name:"BSC",color:"#ffc107",text:"white"}
+                return {name:"BSC",color:"#ffc107",text:"white",scanUrl:"https://www.bscscan.com/address/"}
             case "arbitrum-one":
-                return {name:"ARBITRUM",color:"#0076CE",text:"white"}
+                return {name:"ARBITRUM",color:"#0076CE",text:"white",scanUrl:"https://polygonscan.com/address/"}
             case "polygon-pos":
-                return {name:"MATIC",color:"purple",text:"white"}
+                return {name:"MATIC",color:"purple",text:"white",scanUrl:"https://arbiscan.io/address/"}
             default:
                 return {name:"CUSTOM",color:"grey",text:"white"}
         }
@@ -145,7 +146,10 @@ function Coin({voteCoin}) {
                                                 </div>
                                             </div>
                                             <p>
-                                                <span className="text-warning">{content("coin.address")}:</span> {coin.address}
+                                                <span className="text-warning">{content("coin.address")}:</span> {`${coin.address.slice(0,5)}...${coin.address.slice(38,)}`}
+                                                <span class="badge ms-1 shadow" 
+                                                        onClick={ () => window.open(`${customSymbol(coin.chain).scanUrl}${coin.address}`,"_blank") }
+                                                        style={{...styles.cardBlue,borderWidth:"1px",borderStyle:"solid"}}><i className="fa fa-link"></i></span>
                                             </p>
                                             
                                             <div className="col-6 col-md-3 mb-3">
@@ -170,6 +174,14 @@ function Coin({voteCoin}) {
                                         </div>
                                     </div>
                                 </div>
+                                
+                                <div className="card shadow mt-2" style={styles.cardBlue}>
+                                    <div className="card-body">
+                                        <h3>Rug Check</h3>
+                                        <CoinScan address={address} chain={customSymbol(coin.chain).name} scanUrl={customSymbol(coin.chain).scanUrl}  />
+                                    </div>
+                                </div>
+
                             </div>
         
                             <div className="col-12 col-md-4">
