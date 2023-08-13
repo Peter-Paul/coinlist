@@ -135,6 +135,14 @@ function CoinScan({address,chain,scanUrl}) {
                     
                 </div>
             }
+
+            {
+                !scanInfo &&
+
+                <div className="d-flex justify-content-center my-5">
+                    NO INFORMATION TO DISPLAY
+                </div>
+            }
         </>
      );
 }
